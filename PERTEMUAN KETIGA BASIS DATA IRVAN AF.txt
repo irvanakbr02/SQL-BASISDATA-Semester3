@@ -1,0 +1,127 @@
+SQL> INSERT INTO keluarga
+  2  SELECT * FROM keluarga;
+
+4 rows created.
+
+SQL> SELECT * FROM keluarga;
+
+ DELETE keluarga WHERE nama = 'Karsita';
+
+ ROLLBACK;
+
+ UPDATE keluarga SET TEMPAT_LAHIR ='Papua Nugini' WHERE status='Anak';
+
+SQL> SELECT*FROM keluarga;
+
+NAMA                                     J TEMPAT_LAHIR              TANGGAL_LA STATUS
+---------------------------------------- - ------------------------- ---------- ----------
+Ermayanti                                P Semarang		16-05-1980	 Ibu
+Selviana Ambar Triwulandari    P Papua Nugini              	01-07-1999 	Anak
+Irvan Akbar Febriansyah          L Papua Nugini              	19-02-2002 	Anak
+Ermayanti                                 P Semarang                  	16-05-1980	 Ibu
+Selviana Ambar Triwulandari     P Papua Nugini              	01-07-1999 	Anak
+Irvan Akbar Febriansyah           L Papua Nugini              	19-02-2002 	Anak
+
+
+KUNCI UNIX menandai suatu value berbeda dari value lain
+Sebagai index
+untuk mempermudah SLELCT UPDATE DELETE
+
+primarykey = tidak boleh kosong
+1 tabel = hanya 1 primarykey
+contoh= NIK 
+
+UNIQUE = boleh kosong
+dalam 1 tabel bisa lebih dari satu UNIQUE
+contoh no_hp,email,fb,ig
+
+
+BUAT PRIMARY KEY = 
+
+ ALTER TABLE keluarga ADD CONSTRAINT nama_pk PRIMARY KEY(nama);
+
+MENGECEK 
+
+SQL> INSERT INTO keluarga
+  2  SELECT * FROM keluarga WHERE nama ='Karsita';
+INSERT INTO keluarga
+*
+ERROR at line 1:
+ORA-00001: unique constraint (IRVANAF.NAMA_PK) violated
+
+
+MEMBUAT UNIQUE
+
+
+SQL> ALTER TABLE keluarga ADD CONSTRAINT no_hp_klg_uq UNIQUE (no_hp);
+ALTER TABLE keluarga ADD CONSTRAINT no_hp_klg_uq UNIQUE (no_hp)
+                                    *
+ERROR at line 1:
+ORA-02299: cannot validate (IRVANAF.NO_HP_KLG_UQ) - duplicate keys found
+
+
+SQL> ALTER TABLE keluarga ADD CONSTRAINT ig_uq UNIQUE (ig);
+
+Table altered.
+
+MENAMPILKAN CONSTRAINT YG ADA DI KELUARGA
+
+ SELECT constraint_name, consraint_type FROM all_constrain
+ WHERE table_name = 'KELUARGA';
+
+ganti
+
+ALTER TABLE keluarga MODIFY nama VARCHAR2(50) NOT NULL;
+
+Table altered.
+
+
+MEMINDAHKAN DATA DARI TABLE ASLI MENGGUNAKAN TABLE DUPLIKAT
+
+CREATE TABLE keluarga_dublikat AS
+SELECT * FROM keluarga;
+
+MENGHAPUS ISI DATA DI TABLE KELUARGA AGAR BISA DIRUBAH TIPE DATANYA
+
+DELETE keluarga;
+
+4 rows deleted.
+
+MENGGANTI NIK DAN NO HP MENJADI CHAR YG SEBELUMNYA ADALAH NUMBER
+
+ALTER TABLE keluarga MODIFY nik CHAR(16);
+
+Table altered.
+
+ALTER TABLE keluarga MODIFY no_hp CHAR(13);
+
+Table altered.
+
+MEMASUKAN DATA KELUARGA DUPLLIKAT YG DIDUPLIKAT KE TABLE keluarga 
+
+INSERT INTO keluarga SELECT * FROM keluarga_dublikat;
+
+4 rows created.
+
+MENAMBAH VARIABEL COLOUM DI TABLE MENGGUNKAN ALTER TABLE
+
+ALTER TABLE keluarga ADD email VARCHAR2(20);
+
+Table altered.
+
+MENGHAPUS COLUMN YG DIBUAT MENGGUNAKAN DROP
+
+ALTER TABLE keluarga DROP COLUMN email;
+
+Table altered.
+
+RENAME COLUMN 
+
+ ALTER TABLE keluarga RENAME COLUMN ig to instagram ;
+
+
+
+//CATATAN//
+INSERT,UPDATE,DELETE bersifat sementara
+ROLLBACK = kembali kesedia kala (seperti ctrl z)
+CREATE,ALTER,DROP Sifatnya auto COMMIT/autosave

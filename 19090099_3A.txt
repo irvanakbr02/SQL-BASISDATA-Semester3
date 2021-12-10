@@ -1,0 +1,329 @@
+SQL> SELECT FROM tab;
+SELECT FROM tab
+       *
+ERROR at line 1:
+ORA-00936: missing expression 
+
+
+SQL> SELECT * FROM tab;
+
+TNAME                          TABTYPE  CLUSTERID                               
+------------------------------ ------- ----------                               
+AGAMA                          TABLE                                            
+ALAMAT                         TABLE                                            
+DOSEN                          TABLE                                            
+FISIK                          TABLE                                            
+JENIS_SEKOLAH                  TABLE                                            
+JURUSAN                        TABLE                                            
+KEDUDUKAN_WALI                 TABLE                                            
+KET_AKTIF                      TABLE                                            
+MAHASISWA                      TABLE                                            
+ORTU                           TABLE                                            
+PEKERJAAN                      TABLE                                            
+
+TNAME                          TABTYPE  CLUSTERID                               
+------------------------------ ------- ----------                               
+PENGHASILAN                    TABLE                                            
+SEKOLAH                        TABLE                                            
+STATUS_SEKOLAH                 TABLE                                            
+TAHUN_AKAD                     TABLE                                            
+
+15 rows selected.
+
+SQL> DESC mahasiswa;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ NIM                                       NOT NULL CHAR(8)
+ NAMA                                               VARCHAR2(50)
+ TAHUN_AKADEMIK                                     CHAR(2)
+ SEMESTER                                           CHAR(1)
+ KETERANGAN                                         CHAR(1)
+ KELAS                                              CHAR(2)
+ NAMA_PANGGILAN                                     VARCHAR2(10)
+ DOSEN_WALI                                         CHAR(4)
+ GENDER                                             CHAR(1)
+ TEMPAT_LAHIR                                       VARCHAR2(20)
+ TANGGAL                                            DATE
+ AGAMA                                              CHAR(1)
+ NO_HP                                              VARCHAR2(14)
+ EMAIL                                              VARCHAR2(35)
+ FACEBOOK                                           VARCHAR2(30)
+ TWITTER                                            VARCHAR2(30)
+ INSTAGRAM                                          VARCHAR2(30)
+
+SQL> SET TIME ON
+14:27:12 SQL> ----- no 1
+14:27:21 SQL> SELECT nim, nama, kelas FROM mahasiswa WHERE nim = 19090099;
+
+NIM      NAMA                                               KE                  
+-------- -------------------------------------------------- --                  
+19090099 IRVAN AKBAR FEBRIANSYAH                            3A                  
+
+14:27:52 SQL> SELECT no_hp From mahasiswa WHERE nim = 19090099;
+
+NO_HP                                                                           
+--------------                                                                  
+089517345031                                                                    
+
+14:28:24 SQL> --- no 5
+14:28:35 SQL> SELECT SUBSTR(no_hp,1,3) from mahasiswa WHERE nim  19090099;
+SELECT SUBSTR(no_hp,1,3) from mahasiswa WHERE nim  19090099
+                                                   *
+ERROR at line 1:
+ORA-00920: invalid relational operator 
+
+
+14:29:20 SQL> SELECT SUBSTR(no_hp,1,3) from mahasiswa WHERE nim = 19090099;
+
+SUBSTR(NO_HP                                                                    
+------------                                                                    
+089                                                                             
+
+14:29:26 SQL> SELECT SUBSTR(no_hp,1,3) ,
+14:29:41   2  SUM(CASE WHEN SUBSTR(nim ,1,3) = 17 THEN 1 ELSE 0 END)AS 'tahun 2017'
+14:30:58   3  FROM mahasiswa
+14:31:05   4  WHERE SUBSTR(no_hp,1,3)=
+14:31:22   5  (SELECT SUBSTR(no_hp,1,3) from mahasiswa WHERE nim = 19090099)
+14:31:32   6  GROUP BY SUBSTR(no_hp,1,3);
+SUM(CASE WHEN SUBSTR(nim ,1,3) = 17 THEN 1 ELSE 0 END)AS 'tahun 2017'
+                                                         *
+ERROR at line 2:
+ORA-00923: FROM keyword not found where expected 
+
+
+14:31:49 SQL> SELECT SUBSTR(no_hp,1,3),
+14:32:00   2  SUM(CASE WHEN SUBSTR(nim ,1,3) = 17 THEN 1 ELSE 0 END)AS "tahun 2017"
+14:32:16   3  FROM mahasiswa
+14:32:18   4  WHERE SUBSTR(no_hp,1,3)=
+14:32:25   5  (SELECT SUBSTR(no_hp,1,3) from mahasiswa WHERE nim = 19090099)
+14:32:28   6  GROUP BY SUBSTR(no_hp,1,3);
+
+SUBSTR(NO_HP tahun 2017                                                         
+------------ ----------                                                         
+089                   0                                                         
+
+14:32:29 SQL> SELECT SUBSTR(no_hp,1,3) ,
+14:32:49   2  SUM(CASE WHEN SUBSTR(nim ,1,3) = 17 & GENDER = 'L' THEN 1 ELSE 0 END)AS "tahun 2017"
+14:33:19   3  FROM mahasiswa
+14:33:26   4  WHERE SUBSTR(no_hp,1,3)=
+14:33:29   5  (SELECT SUBSTR(no_hp,1,3) from mahasiswa WHERE nim = 19090099)
+14:33:32   6  GROUP BY SUBSTR(no_hp,1,3);
+Enter value for gender: 
+old   2: SUM(CASE WHEN SUBSTR(nim ,1,3) = 17 & GENDER = 'L' THEN 1 ELSE 0 END)AS "tahun 2017"
+new   2: SUM(CASE WHEN SUBSTR(nim ,1,3) = 17  = 'L' THEN 1 ELSE 0 END)AS "tahun 2017"
+SUM(CASE WHEN SUBSTR(nim ,1,3) = 17  = 'L' THEN 1 ELSE 0 END)AS "tahun 2017"
+                                     *
+ERROR at line 2:
+ORA-00905: missing keyword 
+
+
+14:33:41 SQL> SELECT SUBSTR(no_hp,1,3),
+14:34:03   2  SUM(CASE WHEN SUBSTR(nim ,1,3) = 17 & GENDER = 'L' THEN '1' ELSE '0' END)AS "tahun 2017"
+14:34:15   3  FROM mahasiswa
+14:34:21   4  WHERE SUBSTR(no_hp,1,3)=
+14:34:22   5  (SELECT SUBSTR(no_hp,1,3) from mahasiswa WHERE nim = 19090099)
+14:34:23   6  GROUP BY SUBSTR(no_hp,1,3);
+Enter value for gender: 
+old   2: SUM(CASE WHEN SUBSTR(nim ,1,3) = 17 & GENDER = 'L' THEN '1' ELSE '0' END)AS "tahun 2017"
+new   2: SUM(CASE WHEN SUBSTR(nim ,1,3) = 17  = 'L' THEN '1' ELSE '0' END)AS "tahun 2017"
+SUM(CASE WHEN SUBSTR(nim ,1,3) = 17  = 'L' THEN '1' ELSE '0' END)AS "tahun 2017"
+                                     *
+ERROR at line 2:
+ORA-00905: missing keyword 
+
+
+14:34:26 SQL> SELECT SUBSTR(no_hp,1,3),
+14:34:38   2  SUM(CASE WHEN SUBSTR(nim ,1,3) = 17 && GENDER = 'L' THEN 1 ELSE 0 END)AS "2017 L"
+14:35:06   3  FROM mahasiswa
+14:35:08   4  WHERE SUBSTR(no_hp,1,3)=
+14:35:09   5  (SELECT SUBSTR(no_hp,1,3) from mahasiswa WHERE nim = 19090099)
+14:35:11   6  GROUP BY SUBSTR(no_hp,1,3);
+Enter value for gender: 
+old   2: SUM(CASE WHEN SUBSTR(nim ,1,3) = 17 && GENDER = 'L' THEN 1 ELSE 0 END)AS "2017 L"
+new   2: SUM(CASE WHEN SUBSTR(nim ,1,3) = 17  = 'L' THEN 1 ELSE 0 END)AS "2017 L"
+SUM(CASE WHEN SUBSTR(nim ,1,3) = 17  = 'L' THEN 1 ELSE 0 END)AS "2017 L"
+                                     *
+ERROR at line 2:
+ORA-00905: missing keyword 
+
+
+14:35:13 SQL> SELECT SUBSTR(no_hp,1,3),
+14:35:22   2  SUM(CASE WHEN SUBSTR(nim ,1,3) = 17 AND gender = 'L' THEN '1' ELSE '0' END)AS "2017 - L"
+14:35:43   3  FROM mahasiswa
+14:35:47   4  WHERE SUBSTR(no_hp,1,3)=
+14:35:48   5  (SELECT SUBSTR(no_hp,1,3) from mahasiswa WHERE nim = 19090099)
+14:35:49   6  GROUP BY SUBSTR(no_hp,1,3);
+
+SUBSTR(NO_HP   2017 - L                                                         
+------------ ----------                                                         
+089                   0                                                         
+
+14:35:51 SQL> SELECT SUBSTR(no_hp,1,3),
+14:36:00   2  SUM(CASE WHEN SUBSTR(nim ,1,3) = 17 && GENDER = 'L' THEN 1 ELSE 0 END)AS "2017 L",
+14:36:03   3  SUM(CASE WHEN SUBSTR(nim ,1,3) = 17 && GENDER = 'P' THEN 1 ELSE 0 END)AS "2017 P",
+14:36:12   4  SUM(CASE WHEN SUBSTR(nim ,1,3) = 18 && GENDER = 'L' THEN 1 ELSE 0 END)AS "2018 L",
+14:36:22   5  SUM(CASE WHEN SUBSTR(nim ,1,3) = 18 && GENDER = 'P' THEN 1 ELSE 0 END)AS "2018 P",
+14:36:33   6  SUM(CASE WHEN SUBSTR(nim ,1,3) = 19 && GENDER = 'L' THEN 1 ELSE 0 END)AS "2019 L",
+14:36:42   7  SUM(CASE WHEN SUBSTR(nim ,1,3) = 19 && GENDER = 'P' THEN 1 ELSE 0 END)AS "2019 P",
+14:36:52   8  SUM(CASE WHEN SUBSTR(nim ,1,3) = 20 && GENDER = 'L' THEN 1 ELSE 0 END)AS "2020 L",
+14:37:05   9  SUM(CASE WHEN SUBSTR(nim ,1,3) = 20 && GENDER = 'P' THEN 1 ELSE 0 END)AS "2020 P",
+14:37:16  10  FROM mahasiswa
+14:37:21  11  WHERE SUBSTR(no_hp,1,3)=
+14:37:26  12  (SELECT SUBSTR(no_hp,1,3) from mahasiswa WHERE nim = 19090099)
+14:37:32  13  GROUP BY SUBSTR(no_hp,1,3);
+old   2: SUM(CASE WHEN SUBSTR(nim ,1,3) = 17 && GENDER = 'L' THEN 1 ELSE 0 END)AS "2017 L",
+new   2: SUM(CASE WHEN SUBSTR(nim ,1,3) = 17  = 'L' THEN 1 ELSE 0 END)AS "2017 L",
+old   3: SUM(CASE WHEN SUBSTR(nim ,1,3) = 17 && GENDER = 'P' THEN 1 ELSE 0 END)AS "2017 P",
+new   3: SUM(CASE WHEN SUBSTR(nim ,1,3) = 17  = 'P' THEN 1 ELSE 0 END)AS "2017 P",
+old   4: SUM(CASE WHEN SUBSTR(nim ,1,3) = 18 && GENDER = 'L' THEN 1 ELSE 0 END)AS "2018 L",
+new   4: SUM(CASE WHEN SUBSTR(nim ,1,3) = 18  = 'L' THEN 1 ELSE 0 END)AS "2018 L",
+old   5: SUM(CASE WHEN SUBSTR(nim ,1,3) = 18 && GENDER = 'P' THEN 1 ELSE 0 END)AS "2018 P",
+new   5: SUM(CASE WHEN SUBSTR(nim ,1,3) = 18  = 'P' THEN 1 ELSE 0 END)AS "2018 P",
+old   6: SUM(CASE WHEN SUBSTR(nim ,1,3) = 19 && GENDER = 'L' THEN 1 ELSE 0 END)AS "2019 L",
+new   6: SUM(CASE WHEN SUBSTR(nim ,1,3) = 19  = 'L' THEN 1 ELSE 0 END)AS "2019 L",
+old   7: SUM(CASE WHEN SUBSTR(nim ,1,3) = 19 && GENDER = 'P' THEN 1 ELSE 0 END)AS "2019 P",
+new   7: SUM(CASE WHEN SUBSTR(nim ,1,3) = 19  = 'P' THEN 1 ELSE 0 END)AS "2019 P",
+old   8: SUM(CASE WHEN SUBSTR(nim ,1,3) = 20 && GENDER = 'L' THEN 1 ELSE 0 END)AS "2020 L",
+new   8: SUM(CASE WHEN SUBSTR(nim ,1,3) = 20  = 'L' THEN 1 ELSE 0 END)AS "2020 L",
+old   9: SUM(CASE WHEN SUBSTR(nim ,1,3) = 20 && GENDER = 'P' THEN 1 ELSE 0 END)AS "2020 P",
+new   9: SUM(CASE WHEN SUBSTR(nim ,1,3) = 20  = 'P' THEN 1 ELSE 0 END)AS "2020 P",
+SUM(CASE WHEN SUBSTR(nim ,1,3) = 17  = 'L' THEN 1 ELSE 0 END)AS "2017 L",
+                                     *
+ERROR at line 2:
+ORA-00905: missing keyword 
+
+
+14:37:37 SQL> SELECT SUBSTR(no_hp,1,3),
+14:37:53   2  SUM(CASE WHEN SUBSTR(nim ,1,3) = 17 && GENDER = 'L' THEN 1 ELSE 0 END)AS "2017 L"
+14:38:09   3  
+14:38:13 SQL> 
+14:38:13 SQL> SELECT SUBSTR(no_hp,1,3),
+14:38:15   2  SUM(CASE WHEN SUBSTR(nim ,1,3) = 17 AND gender = 'L' THEN 1 ELSE 0 END)AS "2017 L",
+14:38:40   3  SUM(CASE WHEN SUBSTR(nim ,1,3) = 17 AND gender = 'P' THEN 1 ELSE 0 END)AS "2017 P",
+14:38:47   4  SUM(CASE WHEN SUBSTR(nim ,1,3) = 18 AND gender = 'L' THEN 1 ELSE 0 END)AS "2018 L",
+14:38:55   5  SUM(CASE WHEN SUBSTR(nim ,1,3) = 18 AND gender = 'P' THEN 1 ELSE 0 END)AS "2018 P",
+14:39:06   6  SUM(CASE WHEN SUBSTR(nim ,1,3) = 19 AND gender = 'L' THEN 1 ELSE 0 END)AS "2019 L",
+14:39:15   7  SUM(CASE WHEN SUBSTR(nim ,1,3) = 19 AND gender = 'P' THEN 1 ELSE 0 END)AS "2019 P",
+14:39:30   8  SUM(CASE WHEN SUBSTR(nim ,1,3) = 20 AND gender = 'L' THEN 1 ELSE 0 END)AS "2020 L",
+14:39:39   9  SUM(CASE WHEN SUBSTR(nim ,1,3) = 20 AND gender = 'P' THEN 1 ELSE 0 END)AS "2020 P"
+14:39:49  10  FROM mahasiswa
+14:39:55  11  WHERE SUBSTR(no_hp,1,3)=
+14:40:00  12  (SELECT SUBSTR(no_hp,1,3) from mahasiswa WHERE nim = 19090099)
+14:40:06  13  GROUP BY SUBSTR(no_hp,1,3);
+
+SUBSTR(NO_HP     2017 L     2017 P     2018 L     2018 P     2019 L     2019 P  
+------------ ---------- ---------- ---------- ---------- ---------- ----------  
+    2020 L     2020 P                                                           
+---------- ----------                                                           
+089                   0          0          0          0          0          0  
+         0          0                                                           
+                                                                                
+
+14:40:14 SQL> SET LINESIZE 200
+14:40:32 SQL> SELECT SUBSTR(mahasiswa.no_hp,1,3) AS "OPERATOR",
+14:41:48   2  SUM(CASE WHEN SUBSTR(mahasiswa.nim,1,2) = '17' AND gender ='L' THEN '1' ELSE '0' END) AS "2017 - L",
+14:42:14   3  SUM(CASE WHEN SUBSTR(mahasiswa.nim,1,2) = '17' AND gender ='P' THEN '1' ELSE '0' END) AS "2017 - P",
+14:42:23   4  SUM(CASE WHEN SUBSTR(mahasiswa.nim,1,2) = '18' AND gender ='L' THEN '1' ELSE '0' END) AS "2018 - L",
+14:42:32   5  SUM(CASE WHEN SUBSTR(mahasiswa.nim,1,2) = '18' AND gender ='P' THEN '1' ELSE '0' END) AS "2018 - P",
+14:42:43   6  SUM(CASE WHEN SUBSTR(mahasiswa.nim,1,2) = '19' AND gender ='L' THEN '1' ELSE '0' END) AS "2019 - L",
+14:42:59   7  SUM(CASE WHEN SUBSTR(mahasiswa.nim,1,2) = '19' AND gender ='P' THEN '1' ELSE '0' END) AS "2019 - P",
+14:43:13   8  SUM(CASE WHEN SUBSTR(mahasiswa.nim,1,2) = '20' AND gender ='L' THEN '1' ELSE '0' END) AS "2020 - L",
+14:43:22   9  SUM(CASE WHEN SUBSTR(mahasiswa.nim,1,2) = '20' AND gender ='P' THEN '1' ELSE '0' END) AS "2020 - P"
+14:43:38  10  FROM mahasiswa
+14:43:52  11  WHERE SUBSTR(mahasiswa.no_hp,1,3) =
+14:44:05  12  (SELECT SUBSTR(no_hp,1,3) from mahasiswa WHERE nim = 19090099)
+14:44:16  13  GROUP BY SUBSTR(mahasiswa.no_hp,1,3);
+
+OPERATOR       2017 - L   2017 - P   2018 - L   2018 - P   2019 - L   2019 - P   2020 - L   2020 - P                                                                                                    
+------------ ---------- ---------- ---------- ---------- ---------- ---------- ---------- ----------                                                                                                    
+089                  19          5          4          0          6          3         19         13                                                                                                    
+
+14:44:38 SQL> 
+14:44:51 SQL> 
+14:44:51 SQL> --- no 6
+14:44:56 SQL> 
+14:44:56 SQL> SELECT * FROM TAB;
+
+TNAME                          TABTYPE  CLUSTERID                                                                                                                                                       
+------------------------------ ------- ----------                                                                                                                                                       
+AGAMA                          TABLE                                                                                                                                                                    
+ALAMAT                         TABLE                                                                                                                                                                    
+DOSEN                          TABLE                                                                                                                                                                    
+FISIK                          TABLE                                                                                                                                                                    
+JENIS_SEKOLAH                  TABLE                                                                                                                                                                    
+JURUSAN                        TABLE                                                                                                                                                                    
+KEDUDUKAN_WALI                 TABLE                                                                                                                                                                    
+KET_AKTIF                      TABLE                                                                                                                                                                    
+MAHASISWA                      TABLE                                                                                                                                                                    
+ORTU                           TABLE                                                                                                                                                                    
+PEKERJAAN                      TABLE                                                                                                                                                                    
+
+TNAME                          TABTYPE  CLUSTERID                                                                                                                                                       
+------------------------------ ------- ----------                                                                                                                                                       
+PENGHASILAN                    TABLE                                                                                                                                                                    
+SEKOLAH                        TABLE                                                                                                                                                                    
+STATUS_SEKOLAH                 TABLE                                                                                                                                                                    
+TAHUN_AKAD                     TABLE                                                                                                                                                                    
+
+15 rows selected.
+
+14:45:53 SQL> DESC fisik
+ Name                                                                                                              Null?    Type
+ ----------------------------------------------------------------------------------------------------------------- -------- ----------------------------------------------------------------------------
+ NIM                                                                                                                        CHAR(8)
+ TINGGI                                                                                                                     CHAR(3)
+ BERAT                                                                                                                      VARCHAR2(3)
+ GOL_DARAH                                                                                                                  VARCHAR2(2)
+ KACAMATA                                                                                                                   CHAR(1)
+ LENSA_KANAN                                                                                                                VARCHAR2(5)
+ LENSA_KIRI                                                                                                                 VARCHAR2(5)
+ UKURAN_PAKAIAN                                                                                                             VARCHAR2(5)
+
+14:46:02 SQL> 
+14:46:03 SQL> SELECT ukuran_pakaian From fisik WHERE nim = 19090099;
+
+UKURA                                                                                                                                                                                                   
+-----                                                                                                                                                                                                   
+XL                                                                                                                                                                                                      
+
+14:46:26 SQL> SELECT ukuran_pakaian,
+14:46:42   2  SUM(CASE WHEN SUBSTR(mahasiswa.nim,1,2) = '17' AND gender ='L' THEN '1' ELSE '0' END) AS "2017 - L",
+14:46:54   3  SUM(CASE WHEN SUBSTR(mahasiswa.nim,1,2) = '17' AND gender ='P' THEN '1' ELSE '0' END) AS "2017 - P",
+14:47:21   4  SUM(CASE WHEN SUBSTR(mahasiswa.nim,1,2) = '18' AND gender ='L' THEN '1' ELSE '0' END) AS "2018 - L",
+14:47:38   5  SUM(CASE WHEN SUBSTR(mahasiswa.nim,1,2) = '18' AND gender ='P' THEN '1' ELSE '0' END) AS "2018 - P",
+14:47:46   6  SUM(CASE WHEN SUBSTR(mahasiswa.nim,1,2) = '19' AND gender ='L' THEN '1' ELSE '0' END) AS "2019 - L",
+14:48:12   7  SUM(CASE WHEN SUBSTR(mahasiswa.nim,1,2) = '19' AND gender ='P' THEN '1' ELSE '0' END) AS "2019 - P",
+14:48:21   8  SUM(CASE WHEN SUBSTR(mahasiswa.nim,1,2) = '20' AND gender ='L' THEN '1' ELSE '0' END) AS "2020 - L",
+14:48:29   9  SUM(CASE WHEN SUBSTR(mahasiswa.nim,1,2) = '20' AND gender ='P' THEN '1' ELSE '0' END) AS "2020 - P"
+14:48:34  10  FROM fisik
+14:48:53  11  INNER JOIN mahasiswa ON fisik.nim  = mahasiwsa.nim
+14:49:36  12  WHERE ukuran_pakaian =
+14:49:49  13  (SELECT ukuran_pakaian From fisik WHERE nim = 19090099)
+14:50:02  14  GROUP BY ukuran_pakaian;
+INNER JOIN mahasiswa ON fisik.nim  = mahasiwsa.nim
+                                     *
+ERROR at line 11:
+ORA-00904: "MAHASIWSA"."NIM": invalid identifier 
+
+
+14:50:16 SQL> 
+14:50:22 SQL> SELECT ukuran_pakaian,
+14:50:28   2  SUM(CASE WHEN SUBSTR(mahasiswa.nim,1,2) = '17' AND gender ='L' THEN '1' ELSE '0' END) AS "2017 - L",
+14:50:37   3  SUM(CASE WHEN SUBSTR(mahasiswa.nim,1,2) = '17' AND gender ='P' THEN '1' ELSE '0' END) AS "2017 - P",
+14:50:42   4  SUM(CASE WHEN SUBSTR(mahasiswa.nim,1,2) = '18' AND gender ='L' THEN '1' ELSE '0' END) AS "2018 - L",
+14:50:46   5  SUM(CASE WHEN SUBSTR(mahasiswa.nim,1,2) = '18' AND gender ='P' THEN '1' ELSE '0' END) AS "2018 - P",
+14:50:52   6  SUM(CASE WHEN SUBSTR(mahasiswa.nim,1,2) = '19' AND gender ='L' THEN '1' ELSE '0' END) AS "2019 - L",
+14:51:01   7  SUM(CASE WHEN SUBSTR(mahasiswa.nim,1,2) = '19' AND gender ='P' THEN '1' ELSE '0' END) AS "2019 - P",
+14:51:20   8  SUM(CASE WHEN SUBSTR(mahasiswa.nim,1,2) = '20' AND gender ='L' THEN '1' ELSE '0' END) AS "2020 - L",
+14:51:26   9  SUM(CASE WHEN SUBSTR(mahasiswa.nim,1,2) = '20' AND gender ='P' THEN '1' ELSE '0' END) AS "2020 - P"
+14:51:34  10  FROM fisik
+14:51:37  11  INNER JOIN mahasiswa ON fisik.nim = mahasiswa.nim
+14:51:57  12  WHERE ukuran_pakaian =
+14:52:06  13  (SELECT ukuran_pakaian From fisik WHERE nim = 19090099)
+14:52:15  14  GROUP BY ukuran_pakaian;
+
+UKURA   2017 - L   2017 - P   2018 - L   2018 - P   2019 - L   2019 - P   2020 - L   2020 - P                                                                                                           
+----- ---------- ---------- ---------- ---------- ---------- ---------- ---------- ----------                                                                                                           
+XL            21          6         31          7         29          3         40          7                                                                                                           
+
+14:52:23 SQL> SPOOL OFF

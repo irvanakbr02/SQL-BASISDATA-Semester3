@@ -1,0 +1,982 @@
+SQL> SET TIME ON
+16:05:18 SQL> SELECT CURRENT_DATE AS "Hari Ini" FROM dual;
+
+Hari Ini                                                                        
+---------                                                                       
+27-NOV-20                                                                       
+
+16:06:03 SQL> SELECT SQRT(169) FROM dual;
+
+ SQRT(169)                                                                      
+----------                                                                      
+        13                                                                      
+
+16:06:27 SQL> SELECT 'TAUFIQ ABIDIN' AS "Nama Saya" FROM dual;
+
+Nama Saya                                                                       
+-------------                                                                   
+TAUFIQ ABIDIN                                                                   
+
+16:07:08 SQL> SELECT 'Irvan Akbar Febriansyah' AS "Nama Saya" FROM dual;
+
+Nama Saya                                                                       
+-----------------------                                                         
+Irvan Akbar Febriansyah                                                         
+
+16:07:35 SQL> SELECT 'Karsita' AS "Nama Ayah" FROM dual;
+
+Nama Ay                                                                         
+-------                                                                         
+Karsita                                                                         
+
+16:07:50 SQL> SELECT 'Erma yanti' AS "Nama Ibu" FROM dual;
+
+Nama Ibu                                                                        
+----------                                                                      
+Erma yanti                                                                      
+
+16:08:20 SQL> SELECT 'Irvan Akbar Febriansyah' AS "Nama Saya",'Karsita' AS "Nama Ayah",'Erma yanti' AS "Nama Ibu" FROM dual;
+
+Nama Saya               Nama Ay Nama Ibu                                        
+----------------------- ------- ----------                                      
+Irvan Akbar Febriansyah Karsita Erma yanti                                      
+
+16:10:22 SQL> SELECT 'Irvan Akbar Febriansyah' AS "Nama Saya",'Bpk. Karsita' AS "Nama Ayah",'Erma yanti' AS "Nama Ibu" FROM dual;
+
+Nama Saya               Nama Ayah    Nama Ibu                                   
+----------------------- ------------ ----------                                 
+Irvan Akbar Febriansyah Bpk. Karsita Erma yanti                                 
+
+16:10:37 SQL> SELECT SQRT(4/3 * 22/7 * 7*7*7) FROM dual;
+
+SQRT(4/3*22/7*7*7*7)                                                            
+--------------------                                                            
+          37.9121792                                                            
+
+16:12:23 SQL> SELECT SQRT(4/3 * 22/7 * 7*7*7) AS "Volume Bola" FROM dual;
+
+Volume Bola                                                                     
+-----------                                                                     
+ 37.9121792                                                                     
+
+16:13:01 SQL> SELECT (4/3 * 22/7 * 7*7*7) FROM dual;
+
+(4/3*22/7*7*7*7)                                                                
+----------------                                                                
+      1437.33333                                                                
+
+16:16:30 SQL> SELECT (4/3 * 22/7 * 7*7*7) AS "Volume Bola" FROM dual;
+
+Volume Bola                                                                     
+-----------                                                                     
+ 1437.33333                                                                     
+
+16:16:47 SQL> SELECT (4/3 * 22/7 * 7*7*7) AS "Volume Bola diameter 14" FROM dual;
+
+Volume Bola diameter 14                                                         
+-----------------------                                                         
+             1437.33333                                                         
+
+16:17:08 SQL> SELECT CURENT_DATE FROM dual;
+SELECT CURENT_DATE FROM dual
+       *
+ERROR at line 1:
+ORA-00904: "CURENT_DATE": invalid identifier 
+
+
+16:17:50 SQL> SELECT CURRENT_DATE FROM dual;
+
+CURRENT_D                                                                       
+---------                                                                       
+27-NOV-20                                                                       
+
+16:18:04 SQL> SELECT SYSDATE FROM dual;
+
+SYSDATE                                                                         
+---------                                                                       
+27-NOV-20                                                                       
+
+16:18:37 SQL> SELECT CURRENT_DATE -7 FROM dual;
+
+CURRENT_D                                                                       
+---------                                                                       
+20-NOV-20                                                                       
+
+16:18:51 SQL> SELECT SYSDATE -7 FROM dual;
+
+SYSDATE-7                                                                       
+---------                                                                       
+20-NOV-20                                                                       
+
+16:19:09 SQL> SELECT CURRENT_DATE-7 AS "Pekan Sebelumnya" FROM dual;
+
+Pekan Seb                                                                       
+---------                                                                       
+20-NOV-20                                                                       
+
+16:19:29 SQL> SELECT CURRENT_DATE +7 AS "Pekan yang akan datang" FROM dual;
+
+Pekan yan                                                                       
+---------                                                                       
+04-DEC-20                                                                       
+
+16:19:51 SQL> SELECT CURRENT_DATE-7 AS "Pekan Sebelumnya",CURRENT_DATE+7 AS "Pekan depan" FROM dual;
+
+Pekan Seb Pekan dep                                                             
+--------- ---------                                                             
+20-NOV-20 04-DEC-20                                                             
+
+16:20:35 SQL> SELECT CURRENT_DATE-7 AS "Pekan Sebelumnya",CURRENT_DATE AS "Hari Ini",CURRENT_DATE+7 AS "Pekan depan" FROM dual;
+
+Pekan Seb Hari Ini  Pekan dep                                                   
+--------- --------- ---------                                                   
+20-NOV-20 27-NOV-20 04-DEC-20                                                   
+
+16:21:01 SQL> SELECT ABS(-123) DROM dual;
+SELECT ABS(-123) DROM dual
+                      *
+ERROR at line 1:
+ORA-00923: FROM keyword not found where expected 
+
+
+16:22:16 SQL> SELECT ABS(-123) FROM dual;
+
+ ABS(-123)                                                                      
+----------                                                                      
+       123                                                                      
+
+16:22:23 SQL> SELECT AVG(jumlah) FROM detil_jual;
+
+AVG(JUMLAH)                                                                     
+-----------                                                                     
+       3.75                                                                     
+
+16:22:47 SQL> SELECT CEIL(12.3) FROM dual;
+
+CEIL(12.3)                                                                      
+----------                                                                      
+        13                                                                      
+
+16:23:07 SQL> SELECT COUNT * FROM member;
+SELECT COUNT * FROM member
+               *
+ERROR at line 1:
+ORA-00936: missing expression 
+
+
+16:23:28 SQL> SELECT COUNT (*) FROM member;
+
+  COUNT(*)                                                                      
+----------                                                                      
+         4                                                                      
+
+16:23:36 SQL> SELECT FLOOR(12.3) FROM dual;
+
+FLOOR(12.3)                                                                     
+-----------                                                                     
+         12                                                                     
+
+16:23:51 SQL> SELECT GREATEST(2,3,4,5) FROM dual;
+
+GREATEST(2,3,4,5)                                                               
+-----------------                                                               
+                5                                                               
+
+16:24:23 SQL> SELECT LEAST(2,3,4,5) FROM dual;
+
+LEAST(2,3,4,5)                                                                  
+--------------                                                                  
+             2                                                                  
+
+16:24:34 SQL> SELECT MAX(jumlah) FROM detil_jual;
+
+MAX(JUMLAH)                                                                     
+-----------                                                                     
+         10                                                                     
+
+16:24:58 SQL> SELECT MEDIAN(jumlah) FROM detil_jual;
+
+MEDIAN(JUMLAH)                                                                  
+--------------                                                                  
+             3                                                                  
+
+16:25:06 SQL> SELECT MIN(jumlah) FROM detil_jual;
+
+MIN(JUMLAH)                                                                     
+-----------                                                                     
+          1                                                                     
+
+16:25:23 SQL> SELECT MOD(8,3) FROM dual;
+
+  MOD(8,3)                                                                      
+----------                                                                      
+         2                                                                      
+
+16:26:02 SQL> SELECT SIGN(23) FROM dual;
+
+  SIGN(23)                                                                      
+----------                                                                      
+         1                                                                      
+
+16:26:56 SQL> SELECT SIGN(0) FROM dual;
+
+   SIGN(0)                                                                      
+----------                                                                      
+         0                                                                      
+
+16:27:07 SQL> SELECT SIGN(-23) FROM dual;
+
+ SIGN(-23)                                                                      
+----------                                                                      
+        -1                                                                      
+
+16:27:13 SQL> SELECT SUM(jumlah) FROM detil_jual;
+
+SUM(JUMLAH)                                                                     
+-----------                                                                     
+         60                                                                     
+
+16:27:36 SQL> SELECT*FROM data_barang;
+
+KODE NAMA_BARANG     KA      HARGA      STOCK                                   
+---- --------------- -- ---------- ----------                                   
+M001 Indomie         M1       3500         50                                   
+M002 Aqua Gelas      M2        500        100                                   
+A001 Buku Tulis      A1       2000         50                                   
+A002 Pulpen Hitam    A1       2000         50                                   
+
+16:27:52 SQL> SELECT MIN(harga) FROM data_barang;
+
+MIN(HARGA)                                                                      
+----------                                                                      
+       500                                                                      
+
+16:28:15 SQL> SELECT*FROM penjualan;
+
+NO_STRUK    TANGGAL   ID_MEMB ID_KASI                                           
+----------- --------- ------- -------                                           
+20101310001 13-OCT-20 2010002 A201003                                           
+20101310002 13-OCT-20 2010001 A201003                                           
+20101310003 13-OCT-20 2010003 A201002                                           
+20101310004 13-OCT-20 2010004 A201001                                           
+20101310005 13-OCT-20         A201001                                           
+
+16:28:40 SQL> SELECT SUM(no_Struk
+16:29:03   2  
+16:29:04 SQL> SELECT SUM(no_Struk) FROM penjualan;
+
+SUM(NO_STRUK)                                                                   
+-------------                                                                   
+   1.0051E+11                                                                   
+
+16:29:12 SQL> SELECT COUNT(no_Struk) FROM penjualan;
+
+COUNT(NO_STRUK)                                                                 
+---------------                                                                 
+              5                                                                 
+
+16:30:12 SQL> SELECT * FROM detil_jual;
+
+NO_STRUK    KODE      HARGA     JUMLAH                                          
+----------- ---- ---------- ----------                                          
+20101310001 M002        500          3                                          
+20101310001 A001       5000          5                                          
+20101310001 A002       2000          2                                          
+20101310002 M001       3500         10                                          
+20101310002 A001       5000          4                                          
+20101310002 A002       2000          2                                          
+20101310003 M001       3500          1                                          
+20101310003 M002        500          7                                          
+20101310003 A002       2000          2                                          
+20101310004 M001       3500          2                                          
+20101310004 M002        500          6                                          
+
+NO_STRUK    KODE      HARGA     JUMLAH                                          
+----------- ---- ---------- ----------                                          
+20101310004 A001       5000          3                                          
+20101310005 A001       5000          4                                          
+20101310005 M002        500          5                                          
+20101310005 A002       2000          3                                          
+20101310005 M001       3500          1                                          
+
+16 rows selected.
+
+16:30:40 SQL> SELECT SUM (detil_jual.harga * detil_jual.jumlah) FROM detil_jual;
+
+SUM(DETIL_JUAL.HARGA*DETIL_JUAL.JUMLAH)                                         
+---------------------------------------                                         
+                                 157500                                         
+
+16:31:47 SQL> SELECT SUM (detil_jual.harga * detil_jual.jumlah)AS "TOTAL UANG" FROM detil_jual;
+
+TOTAL UANG                                                                      
+----------                                                                      
+    157500                                                                      
+
+16:32:29 SQL> SELECT jumlah FROM detil_jual;
+
+    JUMLAH                                                                      
+----------                                                                      
+         3                                                                      
+         5                                                                      
+         2                                                                      
+        10                                                                      
+         4                                                                      
+         2                                                                      
+         1                                                                      
+         7                                                                      
+         2                                                                      
+         2                                                                      
+         6                                                                      
+
+    JUMLAH                                                                      
+----------                                                                      
+         3                                                                      
+         4                                                                      
+         5                                                                      
+         3                                                                      
+         1                                                                      
+
+16 rows selected.
+
+16:33:54 SQL> SELECT AVG(jumlah) FROM detil_jual;
+
+AVG(JUMLAH)                                                                     
+-----------                                                                     
+       3.75                                                                     
+
+16:34:13 SQL> SELECT CEIL (AVG(jumlah) FROM detil_jual;
+SELECT CEIL (AVG(jumlah) FROM detil_jual
+                         *
+ERROR at line 1:
+ORA-00907: missing right parenthesis 
+
+
+16:35:01 SQL> SELECT CEIL (AVG(jumlah)) FROM detil_jual;
+
+CEIL(AVG(JUMLAH))                                                               
+-----------------                                                               
+                4                                                               
+
+16:35:08 SQL> SELECT(jumlah) FROM detil_jual;
+
+    JUMLAH                                                                      
+----------                                                                      
+         3                                                                      
+         5                                                                      
+         2                                                                      
+        10                                                                      
+         4                                                                      
+         2                                                                      
+         1                                                                      
+         7                                                                      
+         2                                                                      
+         2                                                                      
+         6                                                                      
+
+    JUMLAH                                                                      
+----------                                                                      
+         3                                                                      
+         4                                                                      
+         5                                                                      
+         3                                                                      
+         1                                                                      
+
+16 rows selected.
+
+16:36:06 SQL> SELECT SIGN(jumlah) FROM detil_jual;
+
+SIGN(JUMLAH)                                                                    
+------------                                                                    
+           1                                                                    
+           1                                                                    
+           1                                                                    
+           1                                                                    
+           1                                                                    
+           1                                                                    
+           1                                                                    
+           1                                                                    
+           1                                                                    
+           1                                                                    
+           1                                                                    
+
+SIGN(JUMLAH)                                                                    
+------------                                                                    
+           1                                                                    
+           1                                                                    
+           1                                                                    
+           1                                                                    
+           1                                                                    
+
+16 rows selected.
+
+16:36:54 SQL> SELECT MOD(jumlah,2) FROM detil_jual;
+
+MOD(JUMLAH,2)                                                                   
+-------------                                                                   
+            1                                                                   
+            1                                                                   
+            0                                                                   
+            0                                                                   
+            0                                                                   
+            0                                                                   
+            1                                                                   
+            1                                                                   
+            0                                                                   
+            0                                                                   
+            0                                                                   
+
+MOD(JUMLAH,2)                                                                   
+-------------                                                                   
+            1                                                                   
+            0                                                                   
+            1                                                                   
+            1                                                                   
+            1                                                                   
+
+16 rows selected.
+
+16:39:26 SQL> SELECT MOD(jumlah,1) FROM detil_jual;
+
+MOD(JUMLAH,1)                                                                   
+-------------                                                                   
+            0                                                                   
+            0                                                                   
+            0                                                                   
+            0                                                                   
+            0                                                                   
+            0                                                                   
+            0                                                                   
+            0                                                                   
+            0                                                                   
+            0                                                                   
+            0                                                                   
+
+MOD(JUMLAH,1)                                                                   
+-------------                                                                   
+            0                                                                   
+            0                                                                   
+            0                                                                   
+            0                                                                   
+            0                                                                   
+
+16 rows selected.
+
+16:39:35 SQL> SELECT MOD(jumlah,2) FROM detil_jual;
+
+MOD(JUMLAH,2)                                                                   
+-------------                                                                   
+            1                                                                   
+            1                                                                   
+            0                                                                   
+            0                                                                   
+            0                                                                   
+            0                                                                   
+            1                                                                   
+            1                                                                   
+            0                                                                   
+            0                                                                   
+            0                                                                   
+
+MOD(JUMLAH,2)                                                                   
+-------------                                                                   
+            1                                                                   
+            0                                                                   
+            1                                                                   
+            1                                                                   
+            1                                                                   
+
+16 rows selected.
+
+16:39:44 SQL> SELECT SQRT(27) FROM dual;
+
+  SQRT(27)                                                                      
+----------                                                                      
+5.19615242                                                                      
+
+16:40:59 SQL> SELECT POWER(27,3) FROM dual;
+
+POWER(27,3)                                                                     
+-----------                                                                     
+      19683                                                                     
+
+16:41:55 SQL> SELECT SQRT(27^3) FROM dual;
+SELECT SQRT(27^3) FROM dual
+              *
+ERROR at line 1:
+ORA-00907: missing right parenthesis 
+
+
+16:42:23 SQL> SELECT SQRT(27,3) FROM dual;
+SELECT SQRT(27,3) FROM dual
+       *
+ERROR at line 1:
+ORA-00909: invalid number of arguments 
+
+
+16:42:28 SQL> SELECT POWER(3,27) FROM dual;
+
+POWER(3,27)                                                                     
+-----------                                                                     
+ 7.6256E+12                                                                     
+
+16:44:03 SQL> SELECT POWER(27,3) FROM dual;
+
+POWER(27,3)                                                                     
+-----------                                                                     
+      19683                                                                     
+
+16:45:30 SQL> SELECT POWER(1/3,27) FROM dual;
+
+POWER(1/3,27)                                                                   
+-------------                                                                   
+   1.3114E-13                                                                   
+
+16:45:48 SQL> SELECT POWER(27,1/3) FROM dual;
+
+POWER(27,1/3)                                                                   
+-------------                                                                   
+            3                                                                   
+
+16:46:01 SQL> SELECT POWER(27,1/3) AS "AKAR" FROM dual;
+
+      AKAR                                                                      
+----------                                                                      
+         3                                                                      
+
+16:46:14 SQL> SELECT CONCAT('INDO,'NESIA') FROM dual;
+ERROR:
+ORA-01756: quoted string not properly terminated 
+
+
+16:50:00 SQL> SELECT CONCAT('INDO','NESIA') FROM dual;
+
+CONCAT('I                                                                       
+---------                                                                       
+INDONESIA                                                                       
+
+16:50:10 SQL> SELECT 'TAUFIQ' || 'ABIDIN' FROM dual;
+
+'TAUFIQ'||'A                                                                    
+------------                                                                    
+TAUFIQABIDIN                                                                    
+
+16:50:48 SQL> SELECT 'TAUFIQ' ||' ' ||'ABIDIN' FROM dual;
+
+'TAUFIQ'||''|                                                                   
+-------------                                                                   
+TAUFIQ ABIDIN                                                                   
+
+16:51:03 SQL> SELECT LENGTH('TAUFIQ ABIDIN') FROM dual;
+
+LENGTH('TAUFIQABIDIN')                                                          
+----------------------                                                          
+                    13                                                          
+
+16:51:35 SQL> SELECT LOWER ('TAUDIQ ABIDIN') FROM dual;
+
+LOWER('TAUDIQ                                                                   
+-------------                                                                   
+taudiq abidin                                                                   
+
+16:52:13 SQL> SELECT REPLACE('Siti makan soto','i','o') FROM dual;
+
+REPLACE('SITIMA                                                                 
+---------------                                                                 
+Soto makan soto                                                                 
+
+16:52:52 SQL> SELECT SUBSTR('TAUFIQ ABIDIN',2,3) FROM dual;
+
+SUB                                                                             
+---                                                                             
+AUF                                                                             
+
+16:53:39 SQL> -- panjang nama
+16:54:28 SQL> SELECT LENGTH('IRVAN AKBAR FEBRIANSYAH') FROM dual;
+
+LENGTH('IRVANAKBARFEBRIANSYAH')                                                 
+-------------------------------                                                 
+                             23                                                 
+
+16:54:49 SQL> -- 3 angka terakhir
+16:56:32 SQL> SELECT SUBSTR('19090099',6,3) FROM dual;
+
+SUB                                                                             
+---                                                                             
+099                                                                             
+
+16:57:04 SQL> SELECT SUBSTR('19090099',6,3) AS "3 angka terakhir" FROM dual;
+
+3 a                                                                             
+---                                                                             
+099                                                                             
+
+16:57:21 SQL> SELECT SUBSTR('19090099',6,3) FROM dual;
+
+SUB                                                                             
+---                                                                             
+099                                                                             
+
+16:57:26 SQL> SELECT SUBSTR('19090099',1,2 ,'19090099',5,4) FROM dual;
+SELECT SUBSTR('19090099',1,2 ,'19090099',5,4) FROM dual
+                              *
+ERROR at line 1:
+ORA-00939: too many arguments for function 
+
+
+16:58:24 SQL> SELECT SUBSTR '19090099',1,2 ,'19090099',5,4 FROM dual;
+SELECT SUBSTR '19090099',1,2 ,'19090099',5,4 FROM dual
+              *
+ERROR at line 1:
+ORA-00923: FROM keyword not found where expected 
+
+
+16:58:38 SQL> SELECT SUBSTR('19090099',1,2 ) SUBSTR('19090099',5,4) FROM dual;
+SELECT SUBSTR('19090099',1,2 ) SUBSTR('19090099',5,4) FROM dual
+                                     *
+ERROR at line 1:
+ORA-00923: FROM keyword not found where expected 
+
+
+16:59:14 SQL> SELECT SUBSTR('19090099',1,2 ),SUBSTR('19090099',5,4) FROM dual;
+
+SU SUBS                                                                         
+-- ----                                                                         
+19 0099                                                                         
+
+16:59:22 SQL> SELECT SUBSTR('19090099',1,2 ),SUBSTR('19090099',5,4) AS "Gabung" FROM dual;
+
+SU Gabu                                                                         
+-- ----                                                                         
+19 0099                                                                         
+
+16:59:39 SQL> SELECT CONCAT(SUBSTR('19090099',1,2 ),SUBSTR('19090099',5,4)) AS "Gabung" FROM dual;
+
+Gabung                                                                          
+------                                                                          
+190099                                                                          
+
+17:00:38 SQL> SELECT CONCAT(SUBSTR('19090099',1,2 ),SUBSTR('19090099',5,4)) AS "Gabungan 2 angka pertama dan 4 angka terakhir" FROM dual;
+SELECT CONCAT(SUBSTR('19090099',1,2 ),SUBSTR('19090099',5,4)) AS "Gabungan 2 angka pertama dan 4 angka terakhir" FROM dual
+                                                                 *
+ERROR at line 1:
+ORA-00972: identifier is too long 
+
+
+17:00:54 SQL> SELECT CONCAT(SUBSTR('19090099',1,2 ),SUBSTR('19090099',5,4)) AS "Gabungan" FROM dual;
+
+Gabung                                                                          
+------                                                                          
+190099                                                                          
+
+17:01:24 SQL> SELECT SYSDATE, ADD_MONTHS(SYSDATE,3) FROM dual;
+
+SYSDATE   ADD_MONTH                                                             
+--------- ---------                                                             
+27-NOV-20 27-FEB-21                                                             
+
+17:02:36 SQL> SELECT CURRENT_TIMESTAMP FROM dual;
+
+CURRENT_TIMESTAMP                                                               
+---------------------------------------------------------------------------     
+27-NOV-20 05.03.24.874000 PM +07:00                                             
+
+17:03:24 SQL> SELECT LAST_DAY(SYSDATE) FROM dual;
+
+LAST_DAY(                                                                       
+---------                                                                       
+30-NOV-20                                                                       
+
+17:04:00 SQL> SELECT SYSDATE,LAST_DAY(SYSDATE) FROM dual;
+
+SYSDATE   LAST_DAY(                                                             
+--------- ---------                                                             
+27-NOV-20 30-NOV-20                                                             
+
+17:04:15 SQL> SELECT LOCALTIMESTAMP FROM dual;
+
+LOCALTIMESTAMP                                                                  
+---------------------------------------------------------------------------     
+27-NOV-20 05.04.42.258000 PM                                                    
+
+17:04:42 SQL> SELECT MONTHS_BETWEEN('17-AUG-2021',SYSDATE)FROM dual;
+
+MONTHS_BETWEEN('17-AUG-2021',SYSDATE)                                           
+-------------------------------------                                           
+                           8.65444706                                           
+
+17:05:29 SQL> SELECT TO_CHAR(SYSDATE, 'Day, dd Month Year') FROM dual;
+
+TO_CHAR(SYSDATE,'DAY,DDMONTHYEAR')                                              
+--------------------------------------------------------------------------------
+Friday   , 27 November  Twenty Twenty                                           
+
+17:06:35 SQL> SELECT TO_DATE('17/08/1945', 'DD/MM/YYYY') FROM dual;
+
+TO_DATE('                                                                       
+---------                                                                       
+17-AUG-45                                                                       
+
+17:07:52 SQL> SELECT TO_DATE('19/02/2002', 'DD/MM/YYYY') FROM dual;
+
+TO_DATE('                                                                       
+---------                                                                       
+19-FEB-02                                                                       
+
+17:09:50 SQL> SELECT CURRENT_DATE - TO_DATE('19/02/2002') FROM dual;
+SELECT CURRENT_DATE - TO_DATE('19/02/2002') FROM dual
+                              *
+ERROR at line 1:
+ORA-01843: not a valid month 
+
+
+17:12:06 SQL> SELECT CURRENT_DATE - TO_DATE('19-FEB-02') FROM dual;
+
+CURRENT_DATE-TO_DATE('19-FEB-02')                                               
+---------------------------------                                               
+                       6856.71689                                               
+
+17:12:19 SQL> SELECT CURRENT_DATE - TO_DATE('19-FEB-02') AS "Usia saya dalam hari" FROM dual;
+
+Usia saya dalam hari                                                            
+--------------------                                                            
+          6856.71934                                                            
+
+17:15:51 SQL> SELECT CEIL(CURRENT_DATE - TO_DATE('19-FEB-02')) AS "Usia saya dalam hari" FROM dual;
+
+Usia saya dalam hari                                                            
+--------------------                                                            
+                6857                                                            
+
+17:16:06 SQL> SELECT CEIL(CURRENT_DATE - TO_DATE('19-FEB-02' || hari)) AS "Usia saya dalam hari" FROM dual;
+SELECT CEIL(CURRENT_DATE - TO_DATE('19-FEB-02' || hari)) AS "Usia saya dalam hari" FROM dual
+                                                  *
+ERROR at line 1:
+ORA-00904: "HARI": invalid identifier 
+
+
+17:20:43 SQL> SELECT CEIL(CURRENT_DATE - TO_DATE('19-FEB-02' || 'hari')) AS "Usia saya dalam hari" FROM dual;
+SELECT CEIL(CURRENT_DATE - TO_DATE('19-FEB-02' || 'hari')) AS "Usia saya dalam hari" FROM dual
+                                                *
+ERROR at line 1:
+ORA-01830: date format picture ends before converting entire input string 
+
+
+17:20:56 SQL> SELECT CEIL(CURRENT_DATE - TO_DATE('19-FEB-02')|| 'HARI') AS "Usia saya dalam hari" FROM dual;
+SELECT CEIL(CURRENT_DATE - TO_DATE('19-FEB-02')|| 'HARI') AS "Usia saya dalam hari" FROM dual
+                                                *
+ERROR at line 1:
+ORA-01722: invalid number 
+
+
+17:21:30 SQL> SELECT CURRENT_DATE - TO_DATE('19-FEB-02') AS "Usia saya dalam hari" FROM dual;
+
+Usia saya dalam hari                                                            
+--------------------                                                            
+           6856.7236                                                            
+
+17:21:59 SQL> SELECT CEIL(CURRENT_DATE - TO_DATE('19-FEB-02')|| 'HARI') AS "Usia saya dalam hari" FROM dual;
+SELECT CEIL(CURRENT_DATE - TO_DATE('19-FEB-02')|| 'HARI') AS "Usia saya dalam hari" FROM dual
+                                                *
+ERROR at line 1:
+ORA-01722: invalid number 
+
+
+17:22:03 SQL> SELECT CEIL(CURRENT_DATE - TO_DATE('19-FEB-02')) AS "Usia saya dalam hari" FROM dual;
+
+Usia saya dalam hari                                                            
+--------------------                                                            
+                6857                                                            
+
+17:22:09 SQL> SELECT CEIL(CURRENT_DATE - TO_DATE('19-FEB-02'))/30 AS "Usia saya dalam hari" FROM dual;
+
+Usia saya dalam hari                                                            
+--------------------                                                            
+          228.566667                                                            
+
+17:22:24 SQL> SELECT CEIL(CURRENT_DATE - TO_DATE('19-FEB-02')) /30 || 'Bulan' AS "Usia saya dalam bulan" FROM dual;
+
+Usia saya dalam bulan                                                           
+---------------------------------------------                                   
+228.566666666666666666666666666666666667Bulan                                   
+
+17:23:32 SQL> SELECT CEIL(CURRENT_DATE - TO_DATE('19-FEB-02')) /30 || 'Bulan' AS "Usia saya dalam  bulan" FROM dual;
+
+Usia saya dalam  bulan                                                          
+---------------------------------------------                                   
+228.566666666666666666666666666666666667Bulan                                   
+
+17:23:59 SQL> SELECT FLOOR(CURRENT_DATE - TO_DATE('19-FEB-02')) /30 || 'Bulan' AS "Usia saya dalam  bulan" FROM dual;
+
+Usia saya dalam  bulan                                                          
+---------------------------------------------                                   
+228.533333333333333333333333333333333333Bulan                                   
+
+17:24:13 SQL> SELECT FLOOR(CURRENT_DATE - TO_DATE('19-FEB-02')) /30 || ' Bulan' AS "Usia saya dalam  bulan" FROM dual;
+
+Usia saya dalam  bulan                                                          
+----------------------------------------------                                  
+228.533333333333333333333333333333333333 Bulan                                  
+
+17:24:33 SQL> 
+17:26:24 SQL> SELECT FLOOR(CURRENT_DATE - TO_DATE('19-FEB-02')) /30.417 || ' Bulan' AS "Usia saya dalam  bulan" FROM dual;
+
+Usia saya dalam  bulan                                                          
+----------------------------------------------                                  
+225.400269586086727816681461025084656607 Bulan                                  
+
+17:28:48 SQL> SELECT TO_NUMBER(CURRENT_DATE - TO_DATE('19-FEB-02'))   FROM dual;
+
+TO_NUMBER(CURRENT_DATE-TO_DATE('19-FEB-02'))                                    
+--------------------------------------------                                    
+                                  6856.72881                                    
+
+17:29:29 SQL> SELECT CEIL(TO_NUMBER(CURRENT_DATE - TO_DATE('19-FEB-02')))   FROM dual;
+
+CEIL(TO_NUMBER(CURRENT_DATE-TO_DATE('19-FEB-02')))                              
+--------------------------------------------------                              
+                                              6857                              
+
+17:29:50 SQL> SELECT CEIL(TO_NUMBER(CURRENT_DATE - TO_DATE('19-FEB-02')))/30   FROM dual;
+
+CEIL(TO_NUMBER(CURRENT_DATE-TO_DATE('19-FEB-02')))/30                           
+-----------------------------------------------------                           
+                                           228.566667                           
+
+17:30:07 SQL> SELECT CEIL(TO_NUMBER(CURRENT_DATE - TO_DATE('19-FEB-02')))/30.417   FROM dual;
+
+CEIL(TO_NUMBER(CURRENT_DATE-TO_DATE('19-FEB-02')))/30.417                       
+---------------------------------------------------------                       
+                                               225.433146                       
+
+17:30:17 SQL> SELECT CEIL(TO_NUMBER(CURRENT_DATE - TO_DATE('19-FEB-2002')))/30.417   FROM dual;
+
+CEIL(TO_NUMBER(CURRENT_DATE-TO_DATE('19-FEB-2002')))/30.417                     
+-----------------------------------------------------------                     
+                                                 225.433146                     
+
+17:30:31 SQL> SELECT FLOOR(TO_NUMBER(CURRENT_DATE - TO_DATE('19-FEB-2002')))/30.417   FROM dual;
+
+FLOOR(TO_NUMBER(CURRENT_DATE-TO_DATE('19-FEB-2002')))/30.417                    
+------------------------------------------------------------                    
+                                                   225.40027                    
+
+17:30:47 SQL> SELECT TRUNC(TO_NUMBER(CURRENT_DATE - TO_DATE('19-FEB-2002')))/30.417   FROM dual;
+
+TRUNC(TO_NUMBER(CURRENT_DATE-TO_DATE('19-FEB-2002')))/30.417                    
+------------------------------------------------------------                    
+                                                   225.40027                    
+
+17:30:58 SQL> SELECT TRUNC(TO_NUMBER(SYSDATE - TO_DATE('19-FEB-2002')))/30.417   FROM dual;
+
+TRUNC(TO_NUMBER(SYSDATE-TO_DATE('19-FEB-2002')))/30.417                         
+-------------------------------------------------------                         
+                                              225.40027                         
+
+17:31:20 SQL> SELECT TRUNC(TO_NUMBER(SYSDATE - TO_DATE('19-FEB-2002'))/30.417)   FROM dual;
+
+TRUNC(TO_NUMBER(SYSDATE-TO_DATE('19-FEB-2002'))/30.417)                         
+-------------------------------------------------------                         
+                                                    225                         
+
+17:31:52 SQL> SELECT CEIL(TO_NUMBER(CURRENT_DATE - TO_DATE('19-FEB-2002'))/30.417)   FROM dual;
+
+CEIL(TO_NUMBER(CURRENT_DATE-TO_DATE('19-FEB-2002'))/30.417)                     
+-----------------------------------------------------------                     
+                                                        226                     
+
+17:32:10 SQL> SELECT FLOOR(TO_NUMBER(CURRENT_DATE - TO_DATE('19-FEB-2002'))/30.417)   FROM dual;
+
+FLOOR(TO_NUMBER(CURRENT_DATE-TO_DATE('19-FEB-2002'))/30.417)                    
+------------------------------------------------------------                    
+                                                         225                    
+
+17:32:21 SQL> SELECT TRUNC(TO_NUMBER(SYSDATE - TO_DATE('19-FEB-2002'))/30.417) AS "USIA DALAM BULAN"  FROM dual;
+
+USIA DALAM BULAN                                                                
+----------------                                                                
+             225                                                                
+
+17:32:42 SQL> SELECT TRUNC(TO_NUMBER(SYSDATE - TO_DATE('19-FEB-2002'))/30.417)|| " Bulan"  AS "USIA DALAM BULAN"  FROM dual;
+SELECT TRUNC(TO_NUMBER(SYSDATE - TO_DATE('19-FEB-2002'))/30.417)|| " Bulan"  AS "USIA DALAM BULAN"  FROM dual
+                                                                   *
+ERROR at line 1:
+ORA-00904: " Bulan": invalid identifier 
+
+
+17:32:56 SQL> SELECT TRUNC(TO_NUMBER(SYSDATE - TO_DATE('19-FEB-2002'))/30.417)|| ' Bulan'  AS "USIA DALAM BULAN"  FROM dual;
+
+USIA DALAM BULAN                                                                
+----------------------------------------------                                  
+225 Bulan                                                                       
+
+17:33:09 SQL> SELECT TRUNC(TO_NUMBER(SYSDATE - TO_DATE('19-FEB-2002')))|| ' HARI'  AS "USIA DALAM HARI"  FROM dual;
+
+USIA DALAM HARI                                                                 
+---------------------------------------------                                   
+6856 HARI                                                                       
+
+17:33:35 SQL> SELECT TRUNC(TO_NUMBER(SYSDATE - TO_DATE('19-FEB-2002'))/30.417)|| ' Bulan'  AS "USIA DALAM BULAN"  FROM dual;
+
+USIA DALAM BULAN                                                                
+----------------------------------------------                                  
+225 Bulan                                                                       
+
+17:33:43 SQL> SELECT TRUNC(TO_NUMBER(SYSDATE - TO_DATE('19-FEB-2002'))/365)|| ' Bulan'  AS "USIA DALAM BULAN"  FROM dual;
+
+USIA DALAM BULAN                                                                
+----------------------------------------------                                  
+18 Bulan                                                                        
+
+17:33:56 SQL> SELECT TRUNC(TO_NUMBER(SYSDATE - TO_DATE('19-FEB-2002'))/365)|| ' TAHUN'  AS "USIA DALAM TAHUN"  FROM dual;
+
+USIA DALAM TAHUN                                                                
+----------------------------------------------                                  
+18 TAHUN                                                                        
+
+17:34:16 SQL> SELECT TO_CHAR('19-FEB-2002', 'DAY') FROM dual;
+SELECT TO_CHAR('19-FEB-2002', 'DAY') FROM dual
+               *
+ERROR at line 1:
+ORA-01722: invalid number 
+
+
+17:35:30 SQL> SELECT TO_CHAR('19-02-2002', 'DAY') FROM dual;
+SELECT TO_CHAR('19-02-2002', 'DAY') FROM dual
+               *
+ERROR at line 1:
+ORA-01722: invalid number 
+
+
+17:35:40 SQL> SELECT TO_CHAR('2002-02-19', 'DAY') FROM dual;
+SELECT TO_CHAR('2002-02-19', 'DAY') FROM dual
+               *
+ERROR at line 1:
+ORA-01722: invalid number 
+
+
+17:35:55 SQL> SELECT TO_CHAR(date'2002-02-19', 'DAY') FROM dual;
+
+TO_CHAR(D                                                                       
+---------                                                                       
+TUESDAY                                                                         
+
+17:36:26 SQL> SELECT TO_CHAR(date'2002-02-19', 'DAY') AS "HARI LAHIR" FROM dual;
+
+HARI LAHI                                                                       
+---------                                                                       
+TUESDAY                                                                         
+
+17:37:28 SQL> SELECT CURRENT_TIMESTAMP FROM dual;
+
+CURRENT_TIMESTAMP                                                               
+---------------------------------------------------------------------------     
+27-NOV-20 05.38.47.732000 PM +07:00                                             
+
+17:38:47 SQL> SELECT CURRENT_TIMESTAMP AS "WAKTU MENGERJAKAN" FROM dual;
+
+WAKTU MENGERJAKAN                                                               
+---------------------------------------------------------------------------     
+27-NOV-20 05.39.08.494000 PM +07:00                                             
+
+17:39:08 SQL> SPOOL OFF

@@ -1,0 +1,149 @@
+LATIHAN
+
+CREATE TABLE kategori(
+kode CHAR(2),
+kategori VARCHAR(10));
+
+Table created.
+
+MEINPUT DATA KATEGORI
+
+INSERT INTO kategori(kode,kategori)
+   VALUES ('M1','Makanan');
+
+1 row created.
+
+INSERT INTO kategori(kode,kategori)
+  VALUES ('M2','Minuman');
+
+1 row created.
+
+CREATE TABLE data_barang(
+  kode_barang CHAR(4),
+  nama_barang VARCHAR2(15),
+  kategori CHAR(2),
+  harga NUMBER,
+  STOK NUMBER);
+
+Table created.
+
+SQL> INSERT INTO data_barang (kode_barang,nama_barang,kategori,harga,stok)
+  2  VALUES ('M001','Indomie','M1',3500,50);
+
+1 row created.
+
+SQL> INSERT INTO data_barang (kode_barang,nama_barang,kategori,harga,stok)
+  2  VALUES ('M002','Aqua Gelas','M2',500,100);
+
+1 row created.
+
+SQL> INSERT INTO data_barang (kode_barang,nama_barang,harga,stok)
+  2  VALUES ('A003','Pulpen Biru',2000,50);
+
+
+
+
+SQL> UPDATE data_barang SET kategori ='A1' WHERE kode_barang = A003;
+UPDATE data_barang SET kategori ='A1' WHERE kode_barang = A003
+                                                          *
+ERROR at line 1:
+ORA-00904: "A003": invalid identifier
+
+// ERROR KARENA A003 tidak diberi ( 'A003 ' ) 
+
+SQL> UPDATE data_barang SET kategori ='A1' WHERE kode_barang = 'A003';
+
+1 row updated.
+
+SQL> UPDATE data_barang SET kategori ='A1' WHERE kode_barang = 'A001';
+
+1 row updated.
+
+SQL> UPDATE data_barang SET kategori ='A1' WHERE kode_barang = 'A002';
+
+1 row updated.
+SQL> SELECT* FROM data_barang;
+
+
+KODE NAMA_BARANG     KA      HARGA       STOK
+---- --------------- -- ---------- ----------
+M001 Indomie        	 M1       3500         50
+M002 Aqua Gelas      	M2        500        100
+A003 Pulpen Biru	              2000         50
+A001 Buku Tulis                          5000         30
+A002 Pulpen Hitam                      2000         20
+
+
+INSERT INTO data_barang (kode_barang,nama_barang,kategori,harga,stok)
+VALUES ('M002','Aqua Gelas','M2',500,100);
+
+INSERT INTO data_barang (kode_barang,nama_barang,kategori,harga,stok)
+VALUES ('M003','Pulpen Biru','',3500,50);
+
+INSERT INTO data_barang (kode_barang,nama_barang,kategori,harga,stok)
+VALUES ('M001','Indomie','M1',3500,50);
+
+
+MEMBUAT VALIDASI = membatasi nilai pada harga minimal 500 tidak bisa kurang
+
+SQL> ALTER TABLE data_barang ADD CONSTRAINT harga_ck CHECK(harga>=500);
+
+Table altered.
+
+MEMBUAT / MENYETING data pada STOK agar min 5 max 100 =
+antara 5 sampai dengan 100
+
+//CARA 1
+SQL> ALTER TABLE data_barang ADD CONSTRAINT stok_ck CHECK(stok>=5 and stok<=100);
+
+Table altered.
+
+//CARA 2
+SQL> ALTER TABLE data_barang ADD CONSTRAINT stok_ck CHECK (stok BETWEEN 5 and 100);
+
+Table altered.
+
+
+MENGUBAH JENIS KELAMIN AGAR ADA 2 YAITU L atau P
+
+SQL> ALTER TABLE keluarga ADD CONSTRAINT jk_ck CHECK (jenis_kelamin IN('L','P'));
+
+Table altered.
+
+MENGUBAH NOMER HP AGAR MENGINPUT HP HARUS 08+...
+
+ALTER TABLE keluarga ADD CONSTRAINT no_hp_ck CHECK(no_hp LIKE '08%');
+
+nama tabel daengan nama kolom sama tidak apa
+
+
+FOREIGN KEY
+
+1. ON DELETE SET NULL;  = cuma dihapus kolom A1 aja 
+2. ON DELETE CASCADE; = ilang kabeh
+3. ON DELETE NO ACTION; (setingan default)
+
+MENCOBA SET NULL;
+ALTER TABLE data_barang ADD CONSTRAINT ktgr_fk
+FOREIGN KEY (kategori) REFERENCES kategori(kode)
+ON DELETE SET NULL;
+
+Table altered.
+
+SQL> DELETE kategori WHERE kode = 'A1';
+
+1 row deleted.
+
+SQL> SELECT * FROM data_barang;
+
+KODE NAMA_BARANG     KA      HARGA       STOK
+---- --------------- -- ---------- ----------
+M001 Indomie        		 M1          3500          50
+M002 Aqua Gelas      		M2            500         100
+A003 Pulpen Biru             		2000         50
+A001 Buku Tulis              		5000         30
+A002 Pulpen Hitam             		2000         20
+
+SQL> ROLLBACK;
+
+Rollback complete.

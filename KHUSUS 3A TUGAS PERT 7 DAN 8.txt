@@ -1,0 +1,45 @@
+
+TUGAS PERT 7 (KHUSUS KELAS 3A)
+-------------------------------------------------
+Buatlah Query untuk menghasilkan tampilan berikut
+
+
+NOMER STRUK NAMA KASIR                     NAMA MEMBER                    NAMA BARANG     KATEGORI        HARGA     JUMLAH      TOTAL
+----------- ------------------------------ ------------------------------ --------------- ---------- ---------- ---------- ----------
+20101310001 Zena                           Bandi                          Pulpen Hitam    Alat Tulis       2000          2       4000
+20101310001 Zena                           Bandi                          Buku Tulis      Alat Tulis       5000          5      25000
+20101310001 Zena                           Bandi                          Aqua Gelas      Minuman           500          3       1500
+20101310002 Zena                           Andi                           Buku Tulis      Alat Tulis       5000          4      20000
+20101310002 Zena                           Andi                           Pulpen Hitam    Alat Tulis       2000          2       4000
+20101310002 Zena                           Andi                           Indomie         Makanan          3500         10      35000
+
+6 rows selected.
+
+
+TUGAS PERT 8 (RIGTH/LEFT JOIN)
+-------------------------------------------------
+Buatlah Query untuk menghasilkan tampilan berikut
+
+
+NOMER STRUK NAMA KASIR                     NAMA MEMBER                    NAMA BARANG     KATEGORI        HARGA     JUMLAH      TOTAL
+----------- ------------------------------ ------------------------------ --------------- ---------- ---------- ---------- ----------
+20101310001 Zena                           Bandi                          Aqua Gelas      Minuman           500          3       1500
+20101310001 Zena                           Bandi                          Buku Tulis      Alat Tulis       5000          5      25000
+20101310001 Zena                           Bandi                          Pulpen Hitam    Alat Tulis       2000          2       4000
+20101310002 Zena                           Andi                           Indomie         Makanan          3500         10      35000
+20101310002 Zena                           Andi                           Buku Tulis      Alat Tulis       5000          4      20000
+20101310002 Zena                           Andi                           Pulpen Hitam    Alat Tulis       2000          2       4000
+20101310003 Yena                           Cindi                          Indomie         Makanan          3500          1       3500
+20101310003 Yena                           Cindi                          Aqua Gelas      Minuman           500          7       3500
+20101310003 Yena                           Cindi                          Pulpen Hitam    Alat Tulis       2000          2       4000
+20101310004 Xena                           Dandi                          Indomie         Makanan          3500          2       7000
+20101310004 Xena                           Dandi                          Aqua Gelas      Minuman           500          6       3000
+20101310004 Xena                           Dandi                          Buku Tulis      Alat Tulis       5000          3      15000
+20101310005 Xena                                                          Buku Tulis      Alat Tulis       5000          4      20000
+20101310005 Xena                                                          Aqua Gelas      Minuman           500          5       2500
+20101310005 Xena                                                          Pulpen Hitam    Alat Tulis       2000          3       6000
+20101310005 Xena                                                          Indomie         Makanan          3500          1       3500
+
+16 rows selected.
+
+SQL> SPOOL OFF

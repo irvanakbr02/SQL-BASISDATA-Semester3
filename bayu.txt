@@ -1,0 +1,513 @@
+Microsoft Windows [Version 6.1.7601]
+Copyright (c) 2009 Microsoft Corporation.  All rights reserved.
+
+C:\Users\Pengguna>SQLPLUS
+
+SQL*Plus: Release 11.2.0.2.0 Production on Sen Okt 5 08:14:24 2020
+
+Copyright (c) 1982, 2014, Oracle.  All rights reserved.
+
+Enter user-name: sys as sysdba
+Enter password:
+
+Connected to:
+Oracle Database 11g Express Edition Release 11.2.0.2.0 - 64bit Production
+
+SQL> CREATE USER bayu IDENTIFIED BY oracle
+  2  SHOW USER
+  3
+SQL> CREATE USER bayu IDENTIFIED BY oracle;
+
+User created.
+
+SQL> GRANT CONNECT, RESOURCE TO bayu;
+
+Grant succeeded.
+
+SQL> CONNECT bayu/oracle
+Connected.
+SQL> SHOW USER
+USER is "BAYU"
+SQL> CREATE TABLE keluarga(nomor NUMBER, nama VARCHAR2(30), jenis_kelamin CHAR(1), tempat_lahir VARCHAR2(10), tanggal_lahir DATE, status CHAR(4), nik CHAR(16), no_hp CHAR(12), pekerjaan VARCHAR2(15), instagram VARCHAR2(18));
+
+Table created.
+
+SQL> DESCRIBE keluarga
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ NOMOR                                              NUMBER
+ NAMA                                               VARCHAR2(30)
+ JENIS_KELAMIN                                      CHAR(1)
+ TEMPAT_LAHIR                                       VARCHAR2(10)
+ TANGGAL_LAHIR                                      DATE
+ STATUS                                             CHAR(4)
+ NIK                                                CHAR(16)
+ NO_HP                                              CHAR(12)
+ PEKERJAAN                                          VARCHAR2(15)
+ INSTAGRAM                                          VARCHAR2(18)
+
+SQL> INSERT INTO keluarga(nomor, nama, jenis_kelamin, tempat_lahir, tanggal_lahir, status, nik, no_hp, pekerjaan, instagram)
+  2  VALUES(1, 'Saksono Hendro Sumadji', 'L', 'Surabaya', '31-07-1972', 'ayah', '3318103107720002', '087802600743', 'karyawan swasta', NULL);
+
+1 row created.
+
+SQL> INSERT INTO keluarga(nomor, nama, jenis_kelamin, tempat_lahir, tanggal_lahir, status, nik, no_hp, pekerjaan, instagram)
+  2  VALUES(2, 'Surijani', 'P', 'Pekalongan', '13-04-1969', 'ibu', '3318105304690001', '081548014229', 'ibu rumah tangga', 'suriyanisoewondo');
+VALUES(2, 'Surijani', 'P', 'Pekalongan', '13-04-1969', 'ibu', '3318105304690001', '081548014229', 'ibu rumah tangga', 'suriyanisoewondo')
+                                                                                                  *
+ERROR at line 2:
+ORA-12899: value too large for column "BAYU"."KELUARGA"."PEKERJAAN" (actual:
+16, maximum: 15)
+
+
+SQL> INSERT INTO keluarga(nomor, nama, jenis_kelamin, tempat_lahir, tanggal_lahir, status, nik, no_hp, pekerjaan, instagram)
+  2  VALUES(2, 'Surijani', 'P', 'Pekalongan', '13-04-1969', 'ibu', '3318105304690001', '081548014229', 'ibu rumahtangga', 'suriyanisoewondo');
+
+1 row created.
+
+SQL> INSERT INTO keluarga(nomor, nama, jenis_kelamin, tempat_lahir, tanggal_lahir, status, nik, no_hp, pekerjaan, instagram)
+  2  VALUES(3, 'Saksono Bayu Ajie Sumantri', 'L', 'Semarang', '12-12-1999', 'anak', '3318101212990002', '087805883851', 'pelajar', 'bayu.cepat');
+
+1 row created.
+
+SQL> INSERT INTO keluarga(nomor, nama, jenis_kelamin, tempat_lahir, tanggal_lahir, status, nik, no_hp, pekerjaan, instagram)
+  2  VALUES(4, 'Rr Aliyyaa Sri Pamenang', 'P', 'Semarang', '18-02-2002', 'anak', '3318105802020001', '082146885463', 'pelajar', 'rara.aliyyaa');
+
+1 row created.
+
+SQL> COMMIT;
+
+Commit complete.
+
+SQL> SELECT * FROM keluarga
+  2
+SQL> SELECT * FROM keluarga;
+
+     NOMOR NAMA                           J TEMPAT_LAH TANGGAL_LA STAT
+---------- ------------------------------ - ---------- ---------- ----
+NIK              NO_HP        PEKERJAAN       INSTAGRAM
+---------------- ------------ --------------- ------------------
+         1 Saksono Hendro Sumadji         L Surabaya   31-07-1972 ayah
+3318103107720002 087802600743 karyawan swasta
+
+         2 Surijani                       P Pekalongan 13-04-1969 ibu
+3318105304690001 081548014229 ibu rumahtangga suriyanisoewondo
+
+         3 Saksono Bayu Ajie Sumantri     L Semarang   12-12-1999 anak
+3318101212990002 087805883851 pelajar         bayu.cepat
+
+
+     NOMOR NAMA                           J TEMPAT_LAH TANGGAL_LA STAT
+---------- ------------------------------ - ---------- ---------- ----
+NIK              NO_HP        PEKERJAAN       INSTAGRAM
+---------------- ------------ --------------- ------------------
+         4 Rr Aliyyaa Sri Pamenang        P Semarang   18-02-2002 anak
+3318105802020001 082146885463 pelajar         rara.aliyyaa
+
+
+
+SQL> SET LINESIZE 250
+SQL> SELECT * FROM keluarga;
+
+     NOMOR NAMA                           J TEMPAT_LAH TANGGAL_LA STAT NIK              NO_HP        PEKERJAAN       INSTAGRAM
+---------- ------------------------------ - ---------- ---------- ---- ---------------- ------------ --------------- ------------------
+         1 Saksono Hendro Sumadji         L Surabaya   31-07-1972 ayah 3318103107720002 087802600743 karyawan swasta
+         2 Surijani                       P Pekalongan 13-04-1969 ibu  3318105304690001 081548014229 ibu rumahtangga suriyanisoewondo
+         3 Saksono Bayu Ajie Sumantri     L Semarang   12-12-1999 anak 3318101212990002 087805883851 pelajar         bayu.cepat
+         4 Rr Aliyyaa Sri Pamenang        P Semarang   18-02-2002 anak 3318105802020001 082146885463 pelajar         rara.aliyyaa
+
+SQL> SET LINESIZE 270
+SQL> SELECT * FROM keluarga;
+
+     NOMOR NAMA                           J TEMPAT_LAH TANGGAL_LA STAT NIK              NO_HP        PEKERJAAN       INSTAGRAM
+---------- ------------------------------ - ---------- ---------- ---- ---------------- ------------ --------------- ------------------
+         1 Saksono Hendro Sumadji         L Surabaya   31-07-1972 ayah 3318103107720002 087802600743 karyawan swasta
+         2 Surijani                       P Pekalongan 13-04-1969 ibu  3318105304690001 081548014229 ibu rumahtangga suriyanisoewondo
+         3 Saksono Bayu Ajie Sumantri     L Semarang   12-12-1999 anak 3318101212990002 087805883851 pelajar         bayu.cepat
+         4 Rr Aliyyaa Sri Pamenang        P Semarang   18-02-2002 anak 3318105802020001 082146885463 pelajar         rara.aliyyaa
+
+SQL> UPDATE keluarga SET nama= 'Turbo'
+  2  WHERE no = 2;
+WHERE no = 2
+      *
+ERROR at line 2:
+ORA-00904: "NO": invalid identifier
+
+SQL> UPDATE keluarga SET nama= 'Turbo'
+  2  WHERE no = 2;
+WHERE no = 2
+      *
+ERROR at line 2:
+ORA-00904: "NO": invalid identifier
+
+
+SQL> SELECT * FROM keluarga;
+
+     NOMOR NAMA                           J TEMPAT_LAH TANGGAL_LA STAT NIK              NO_HP        PEKERJAAN       INSTAGRAM
+---------- ------------------------------ - ---------- ---------- ---- ---------------- ------------ --------------- ------------------
+         1 Saksono Hendro Sumadji         L Surabaya   31-07-1972 ayah 3318103107720002 087802600743 karyawan swasta
+         2 Surijani                       P Pekalongan 13-04-1969 ibu  3318105304690001 081548014229 ibu rumahtangga suriyanisoewondo
+         3 Saksono Bayu Ajie Sumantri     L Semarang   12-12-1999 anak 3318101212990002 087805883851 pelajar         bayu.cepat
+         4 Rr Aliyyaa Sri Pamenang        P Semarang   18-02-2002 anak 3318105802020001 082146885463 pelajar         rara.aliyyaa
+
+SQL> ALTER TABLE keluarga ADD CONSTRAINT no_pk PRIMARY KEY(nomor);
+
+Table altered.
+
+SQL> VALUES(4, 'Rr Aliyyaa Sri Pamenang', 'P', 'Semarang', '18-02-2002', 'anak', '3318105802020001', '082146885463', 'pelajar', 'rara.aliyyaa');
+SP2-0734: unknown command beginning "VALUES(4, ..." - rest of line ignored.
+SQL> INSERT INTO keluarga(nomor, nama, jenis_kelamin, tempat_lahir, tanggal_lahir, status, nik, no_hp, pekerjaan, instagram)
+  2  VALUES(4, 'Rr Aliyyaa Sri Pamenang', 'P', 'Semarang', '18-02-2002', 'anak', '3318105802020001', '082146885463', 'pelajar', 'rara.aliyyaa');
+INSERT INTO keluarga(nomor, nama, jenis_kelamin, tempat_lahir, tanggal_lahir, status, nik, no_hp, pekerjaan, instagram)
+*
+ERROR at line 1:
+ORA-00001: unique constraint (BAYU.NO_PK) violated
+
+
+SQL> INSERT INTO keluarga
+  2  VALUES(5, 'Rr Aliyyaa Sri Pamenang', 'P', 'Semarang', '18-02-2002', 'anak', '3318105802020001', '082146885463', 'pelajar', 'rara.aliyyaa');
+
+1 row created.
+
+SQL> SELECT * FROM keluarga;
+
+     NOMOR NAMA                           J TEMPAT_LAH TANGGAL_LA STAT NIK              NO_HP        PEKERJAAN       INSTAGRAM
+---------- ------------------------------ - ---------- ---------- ---- ---------------- ------------ --------------- ------------------
+         1 Saksono Hendro Sumadji         L Surabaya   31-07-1972 ayah 3318103107720002 087802600743 karyawan swasta
+         2 Surijani                       P Pekalongan 13-04-1969 ibu  3318105304690001 081548014229 ibu rumahtangga suriyanisoewondo
+         3 Saksono Bayu Ajie Sumantri     L Semarang   12-12-1999 anak 3318101212990002 087805883851 pelajar         bayu.cepat
+         4 Rr Aliyyaa Sri Pamenang        P Semarang   18-02-2002 anak 3318105802020001 082146885463 pelajar         rara.aliyyaa
+         5 Rr Aliyyaa Sri Pamenang        P Semarang   18-02-2002 anak 3318105802020001 082146885463 pelajar         rara.aliyyaa
+
+SQL> ROLLBACK
+  2
+SQL> ROLLBACK;
+
+Rollback complete.
+
+SQL> SELECT * FROM keluarga;
+
+     NOMOR NAMA                           J TEMPAT_LAH TANGGAL_LA STAT NIK              NO_HP        PEKERJAAN       INSTAGRAM
+---------- ------------------------------ - ---------- ---------- ---- ---------------- ------------ --------------- ------------------
+         1 Saksono Hendro Sumadji         L Surabaya   31-07-1972 ayah 3318103107720002 087802600743 karyawan swasta
+         2 Surijani                       P Pekalongan 13-04-1969 ibu  3318105304690001 081548014229 ibu rumahtangga suriyanisoewondo
+         3 Saksono Bayu Ajie Sumantri     L Semarang   12-12-1999 anak 3318101212990002 087805883851 pelajar         bayu.cepat
+         4 Rr Aliyyaa Sri Pamenang        P Semarang   18-02-2002 anak 3318105802020001 082146885463 pelajar         rara.aliyyaa
+
+SQL> COMMIT;
+
+Commit complete.
+
+SQL> ALTER TABLE keluarga ADD CONSTAINT nama_uq UNIQUE(nik);
+ALTER TABLE keluarga ADD CONSTAINT nama_uq UNIQUE(nik)
+                                                  *
+ERROR at line 1:
+ORA-01735: invalid ALTER TABLE option
+
+
+SQL> ALTER TABLE keluarga ADD CONSTRAINT nik_uq UNIQUE(nik);
+
+Table altered.
+
+SQL> ALTER TABLE keluarga ADD CONSTRAINT no_hp_uq UNIQUE(no_hp);
+
+Table altered.
+
+SQL> ALTER TABLE keluarga ADD CONSTRAINT instagram_ig UNIQUE(instagram);
+
+Table altered.
+
+SQL> ALTER TABLE keluarga ADD CONSTRAINT nama_uq UNIQUE(nama);
+
+Table altered.
+
+SQL> ALTER TABLE keluarga ADD CONSTRAINT pekerjaan_uq UNIQUE(pekerjaan);
+ALTER TABLE keluarga ADD CONSTRAINT pekerjaan_uq UNIQUE(pekerjaan)
+                                    *
+ERROR at line 1:
+ORA-02299: cannot validate (BAYU.PEKERJAAN_UQ) - duplicate keys found
+
+
+SQL> SELECT constraint_name, constraint_type FROM all_constraints
+  2  WHERE table_name = 'KELUARGA';
+
+CONSTRAINT_NAME                C
+------------------------------ -
+NO_PK                          P
+NIK_UQ                         U
+NO_HP_UQ                       U
+INSTAGRAM_IG                   U
+NAMA_UQ                        U
+
+SQL> ALTER TABLE keluarga MODIFY pekerjaan VARCHAR2(15);
+
+Table altered.
+
+SQL> UPDATE keluarga SET pekerjaan = 'ibu rumah tangga' WHERE no = 2;
+UPDATE keluarga SET pekerjaan = 'ibu rumah tangga' WHERE no = 2
+                                                         *
+ERROR at line 1:
+ORA-00904: "NO": invalid identifier
+
+
+SQL> UPDATE keluarga SET pekerjaan = 'ibu rumah tangga' WHERE nomor = 2;
+UPDATE keluarga SET pekerjaan = 'ibu rumah tangga' WHERE nomor = 2
+                                *
+ERROR at line 1:
+ORA-12899: value too large for column
+"BAYU"."KELUARGA"."PEKERJAAN" (actual: 16, maximum: 15)
+
+
+SQL> ALTER TABLE keluarga MODIFY pekerjaan VARCHAR2(16);
+
+Table altered.
+
+SQL> UPDATE keluarga SET pekerjaan = 'ibu rumah tangga' WHERE nomor = 2;
+
+1 row updated.
+
+SQL> SELECT * FROM keluarga;
+
+     NOMOR NAMA                           J TEMPAT_LAH
+---------- ------------------------------ - ----------
+TANGGAL_LA STAT NIK              NO_HP
+---------- ---- ---------------- ------------
+PEKERJAAN        INSTAGRAM
+---------------- ------------------
+         1 Saksono Hendro Sumadji         L Surabaya
+31-07-1972 ayah 3318103107720002 087802600743
+karyawan swasta
+
+         2 Surijani                       P Pekalongan
+13-04-1969 ibu  3318105304690001 081548014229
+ibu rumah tangga suriyanisoewondo
+
+     NOMOR NAMA                           J TEMPAT_LAH
+---------- ------------------------------ - ----------
+TANGGAL_LA STAT NIK              NO_HP
+---------- ---- ---------------- ------------
+PEKERJAAN        INSTAGRAM
+---------------- ------------------
+
+         3 Saksono Bayu Ajie Sumantri     L Semarang
+12-12-1999 anak 3318101212990002 087805883851
+pelajar          bayu.cepat
+
+         4 Rr Aliyyaa Sri Pamenang        P Semarang
+18-02-2002 anak 3318105802020001 082146885463
+
+     NOMOR NAMA                           J TEMPAT_LAH
+---------- ------------------------------ - ----------
+TANGGAL_LA STAT NIK              NO_HP
+---------- ---- ---------------- ------------
+PEKERJAAN        INSTAGRAM
+---------------- ------------------
+pelajar          rara.aliyyaa
+
+
+SQL> SET LINESIZE 280;
+SQL> SELECT * FROM keluarga;
+
+     NOMOR NAMA                           J TEMPAT_LAH TANGGAL_LA STAT NIK              NO_HP        PEKERJAAN        INSTAGRAM
+---------- ------------------------------ - ---------- ---------- ---- ---------------- ------------ ---------------- ------------------
+         1 Saksono Hendro Sumadji         L Surabaya   31-07-1972 ayah 3318103107720002 087802600743 karyawan swasta
+         2 Surijani                       P Pekalongan 13-04-1969 ibu  3318105304690001 081548014229 ibu rumah tangga suriyanisoewondo
+         3 Saksono Bayu Ajie Sumantri     L Semarang   12-12-1999 anak 3318101212990002 087805883851 pelajar          bayu.cepat
+         4 Rr Aliyyaa Sri Pamenang        P Semarang   18-02-2002 anak 3318105802020001 082146885463 pelajar          rara.aliyyaa
+
+
+
+
+
+
+SQL> CREATE TABLE kategori(
+  2  kode CHAR(2)
+  3  kategori VARCHAR(10)
+  4  );
+kategori VARCHAR(10)
+*
+ERROR at line 3:
+ORA-00907: missing right parenthesis
+
+
+SQL> CREATE TABLE kategori(
+  2  kode CHAR(2)
+  3  kategori VARCHAR2(10)
+  4  );
+kategori VARCHAR2(10)
+*
+ERROR at line 3:
+ORA-00907: missing right parenthesis
+
+
+SQL> CREATE TABLE kategori(
+  2  kode CHAR(2)
+  3  kategori VARCHAR2(10));
+kategori VARCHAR2(10))
+*
+ERROR at line 3:
+ORA-00907: missing right parenthesis
+
+
+SQL> CREATE TABLE kategori(
+  2  kode CHAR(2),
+  3  kategori VARCHAR2(10));
+
+Table created.
+
+SQL> ALTER TABLE kategori ADD CONSTRAINT kode_pk PRIMARY KEY(kode);
+
+Table altered.
+
+SQL> ALTER TABLE kategori ADD CONSTRAINT kategori_uq UNIQUE(kategori);
+
+Table altered.
+
+SQL> INSERT INTO kategori VALUES('M1','Makanan');
+
+1 row created.
+
+SQL> INSERT INTO kategori VALUES('M2','Minuman');
+
+1 row created.
+
+SQL> INSERT INTO kategori VALUES('A1','Alat Tulis');
+
+1 row created.
+
+SQL> COMMIT;
+
+Commit complete.
+
+SQL> CREATE TABLE data_barang(
+  2  kode_barang CHAR(4),
+  3  nama_barang VARCHAR2(15),
+  4  kategori CHAR(2),
+  5  harga NUMBER,
+  6  stok NUMBER);
+
+Table created.
+
+SQL> ALTER TABLE data_barang ADD CONSTRAINT kd_brg_pk PRIMARY KEY(kode_barang);
+
+Table altered.
+
+SQL> ALTER TABLE data_barang ADD CONSTRAINT nm_brg_uq UNIQUE(nama_barang);
+
+Table altered.
+
+SQL> INSERT INTO data_barang VALUES('M001','Indomie','M1',3500,50);
+
+1 row created.
+
+SQL> INSERT INTO data_barang VALUES('M001','Aqua Gelas','M2',500,100);
+INSERT INTO data_barang VALUES('M001','Aqua Gelas','M2',500,100)
+*
+ERROR at line 1:
+ORA-00001: unique constraint (BAYU.KD_BRG_PK) violated
+
+
+SQL> INSERT INTO data_barang VALUES('M002','Aqua Gelas','M2',500,100);
+
+1 row created.
+
+SQL> INSERT INTO data_barang VALUES('A001','Buku Tulis','A1',2000,50);
+
+1 row created.
+
+SQL> INSERT INTO data_barang VALUES('A001','Pulpen Hitam','A1',2000,50);
+INSERT INTO data_barang VALUES('A001','Pulpen Hitam','A1',2000,50)
+*
+ERROR at line 1:
+ORA-00001: unique constraint (BAYU.KD_BRG_PK) violated
+
+
+SQL> INSERT INTO data_barang VALUES('A002','Pulpen Hitam','A1',2000,50);
+
+1 row created.
+
+SQL> SELECT * FROM kategori;
+
+KO KATEGORI
+-- ----------
+M1 Makanan
+M2 Minuman
+A1 Alat Tulis
+
+SQL> SELECT * FROM data_barang;
+
+KODE NAMA_BARANG     KA      HARGA       STOK
+---- --------------- -- ---------- ----------
+M001 Indomie         M1       3500         50
+M002 Aqua Gelas      M2        500        100
+A001 Buku Tulis      A1       2000         50
+A002 Pulpen Hitam    A1       2000         50
+
+
+SQL> ALTER TABLE data_barang ADD CONSTRAINT ktgr_fk
+  2  FOREIGN KEY (kategori) REFERENCES kategori(kode);
+
+Table altered.
+
+SQL> INSERT INTO data_barang VALUES('A003','Pulpen Biru','Z1',2000,50);
+INSERT INTO data_barang VALUES('A003','Pulpen Biru','Z1',2000,50)
+*
+ERROR at line 1:
+ORA-02291: integrity constraint (BAYU.KTGR_FK) violated - parent key not found
+
+
+
+
+SQL> ALTER TABLE data_barang ADD CONSTRAINT harga_ck CHECK(harga>=500);
+
+Table altered.
+
+
+
+
+
+ALTER TABLE data_barang ADD CONSTRAINT stok_ck CHECK(stok >=5 AND stok<=100);
+
+
+ALTER TABLE keluarga ADD CONSTRAINT jns_kel_ck CHECK(jenis_kelamin IN ('L','P'));
+
+
+ALTER TABLE keluarga ADD CONSTRAINT hp_ck CHECK(no_hp LIKE '08%');
+
+
+SELECT constraint_name, constraint_type FROM all_constraints
+  2  WHERE table_name = 'KELUARGA';
+
+ ALTER TABLE keluarga DROP CONSTRAINT hp_ck;
+
+SQLPLUS bayu/oracle
+SQL> SELECT
+  2  data_barang.kode_barang,
+  3  data_barang.nama_barang,
+  4  kategori.kategori
+  5  FROM data_barang INNER JOIN kategori
+  6  ON data_barang.kategori = kategori.kode;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

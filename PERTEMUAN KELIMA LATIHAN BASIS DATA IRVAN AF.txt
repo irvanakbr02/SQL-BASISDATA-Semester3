@@ -1,0 +1,554 @@
+Microsoft Windows [Version 6.1.7601]
+Copyright (c) 2009 Microsoft Corporation.  All rights reserved.
+
+C:\Users\Guest>SQLPLUS
+
+SQL*Plus: Release 11.2.0.2.0 Production on Kam Okt 22 13:11:02 2020
+
+Copyright (c) 1982, 2014, Oracle.  All rights reserved.
+
+Enter user-name: irvanaf
+Enter password:
+
+Connected to:
+Oracle Database 11g Express Edition Release 11.2.0.2.0 - 64bit Production
+
+SQL> CREATE TABLE admin(
+  2  id_admin CHAR(7),
+  3  nama VARCHAR2(30),
+  4
+SQL> CREATE TABLE tab(
+  2  admin TABLE,
+  3  data_barang,
+  4  detil_beli,
+  5  kategori,
+  6  pembelian,
+  7  supplier);
+data_barang,
+*
+ERROR at line 3:
+ORA-02263: need to specify the datatype for this column
+
+
+SQL> CREATE TABLE tab(
+  2  admin TABLE,
+  3  data_barang TABLE,
+  4  detil_beli TABLE,
+  5  kategori TABLE,
+  6  pembelian TABLE,
+  7  supplier TABLE);
+
+Table created.
+
+SQL> SELECT * FROM tab;
+
+no rows selected
+
+SQL> SELECT * FROM tab;
+
+no rows selected
+
+SQL> CREATE TABLE detil_beli(
+  2  struk_pembelian CHAR(11),
+  3  kode_barang CHAR(4),
+  4  harga NUMBER,
+  5  jumlah NUMBER);
+
+Table created.
+
+SQL> DESC tab
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ ADMIN                                              RAW(16)
+ DATA_BARANG                                        RAW(16)
+ DETIL_BELI                                         RAW(16)
+ KATEGORI                                           RAW(16)
+ PEMBELIAN                                          RAW(16)
+ SUPPLIER                                           RAW(16)
+
+SQL> DESC detil_beli
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ STRUK_PEMBELIAN                                    CHAR(11)
+ KODE_BARANG                                        CHAR(4)
+ HARGA                                              NUMBER
+ JUMLAH                                             NUMBER
+
+SQL> CREATE TABLE admin(
+  2  id_admin CHAR(7),
+  3  nama VARCHAR2(30),
+  4  gender CHAR(1),
+  5  no_hp VARCHAR2(14),
+  6  email VARCHAR2(30),
+  7  tanggal_lahir DATE);
+
+Table created.
+
+SQL> DESC admin
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ ID_ADMIN                                           CHAR(7)
+ NAMA                                               VARCHAR2(30)
+ GENDER                                             CHAR(1)
+ NO_HP                                              VARCHAR2(14)
+ EMAIL                                              VARCHAR2(30)
+ TANGGAL_LAHIR                                      DATE
+
+SQL> CREATE TABLE supplier(
+  2  id_supplier CHAR(7),
+  3  nama VARCHAR2(30),
+  4  no_hp VARCHAR2(14),
+  5  email VARCHAR2(30),
+  6  alamat VARCHAR2(50));
+
+Table created.
+
+SQL> DESC supplier
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ ID_SUPPLIER                                        CHAR(7)
+ NAMA                                               VARCHAR2(30)
+ NO_HP                                              VARCHAR2(14)
+ EMAIL                                              VARCHAR2(30)
+ ALAMAT                                             VARCHAR2(50)
+
+SQL> CREATE TABLE pembelian(
+  2  struk_pembelian CHAR(11),
+  3  tanggal DATE,
+  4  id_supplier CHAR(7),
+  5  id_admin CHAR(7));
+
+Table created.
+
+SQL> DESC pembelian
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ STRUK_PEMBELIAN                                    CHAR(11)
+ TANGGAL                                            DATE
+ ID_SUPPLIER                                        CHAR(7)
+ ID_ADMIN                                           CHAR(7)
+
+SQL> SELECT * FROM tab
+  2
+SQL> SELECT * FROM tab;
+
+no rows selected
+
+SQL> INSERT INTO detil_beli VALUES ('20101310A01','M002',300,300);
+
+1 row created.
+
+SQL> SELECT * FROM detil_beli;
+
+STRUK_PEMBE KODE      HARGA     JUMLAH
+----------- ---- ---------- ----------
+20101310A01 M002        300        300
+
+SQL> INSERT INTO detil_beli VALUES ('20101310A02','M001',2500,100);
+
+1 row created.
+
+SQL> INSERT INTO detil_beli VALUES ('20101310A03','A001',4000,50);
+
+1 row created.
+
+SQL> INSERT INTO detil_beli VALUES ('20101310A04','A002',1500,200);
+
+1 row created.
+
+SQL> SELECT * FROM detil_beli;
+
+STRUK_PEMBE KODE      HARGA     JUMLAH
+----------- ---- ---------- ----------
+20101310A01 M002        300        300
+20101310A02 M001       2500        100
+20101310A03 A001       4000         50
+20101310A04 A002       1500        200
+
+SQL> SET LINESIZE 200
+SQL> SELECT * FROM detil_beli;
+
+STRUK_PEMBE KODE      HARGA     JUMLAH
+----------- ---- ---------- ----------
+20101310A01 M002        300        300
+20101310A02 M001       2500        100
+20101310A03 A001       4000         50
+20101310A04 A002       1500        200
+
+SQL> commit;
+
+Commit complete.
+
+SQL> SELECT * FROM keluarga;
+
+NAMA                                               J TEMPAT_LAHIR              TANGGAL_LA STATUS     NIK              NO_HP         PEKERJAAN                 IG
+-------------------------------------------------- - ------------------------- ---------- ---------- ---------------- ------------- ------------------------- ------------------------------
+Karsita                                            L Cirebon                   10-04-1975 Ayah       3376031004750002 81390065682   Polri                     masbagusainulyakkin
+Ermayanti                                          P Semarang                  16-05-1980 Ibu        3376031605800001 81325564746   Ibu Rumah Tangga          imay_may
+Selviana Ambar Triwulandari                        P Cirebon                   01-07-1999 Anak       3376030107990001 81390065682   Pekerja Swasta            selvianambar
+Irvan Akbar Febriansyah                            L Tegal                     19-02-2002 Anak       3376031902020002 85225430800   Mahasiswa                 irvanakbr02
+
+SQL> DESC keluarga
+ Name                                                                                                      Null?    Type
+ ----------------------------------------------------------------------------------------------------------------- -------- --------------------------------------------------------------------
+ NAMA                                                                                                      NOT NULL VARCHAR2(50)
+ JENIS_KELAMIN                                                                                                      CHAR(1)
+ TEMPAT_LAHIR                                                                                                       VARCHAR2(25)
+ TANGGAL_LAHIR                                                                                                      DATE
+ STATUS                                                                                                             VARCHAR2(10)
+ NIK                                                                                                                CHAR(16)
+ NO_HP                                                                                                              CHAR(13)
+ PEKERJAAN                                                                                                          VARCHAR2(25)
+ IG                                                                                                                 VARCHAR2(30)
+
+SQL> DESC admin;
+ Name                                                                                                      Null?    Type
+ ----------------------------------------------------------------------------------------------------------------- -------- --------------------------------------------------------------------
+ ID_ADMIN                                                                                                           CHAR(7)
+ NAMA                                                                                                               VARCHAR2(30)
+ GENDER                                                                                                             CHAR(1)
+ NO_HP                                                                                                              VARCHAR2(14)
+ EMAIL                                                                                                              VARCHAR2(30)
+ TANGGAL_LAHIR                                                                                                      DATE
+
+SQL> ALTER TABLE admin ADD CONSTRAINT id_admin_pk PRIMARY KEY(id_admin);
+
+Table altered.
+
+SQL> DESC admin;
+ Name                                                                                                      Null?    Type
+ ----------------------------------------------------------------------------------------------------------------- -------- --------------------------------------------------------------------
+ ID_ADMIN                                                                                                  NOT NULL CHAR(7)
+ NAMA                                                                                                               VARCHAR2(30)
+ GENDER                                                                                                             CHAR(1)
+ NO_HP                                                                                                              VARCHAR2(14)
+ EMAIL                                                                                                              VARCHAR2(30)
+ TANGGAL_LAHIR                                                                                                      DATE
+
+SQL> ALTER TABLE supplier ADD CONSTRAINT id_supplier_pk PRIMARY KEY(id_supplier);
+
+Table altered.
+
+SQL> DESC supplier;
+ Name                                                                                                      Null?    Type
+ ----------------------------------------------------------------------------------------------------------------- -------- --------------------------------------------------------------------
+ ID_SUPPLIER                                                                                               NOT NULL CHAR(7)
+ NAMA                                                                                                               VARCHAR2(30)
+ NO_HP                                                                                                              VARCHAR2(14)
+ EMAIL                                                                                                              VARCHAR2(30)
+ ALAMAT                                                                                                             VARCHAR2(50)
+
+SQL> ALTER TABLE pembelian ADD CONSTRAINT struk_pembelian_pk PRIMARY KEY(struk_pembelian);
+
+Table altered.
+
+SQL> DESC pembelian;
+ Name                                                                                                      Null?    Type
+ ----------------------------------------------------------------------------------------------------------------- -------- --------------------------------------------------------------------
+ STRUK_PEMBELIAN                                                                                           NOT NULL CHAR(11)
+ TANGGAL                                                                                                            DATE
+ ID_SUPPLIER                                                                                                        CHAR(7)
+ ID_ADMIN                                                                                                           CHAR(7)
+
+SQL> ALTER TABLE admin ADD CONSTRAINT admin_gender_ck CHECK(gender('L','P'));
+ALTER TABLE admin ADD CONSTRAINT admin_gender_ck CHECK(gender('L','P'))
+                                                                      *
+ERROR at line 1:
+ORA-00920: invalid relational operator
+
+
+SQL> ALTER TABLE admin ADD CONSTRAINT admin_gender_ck CHECK(gender IN('L','P'));
+
+Table altered.
+
+SQL> INSERT INTO admin VALUES('2010A01','Karin','P','08123246360','karin@main.com','17-08-1991');
+
+1 row created.
+
+SQL> INSERT INTO admin VALUES('2010A02','Lana','L','08246369124','lana1@main.com','17-08-1992');
+
+1 row created.
+
+SQL> INSERT INTO admin VALUES('2010A03','Mona','P','08369123247','mona1@main.com','17-08-1993');
+
+1 row created.
+
+SQL> SELECT * FROM admin;
+
+ID_ADMI NAMA                           G NO_HP          EMAIL                          TANGGAL_LA
+------- ------------------------------ - -------------- ------------------------------ ----------
+2010A01 Karin                          P 08123246360    karin@main.com                 17-08-1991
+2010A02 Lana                           L 08246369124    lana1@main.com                 17-08-1992
+2010A03 Mona                           P 08369123247    mona1@main.com                 17-08-1993
+
+SQL> INSERT INTO supplier VALUES('JKT2010','PT.Andi Sentosa','085125250376','andisentosa@mail.com','JAKARTA');
+
+1 row created.
+
+SQL> INSERT INTO supplier VALUES('SMG2010','CV.Budi Santoso','085250375126','budisantoso@mail.com','SEMARANG');
+
+1 row created.
+
+SQL> INSERT INTO supplier VALUES('BDG2010','PT.Cindi Centuri','085375125256','cindicenturi@mail.com','BANDUNG');
+
+1 row created.
+
+SQL> INSERT INTO supplier VALUES('SBY2010','CV.Dandi Cantara','085250125376','dandicantara@mail.com','SURABAYA');
+
+1 row created.
+
+SQL> SELECT * FROM supplier;
+
+ID_SUPP NAMA                           NO_HP          EMAIL                          ALAMAT
+------- ------------------------------ -------------- ------------------------------ --------------------------------------------------
+JKT2010 PT.Andi Sentosa                085125250376   andisentosa@mail.com           JAKARTA
+SMG2010 CV.Budi Santoso                085250375126   budisantoso@mail.com           SEMARANG
+BDG2010 PT.Cindi Centuri               085375125256   cindicenturi@mail.com          BANDUNG
+SBY2010 CV.Dandi Cantara               085250125376   dandicantara@mail.com          SURABAYA
+
+SQL> INSERT INTO pembelian VALUES('20101310A01','13-10-2020','SMG2010','2010A03');
+
+1 row created.
+
+SQL> INSERT INTO pembelian VALUES('20101310A02','13-10-2020','JKT2010','2010A03');
+
+1 row created.
+
+SQL> INSERT INTO pembelian VALUES('20101310A03','13-10-2020','BDG2010','2010A02');
+
+1 row created.
+
+SQL> INSERT INTO pembelian VALUES('20101310A04','13-10-2020','SBY2010','2010A01');
+
+1 row created.
+
+SQL> SELECT * FROM pembelian;
+
+STRUK_PEMBE TANGGAL    ID_SUPP ID_ADMI
+----------- ---------- ------- -------
+20101310A01 13-10-2020 SMG2010 2010A03
+20101310A02 13-10-2020 JKT2010 2010A03
+20101310A03 13-10-2020 BDG2010 2010A02
+20101310A04 13-10-2020 SBY2010 2010A01
+
+SQL> SELECT constraint_name, constraint_type, table_name FROM all_constraints
+  2  WHERE table_name = 'ADMIN' OR table_name = 'SUPPLIER' OR table_name = 'PEMBELIAN' OR table_name = 'DETIL_BELI'
+  3  ORDER BY table_name, constraint_type;
+
+CONSTRAINT_NAME                C TABLE_NAME
+------------------------------ - ------------------------------
+ADMIN_GENDER_CK                C ADMIN
+ID_ADMIN_PK                    P ADMIN
+STRUK_PEMBELIAN_PK             P PEMBELIAN
+ID_SUPPLIER_PK                 P SUPPLIER
+
+SQL> ALTER TABLE admin ADD CONSTRAINT admin_no_hp_ck CHECK(no_hp LIKE'08%');
+
+Table altered.
+
+SQL> ALTER TABLE admin ADD CONSTRAINT admin_email_ck CHECK(email LIKE'%_@_
+  2
+SQL> ALTER TABLE admin ADD CONSTRAINT admin_email_ck CHECK(email LIKE'%_@%_._%');
+
+Table altered.
+
+SQL> ALTER TABLE admin ADD CONSTRAINT admin_email_uq UNIQUE(email);
+
+Table altered.
+
+SQL> ALTER TABLE admin ADD CONSTRAINT admin_nama_uq UNIQUE(nama);
+
+Table altered.
+
+SQL> ALTER TABLE admin ADD CONSTRAINT admin_no_hp_uq UNIQUE(no_hp);
+
+Table altered.
+
+SQL> SELECT constraint_name, constraint_type, table_name FROM all_constraints
+  2    2  WHERE table_name = 'ADMIN' OR table_name = 'SUPPLIER' OR table_name = 'PEMBELIAN' OR table_name = 'DETIL_BELI'
+  3
+SQL> SELECT constraint_name, constraint_type, table_name FROM all_constraints
+  2  WHERE table_name = 'ADMIN' OR table_name = 'SUPPLIER' OR table_name = 'PEMBELIAN' OR table_name = 'DETIL_BELI'
+  3  ORDER BY table_name, constraint_type;
+
+CONSTRAINT_NAME                C TABLE_NAME
+------------------------------ - ------------------------------
+ADMIN_GENDER_CK                C ADMIN
+ADMIN_NO_HP_CK                 C ADMIN
+ADMIN_EMAIL_CK                 C ADMIN
+ID_ADMIN_PK                    P ADMIN
+ADMIN_NO_HP_UQ                 U ADMIN
+ADMIN_EMAIL_UQ                 U ADMIN
+ADMIN_NAMA_UQ                  U ADMIN
+STRUK_PEMBELIAN_PK             P PEMBELIAN
+ID_SUPPLIER_PK                 P SUPPLIER
+
+9 rows selected.
+
+SQL> ALTER TABLE supplier ADD CONSTRAINT supplier_no_hp_ck CHECK (no_hp LIKE'08%');
+
+Table altered.
+
+SQL> ALTER TABLE supplier ADD CONSTRAINT supplier_email_ck CHECK (email LIKE'%_@%_._%');
+
+Table altered.
+
+SQL> ALTER TABLE supplier ADD CONSTRAINT supplier_nama_uq UNIQUE (nama);
+
+Table altered.
+
+SQL> ALTER TABLE supplier ADD CONSTRAINT supplier_no_hp_uq UNIQUE (no_hp);
+
+Table altered.
+
+SQL> ALTER TABLE supplier ADD CONSTRAINT supplier_email_uq UNIQUE (email);
+
+Table altered.
+
+SQL> SELECT constraint_name, constraint_type, table_name FROM all_constraints
+  2  WHERE table_name = 'ADMIN' OR table_name = 'SUPPLIER' OR table_name = 'PEMBELIAN' OR table_name = 'DETIL_BELI'
+  3  ORDER BY table_name, constraint_type;
+
+CONSTRAINT_NAME                C TABLE_NAME
+------------------------------ - ------------------------------
+ADMIN_NO_HP_CK                 C ADMIN
+ADMIN_EMAIL_CK                 C ADMIN
+ADMIN_GENDER_CK                C ADMIN
+ID_ADMIN_PK                    P ADMIN
+ADMIN_EMAIL_UQ                 U ADMIN
+ADMIN_NAMA_UQ                  U ADMIN
+ADMIN_NO_HP_UQ                 U ADMIN
+STRUK_PEMBELIAN_PK             P PEMBELIAN
+SUPPLIER_NO_HP_CK              C SUPPLIER
+SUPPLIER_EMAIL_CK              C SUPPLIER
+ID_SUPPLIER_PK                 P SUPPLIER
+
+CONSTRAINT_NAME                C TABLE_NAME
+------------------------------ - ------------------------------
+SUPPLIER_NAMA_UQ               U SUPPLIER
+SUPPLIER_NO_HP_UQ              U SUPPLIER
+SUPPLIER_EMAIL_UQ              U SUPPLIER
+
+14 rows selected.
+
+SQL> commit;
+
+Commit complete.
+
+SQL> ALTER TABLE detil_beli ADD CONSTRAINT detil_beli_struk_pembelian_fk FOREIGN KEY(struk_pembelian)
+  2  REFERENCES pembelian (struk_pembelian);
+
+Table altered.
+
+SQL> ALTER TABLE detil_beli ADD CONSTRAINT detil_beli_kode_barang_fk FOREIGN KEY(kode_barang)
+  2  REFERENCES data_barang (kode_barang);
+REFERENCES data_barang (kode_barang)
+                        *
+ERROR at line 2:
+ORA-02270: no matching unique or primary key for this column-list
+
+
+SQL> DESC detil_beli;
+ Name                                                                                                      Null?    Type
+ ----------------------------------------------------------------------------------------------------------------- -------- --------------------------------------------------------------------
+ STRUK_PEMBELIAN                                                                                                    CHAR(11)
+ KODE_BARANG                                                                                                        CHAR(4)
+ HARGA                                                                                                              NUMBER
+ JUMLAH                                                                                                             NUMBER
+
+SQL> DESC data_barang;
+ Name                                                                                                      Null?    Type
+ ----------------------------------------------------------------------------------------------------------------- -------- --------------------------------------------------------------------
+ KODE_BARANG                                                                                                        CHAR(4)
+ NAMA_BARANG                                                                                                        VARCHAR2(15)
+ KATEGORI                                                                                                           CHAR(2)
+ HARGA                                                                                                              NUMBER
+ STOK                                                                                                               NUMBER
+
+SQL> ALTER TABLE data_barang ADD CONSTRAINT kode_barang_fk PRIMARY KEY(kode_barang);
+
+Table altered.
+
+SQL> DESC data_barang;
+ Name                                                                                                      Null?    Type
+ ----------------------------------------------------------------------------------------------------------------- -------- --------------------------------------------------------------------
+ KODE_BARANG                                                                                               NOT NULL CHAR(4)
+ NAMA_BARANG                                                                                                        VARCHAR2(15)
+ KATEGORI                                                                                                           CHAR(2)
+ HARGA                                                                                                              NUMBER
+ STOK                                                                                                               NUMBER
+
+SQL> ALTER TABLE detil_beli ADD CONSTRAINT detil_beli_kode_barang_fk FOREIGN KEY(kode_barang)
+  2  REFERENCES data_barang (kode_barang);
+
+Table altered.
+
+SQL> ALTER TABLE pembelian ADD CONSTRAINT pembelian_id_admin_fk FOREIGN KEY(id_admin)
+  2  REFERENCES admin (id_admin);
+
+Table altered.
+
+SQL> ALTER TABLE pembelian ADD CONSTRAINT pembelian_id_supplier_fk FOREIGN KEY(id_supplier)
+  2  REFERNCES supplier (id_supplier);
+REFERNCES supplier (id_supplier)
+*
+ERROR at line 2:
+ORA-00905: missing keyword
+
+
+SQL> ALTER TABLE pembelian ADD CONSTRAINT pembelian_id_supplier_fk FOREIGN KEY(id_supplier)
+  2  REFERNCES supplier (id_supplier);
+REFERNCES supplier (id_supplier)
+*
+ERROR at line 2:
+ORA-00905: missing keyword
+
+
+SQL> ALTER TABLE pembelian ADD CONSTRAINT pembelian_id_supplier_fk FOREIGN KEY(id_supplier)
+  2  REFERNCES supplier (id_supplier);
+REFERNCES supplier (id_supplier)
+*
+ERROR at line 2:
+ORA-00905: missing keyword
+
+
+SQL> ALTER TABLE pembelian ADD CONSTRAINT pembelian_id_supplier_fk FOREIGN KEY(id_supplier)
+  2  REFERENCES supplier (id_supplier);
+
+Table altered.
+
+SQL> SELECT constraint_name, constraint_type, table_name FROM all_constraints
+  2  WHERE table_name = 'ADMIN' OR table_name = 'SUPPLIER' OR table_name = 'PEMBELIAN' OR table_name = 'DETIL_BELI'
+  3  ORDER BY table_name, constraint_type;
+
+CONSTRAINT_NAME                C TABLE_NAME
+------------------------------ - ------------------------------
+ADMIN_NO_HP_CK                 C ADMIN
+ADMIN_EMAIL_CK                 C ADMIN
+ADMIN_GENDER_CK                C ADMIN
+ID_ADMIN_PK                    P ADMIN
+ADMIN_NO_HP_UQ                 U ADMIN
+ADMIN_NAMA_UQ                  U ADMIN
+ADMIN_EMAIL_UQ                 U ADMIN
+DETIL_BELI_STRUK_PEMBELIAN_FK  R DETIL_BELI
+DETIL_BELI_KODE_BARANG_FK      R DETIL_BELI
+STRUK_PEMBELIAN_PK             P PEMBELIAN
+PEMBELIAN_ID_ADMIN_FK          R PEMBELIAN
+
+CONSTRAINT_NAME                C TABLE_NAME
+------------------------------ - ------------------------------
+PEMBELIAN_ID_SUPPLIER_FK       R PEMBELIAN
+SUPPLIER_EMAIL_CK              C SUPPLIER
+SUPPLIER_NO_HP_CK              C SUPPLIER
+ID_SUPPLIER_PK                 P SUPPLIER
+SUPPLIER_NO_HP_UQ              U SUPPLIER
+SUPPLIER_NAMA_UQ               U SUPPLIER
+SUPPLIER_EMAIL_UQ              U SUPPLIER
+
+18 rows selected.
+
+SQL> commit;
+
+Commit complete.
+
+SQL>

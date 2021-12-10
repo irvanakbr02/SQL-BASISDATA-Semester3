@@ -1,0 +1,93 @@
+Enter user-name: sys as sysdba
+Enter password:
+
+Connected to:
+Oracle Database 11g Express Edition Release 11.2.0.2.0 - 64bit Production
+
+SQL> CREATE USER irvanaf IDENTIFIED BY irvan885t;
+
+User created.
+
+SQL> GRANT CONNECT, RESOURCE TO irvanaf;
+
+Grant succeeded.
+
+SQL> CONNECT
+Enter user-name: irvanaf
+Enter password:
+Connected.
+
+SQL> CREATE TABLE mahasiswa (
+  2  nim NUMBER,
+  3  nama VARCHAR(40),
+  4  jenis_kelamin CHAR(1),
+  5  tanggal_lahir DATE);
+
+Table created.
+
+SQL> DESCRIBE mahasiswa
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------
+
+ NIM                                                	NUMBER
+ NAMA                                               	VARCHAR2(40)
+ JENIS_KELAMIN                                     	CHAR(1)
+ TANGGAL_LAHIR                                      	DATE
+
+INSERT INTO mahasiswa
+
+INSERT INTO mahasiswa (nim, nama, jenis_kelamin, tanggal_lahir)
+VALUES (19090099, 'Irvan AF', 'L', '19-02-2002');
+INSERT INTO mahasiswa (nim, nama, jenis_kelamin, tanggal_lahir)
+VALUES (19090099, 'Irvan AF', 'L', '19-02-2002');
+INSERT INTO mahasiswa (nim, nama, jenis_kelamin, tanggal_lahir)
+VALUES (19090099, 'Irvan AF', 'L', '19-02-2002');
+INSERT INTO mahasiswa (nim, nama, jenis_kelamin, tanggal_lahir)
+VALUES (19090099, 'Irvan AF', 'L', '19-02-2002');
+INSERT INTO mahasiswa (nim, nama, jenis_kelamin, tanggal_lahir)
+VALUES (19090099, 'Irvan AF', 'L', '19-02-2002');
+INSERT INTO mahasiswa (nim, nama, jenis_kelamin, tanggal_lahir)
+VALUES (19090099, 'Irvan AF', 'L', '19-02-2002');
+INSERT INTO mahasiswa (nim, nama, jenis_kelamin, tanggal_lahir)
+VALUES (19090099, 'Irvan AF', 'L', '19-02-2002');
+INSERT INTO mahasiswa (nim, nama, jenis_kelamin, tanggal_lahir)
+VALUES (19090099, 'Irvan AF', 'L', '19-02-2002');
+INSERT INTO mahasiswa (nim, nama, jenis_kelamin, tanggal_lahir)
+VALUES (19090099, 'Irvan AF', 'L', '19-02-2002');
+INSERT INTO mahasiswa (nim, nama, jenis_kelamin, tanggal_lahir)
+VALUES (19090099, 'Irvan AF', 'L', '19-02-2002');
+INSERT INTO mahasiswa (nim, nama, jenis_kelamin, tanggal_lahir)
+VALUES (19090001, ahmad', 'L', '9-01-2001');
+INSERT INTO mahasiswa (nim, nama, jenis_kelamin, tanggal_lahir)
+VALUES (19090001, ahmad', 'L', '9-01-2001');
+
+SQL> SELECT * FROM mahasiswa;
+
+       NIM NAMA                                     J TANGGAL_LA
+---------- ---------------------------------------- - ----------
+  19090099 Irvan AF                                 L 19-02-2002
+  19090009 ahmad                                    L 02-02-2001
+  19090011 farid                                    	L 02-02-2000
+  19090064 ilham                                    L 21-06-1999
+  19090077 nadil                                    L 02-02-2001
+  19090013 riski nafi                               L 02-05-2001
+  19090092 dias                                     p 22-12-2001
+  19090053 elang                                    L 22-05-2000
+  19090066 abror                                    L 23-12-2001
+  19090073 muhammad                                 L 22-05-1999
+
+10 rows selected.
+SQL> COMMIT;
+
+Commit complete.
+
+SET PAGESIZE 50
+SELECT * FROM mahasiswa;
+
+CREATE TABLE mhs AS
+SELECT nim AS nomer , nama AS nama_lengkap, jenis_kelamin, tanggal_lahir AS tanggal
+FROM mahasiswa;
+
+Table created.
+
+SELECT * FROM mhs;

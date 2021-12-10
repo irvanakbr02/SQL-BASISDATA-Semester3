@@ -1,0 +1,26 @@
+INSERT INTO keluarga (nama, jenis_kelamin, tempat_lahir, tanggal_lahir, status, nik, no_hp,  pekerjaan, ig)
+VALUES ('Karsita', 'L', 'Cirebon', '10-04-1975', 'Ayah',3376031004750002,081390065682,'Polri','masbagusainulyakkin');
+
+INSERT INTO keluarga (nama, jenis_kelamin, tempat_lahir, tanggal_lahir, status, nik, no_hp,  pekerjaan, ig)
+VALUES ('Ermayanti', 'P', 'Semarang', '16-05-1980', 'Ibu',3376031605800001,081325564746,'Ibu Rumah Tangga','imay_may');
+
+INSERT INTO keluarga (nama, jenis_kelamin, tempat_lahir, tanggal_lahir, status, nik, no_hp,  pekerjaan, ig)
+VALUES ('Selviana Ambar Triwulandari', 'P', 'Cirebon', '01-07-1999', 'Anak',3376030107990001,081390065682,'Pekerja Swasta','selvianambar');
+
+INSERT INTO keluarga (nama, jenis_kelamin, tempat_lahir, tanggal_lahir, status, nik, no_hp,  pekerjaan, ig)
+VALUES ('Irvan Akbar Febriansyah', 'L', 'Tegal', '19-02-2002', 'Anak',3376031902020002,085225430800,'Mahasiswa','irvanakbr02');
+
+DELETE keluarga WHERE no = 3 ; //menghapus no 3
+COMMIT; // save
+ROLLBACK; //mengulang
+
+UPDATE keluarga SET no_hp = '085225430800'; // semua diupdate seluru tabel no hp
+UPDATE keluarga SET no_hp = '085225430800' WHERE no = 3; // mengupdate no hp di row atau no 3
+
+//Mengupdate lebih dari satu 
+UPDATE keluarga SET status = 'anak 2' ,pekerjaan = 'pelajar ' WHERE no =1;
+
+//Menampilkan no,status,pekerjaan dari table keluarga
+SELECT no,status pekerjaan FROM keluarga;
+
+COMMIT;

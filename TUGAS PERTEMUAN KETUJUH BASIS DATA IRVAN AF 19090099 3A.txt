@@ -1,0 +1,1528 @@
+SQL> SET TIME ON
+12:44:19 SQL> SELECT*FROM tab;
+
+TNAME                          TABTYPE  CLUSTERID                               
+------------------------------ ------- ----------                               
+DETIL_JUAL                     TABLE                                            
+JADWAL                         TABLE                                            
+KASIR                          TABLE                                            
+MEMBER                         TABLE                                            
+PENJUALAN                      TABLE                                            
+PETUGAS                        TABLE                                            
+TUGAS                          TABLE                                            
+
+7 rows selected.
+
+12:44:31 SQL> SELECT * FROM detil_jual;
+
+NO_STRUK    KODE      HARGA     JUMLAH                                          
+----------- ---- ---------- ----------                                          
+20101310001 M002        500          3                                          
+20101310001 A001       5000          5                                          
+20101310001 A002       2000          2                                          
+20101310002 M001       3500         10                                          
+20101310002 A001       5000          4                                          
+20101310002 A002       2000          2                                          
+20101310003 M001       3500          1                                          
+20101310003 M002        500          7                                          
+20101310003 A002       2000          2                                          
+20101310004 M001       3500          2                                          
+20101310004 M002        500          6                                          
+
+NO_STRUK    KODE      HARGA     JUMLAH                                          
+----------- ---- ---------- ----------                                          
+20101310004 A001       5000          3                                          
+20101310005 A001       5000          4                                          
+20101310005 M002        500          5                                          
+20101310005 A002       2000          3                                          
+20101310005 M001       3500          1                                          
+
+16 rows selected.
+
+12:45:05 SQL> SELECT * FROM kasir;
+
+ID_KASI NAMA                           G NO_HP                                  
+------- ------------------------------ - --------------                         
+EMAIL                          TANGGAL_L                                        
+------------------------------ ---------                                        
+A201001 Xena                           L 08123246369                            
+xena1@mail.com                 17-AUG-91                                        
+                                                                                
+A201002 Yena                           P 08245369123                            
+yena1@mail.com                 17-AUG-92                                        
+                                                                                
+A201003 Zena                           P 08369123246                            
+zena1@mail.com                 17-AUG-93                                        
+                                                                                
+
+12:45:22 SQL> SET LINESIZE 200
+12:45:33 SQL> SELECT * FROM kasir;
+
+ID_KASI NAMA                           G NO_HP          EMAIL                          TANGGAL_L                                                                                                        
+------- ------------------------------ - -------------- ------------------------------ ---------                                                                                                        
+A201001 Xena                           L 08123246369    xena1@mail.com                 17-AUG-91                                                                                                        
+A201002 Yena                           P 08245369123    yena1@mail.com                 17-AUG-92                                                                                                        
+A201003 Zena                           P 08369123246    zena1@mail.com                 17-AUG-93                                                                                                        
+
+12:45:35 SQL> SELECT * FROM member;
+
+ID_MEMB NAMA                           G NO_HP          EMAIL                          TANGGAL_L                                                                                                        
+------- ------------------------------ - -------------- ------------------------------ ---------                                                                                                        
+2010001 Andi                           L 085125250375   andi1@mail.com                 17-AUG-90                                                                                                        
+2010002 Bandi                          L 085250250375   bandi1@mail.com                17-AUG-91                                                                                                        
+2010003 Cindi                          P 085375250375   candi1@mail.com                17-AUG-93                                                                                                        
+2010004 Dandi                          L 085255250375   dandi1@mail.com                17-AUG-93                                                                                                        
+
+12:45:48 SQL> SELECT * FROM penjualan;
+
+NO_STRUK    TANGGAL   ID_MEMB ID_KASI                                                                                                                                                                   
+----------- --------- ------- -------                                                                                                                                                                   
+20101310001 13-OCT-20 2010002 A201003                                                                                                                                                                   
+20101310002 13-OCT-20 2010001 A201003                                                                                                                                                                   
+20101310003 13-OCT-20 2010003 A201002                                                                                                                                                                   
+20101310004 13-OCT-20 2010004 A201001                                                                                                                                                                   
+20101310005 13-OCT-20         A201001                                                                                                                                                                   
+
+12:45:59 SQL> SELECT constraint_name, constrainr_type, table_name
+12:46:51   2  FROM all_constraints WHERE table_name = 'DETIL_JUAL'
+12:47:19   3  or table name = 'KASIR'
+12:47:31   4  or table name = 'MEMBER'
+12:47:39   5  or table name = 'PENJUALAN';
+or table name = 'KASIR'
+   *
+ERROR at line 3:
+ORA-00936: missing expression 
+
+
+12:47:56 SQL> SELECT constraint_name, constrainr_type, table_name
+12:47:59   2  FROM all_constraints WHERE table_name = 'DETIL_JUAL'
+12:48:02   3  or table_name = 'KASIR'
+12:48:08   4  or table_name = 'MEMBER'
+12:48:25   5  or table_name = 'PENJUALAN';
+SELECT constraint_name, constrainr_type, table_name
+                        *
+ERROR at line 1:
+ORA-00904: "CONSTRAINR_TYPE": invalid identifier 
+
+
+12:48:43 SQL> SELECT constraint_name, constraint_type, table_name
+12:48:59   2  FROM all_constraints WHERE table_name = 'DETIL_JUAL'
+12:49:02   3  or table_name = 'KASIR'
+12:49:05   4  or table_name = 'MEMBER'
+12:49:08   5  or table_name = 'PENJUALAN';
+
+CONSTRAINT_NAME                C TABLE_NAME                                                                                                                                                             
+------------------------------ - ------------------------------                                                                                                                                         
+KASIR_EMAIL_CK                 C KASIR                                                                                                                                                                  
+KASIR_GENDER_CK                C KASIR                                                                                                                                                                  
+KASIR_NO_HP_CK                 C KASIR                                                                                                                                                                  
+MEMBER_EMAIL_CK                C MEMBER                                                                                                                                                                 
+MEMBER_GENDER_CK               C MEMBER                                                                                                                                                                 
+MEMBER_NO_HP_CK                C MEMBER                                                                                                                                                                 
+DETIL_JUAL_NO_STRUK_FK         R DETIL_JUAL                                                                                                                                                             
+ID_MEMBER_FK                   R PENJUALAN                                                                                                                                                              
+ID_KASIR_FK                    R PENJUALAN                                                                                                                                                              
+ID_KASIR_PK                    P KASIR                                                                                                                                                                  
+ID_MEMBER_PK                   P MEMBER                                                                                                                                                                 
+
+CONSTRAINT_NAME                C TABLE_NAME                                                                                                                                                             
+------------------------------ - ------------------------------                                                                                                                                         
+NO_STRUK_PK                    P PENJUALAN                                                                                                                                                              
+KASIR_EMAIL_UQ                 U KASIR                                                                                                                                                                  
+KASIR_NO_HP_UQ                 U KASIR                                                                                                                                                                  
+KASIR_NAMA_UQ                  U KASIR                                                                                                                                                                  
+MEMBER_EMAIL_UQ                U MEMBER                                                                                                                                                                 
+MEMBER_NO_HP_UQ                U MEMBER                                                                                                                                                                 
+MEMBER_NAMA_UQ                 U MEMBER                                                                                                                                                                 
+
+18 rows selected.
+
+12:49:10 SQL> CREATE TABLE kategori(
+12:51:06   2  kode CHAR(2),
+12:51:14   3  kategori VARCHAR2(10));
+
+Table created.
+
+12:51:28 SQL> ALTER TABLE kategori ADD CONSTRAINT kode_pk PRIMARY KEY(kode);
+
+Table altered.
+
+12:52:08 SQL> ALTER TABLE kategori ADD CONSTRAINT kategori_uq UNIQUE(kategori);
+
+Table altered.
+
+12:52:35 SQL> INSERT INTO kategori VALUES('M1','Makanan');
+
+1 row created.
+
+12:53:26 SQL> INSERT INTO kategori VALUES('M2','Minuman');
+
+1 row created.
+
+12:53:41 SQL> INSERT INTO kategori VALUES('A1','Alat Tulis');
+
+1 row created.
+
+12:53:58 SQL> SELECT * FROM kategori;
+
+KO KATEGORI                                                                                                                                                                                             
+-- ----------                                                                                                                                                                                           
+M1 Makanan                                                                                                                                                                                              
+M2 Minuman                                                                                                                                                                                              
+A1 Alat Tulis                                                                                                                                                                                           
+
+12:54:25 SQL> CREATE TABLE data_barang(
+12:54:50   2  kode_barang CHAR(4),
+12:55:01   3  nama_barang VARCHAR2(15),
+12:55:12   4  kategori CHAR(2),
+12:57:05   5  harga NUMBER,
+12:57:13   6  stock NUMBER);
+
+Table created.
+
+12:57:21 SQL> ALTER TABLE data_barang ADD CONSTRAINT kode_barang_pk PRIMARY KEY (kode_barang);
+
+Table altered.
+
+12:58:22 SQL> ALTER TABLE data_barang ADD CONSTRAINT nama_barang_uq UNIQUE (nama_barang);
+
+Table altered.
+
+13:07:59 SQL> INSERT INTO data_barang VALUES('M001','Indomie','M1',3500,50);
+
+1 row created.
+
+13:14:03 SQL> INSERT INTO data_barang VALUES('M002','Aqua Gelas','M2',500,100);
+
+1 row created.
+
+13:14:33 SQL> INSERT INTO data_barang VALUES('A001','Buku Tulis','A1',2000,50);
+
+1 row created.
+
+13:15:43 SQL> INSERT INTO data_barang VALUES('A002','Pulpen Hitam','A1',2000,50);
+
+1 row created.
+
+13:16:10 SQL> SELECT*FROM data_barang;
+
+KODE NAMA_BARANG     KA      HARGA      STOCK                                                                                                                                                           
+---- --------------- -- ---------- ----------                                                                                                                                                           
+M001 Indomie         M1       3500         50                                                                                                                                                           
+M002 Aqua Gelas      M2        500        100                                                                                                                                                           
+A001 Buku Tulis      A1       2000         50                                                                                                                                                           
+A002 Pulpen Hitam    A1       2000         50                                                                                                                                                           
+
+13:16:27 SQL> SELECT*FROM kategori;
+
+KO KATEGORI                                                                                                                                                                                             
+-- ----------                                                                                                                                                                                           
+M1 Makanan                                                                                                                                                                                              
+M2 Minuman                                                                                                                                                                                              
+A1 Alat Tulis                                                                                                                                                                                           
+
+13:16:33 SQL> ALTER TABLE data_barang ADD CONSTRAINT kategori_fk FOREIGN KEY (kategori)
+13:18:02   2  REFERENCES kategori(kode);
+
+Table altered.
+
+13:18:20 SQL> DESC detil_jual;
+ Name                                                                                                              Null?    Type
+ ----------------------------------------------------------------------------------------------------------------- -------- ----------------------------------------------------------------------------
+ NO_STRUK                                                                                                                   CHAR(11)
+ KODE_BARANG                                                                                                                CHAR(4)
+ HARGA                                                                                                                      NUMBER
+ JUMLAH                                                                                                                     NUMBER
+
+13:20:56 SQL> ALTER TABLE detil_jual ADD CONSTRAINT detil_jual_kode_barang_fk FOREIGN KEY(kode_barang)
+13:21:44   2  REFERENCES data_barang(kode_barang);
+
+Table altered.
+
+13:21:59 SQL> SELECT*FROM tab;
+
+TNAME                          TABTYPE  CLUSTERID                                                                                                                                                       
+------------------------------ ------- ----------                                                                                                                                                       
+DATA_BARANG                    TABLE                                                                                                                                                                    
+DETIL_JUAL                     TABLE                                                                                                                                                                    
+JADWAL                         TABLE                                                                                                                                                                    
+KASIR                          TABLE                                                                                                                                                                    
+KATEGORI                       TABLE                                                                                                                                                                    
+MEMBER                         TABLE                                                                                                                                                                    
+PENJUALAN                      TABLE                                                                                                                                                                    
+PETUGAS                        TABLE                                                                                                                                                                    
+TUGAS                          TABLE                                                                                                                                                                    
+
+9 rows selected.
+
+13:23:42 SQL> commit;
+
+Commit complete.
+
+13:24:05 SQL> SELECT*FROM detil_jual;
+
+NO_STRUK    KODE      HARGA     JUMLAH                                                                                                                                                                  
+----------- ---- ---------- ----------                                                                                                                                                                  
+20101310001 M002        500          3                                                                                                                                                                  
+20101310001 A001       5000          5                                                                                                                                                                  
+20101310001 A002       2000          2                                                                                                                                                                  
+20101310002 M001       3500         10                                                                                                                                                                  
+20101310002 A001       5000          4                                                                                                                                                                  
+20101310002 A002       2000          2                                                                                                                                                                  
+20101310003 M001       3500          1                                                                                                                                                                  
+20101310003 M002        500          7                                                                                                                                                                  
+20101310003 A002       2000          2                                                                                                                                                                  
+20101310004 M001       3500          2                                                                                                                                                                  
+20101310004 M002        500          6                                                                                                                                                                  
+
+NO_STRUK    KODE      HARGA     JUMLAH                                                                                                                                                                  
+----------- ---- ---------- ----------                                                                                                                                                                  
+20101310004 A001       5000          3                                                                                                                                                                  
+20101310005 A001       5000          4                                                                                                                                                                  
+20101310005 M002        500          5                                                                                                                                                                  
+20101310005 A002       2000          3                                                                                                                                                                  
+20101310005 M001       3500          1                                                                                                                                                                  
+
+16 rows selected.
+
+13:24:46 SQL> DESC detil_jual;
+ Name                                                                                                              Null?    Type
+ ----------------------------------------------------------------------------------------------------------------- -------- ----------------------------------------------------------------------------
+ NO_STRUK                                                                                                                   CHAR(11)
+ KODE_BARANG                                                                                                                CHAR(4)
+ HARGA                                                                                                                      NUMBER
+ JUMLAH                                                                                                                     NUMBER
+
+13:25:30 SQL> SELECT detil_jual.no_stuck, kasir.nama, member.nama, data_barang.nama_barang, kategori.kode , detil_jual.harga, detil_jual.jumlah FROM detil_jual INNER JOIN kasir INNER JOIN member INNER JOIN data_barang INNER JOIN kategori;
+SELECT detil_jual.no_stuck, kasir.nama, member.nama, data_barang.nama_barang, kategori.kode , detil_jual.harga, detil_jual.jumlah FROM detil_jual INNER JOIN kasir INNER JOIN member INNER JOIN data_barang INNER JOIN kategori
+                                                                                                                                                                                                                              *
+ERROR at line 1:
+ORA-00905: missing keyword 
+
+
+13:37:26 SQL> SELECT detil_jual.no_struk, kasir.nama FROM detil_jual INNER JOIN kasir;
+SELECT detil_jual.no_struk, kasir.nama FROM detil_jual INNER JOIN kasir
+                                                                      *
+ERROR at line 1:
+ORA-00905: missing keyword 
+
+
+13:40:10 SQL> SELECT detil_jual.no_struk, kasir.nama FROM detil_jual INNER JOIN kasir ON no_struk = penjualan.no_struk;
+SELECT detil_jual.no_struk, kasir.nama FROM detil_jual INNER JOIN kasir ON no_struk = penjualan.no_struk
+                                                                                      *
+ERROR at line 1:
+ORA-00904: "PENJUALAN"."NO_STRUK": invalid identifier 
+
+
+13:41:01 SQL> SELECT penjualan.no_struk, kasir.nama FROM penjualan INNER JOIN kasir ON no_struk = detil_beli.no_struk;
+SELECT penjualan.no_struk, kasir.nama FROM penjualan INNER JOIN kasir ON no_struk = detil_beli.no_struk
+                                                                                    *
+ERROR at line 1:
+ORA-00904: "DETIL_BELI"."NO_STRUK": invalid identifier 
+
+
+13:43:50 SQL> SELECT penjualan.no_struk, kasir.nama FROM penjualan INNER JOIN detil_beli ON no_struk = detil_beli.no_struk;
+SELECT penjualan.no_struk, kasir.nama FROM penjualan INNER JOIN detil_beli ON no_struk = detil_beli.no_struk
+                                                                *
+ERROR at line 1:
+ORA-00942: table or view does not exist 
+
+
+13:44:26 SQL> SELECT*FROM tab;
+
+TNAME                          TABTYPE  CLUSTERID                                                                                                                                                       
+------------------------------ ------- ----------                                                                                                                                                       
+DATA_BARANG                    TABLE                                                                                                                                                                    
+DETIL_JUAL                     TABLE                                                                                                                                                                    
+JADWAL                         TABLE                                                                                                                                                                    
+KASIR                          TABLE                                                                                                                                                                    
+KATEGORI                       TABLE                                                                                                                                                                    
+MEMBER                         TABLE                                                                                                                                                                    
+PENJUALAN                      TABLE                                                                                                                                                                    
+PETUGAS                        TABLE                                                                                                                                                                    
+TUGAS                          TABLE                                                                                                                                                                    
+
+9 rows selected.
+
+13:44:39 SQL> SELECT penjualan.no_struk, kasir.nama FROM penjualan INNER JOIN detil_jual ON no_struk = detil_jual.no_struk;
+SELECT penjualan.no_struk, kasir.nama FROM penjualan INNER JOIN detil_jual ON no_struk = detil_jual.no_struk
+                                                                              *
+ERROR at line 1:
+ORA-00918: column ambiguously defined 
+
+
+13:45:00 SQL> SELECT penjualan.no_struk FROM penjualan INNER JOIN detil_jual ON no_struk = detil_jual.no_struk;
+SELECT penjualan.no_struk FROM penjualan INNER JOIN detil_jual ON no_struk = detil_jual.no_struk
+                                                                  *
+ERROR at line 1:
+ORA-00918: column ambiguously defined 
+
+
+13:45:27 SQL> SELECT penjualan.no_struk,detil_jual.harga FROM penjualan INNER JOIN detil_jual ON no_struk = detil_jual.no_struk;
+SELECT penjualan.no_struk,detil_jual.harga FROM penjualan INNER JOIN detil_jual ON no_struk = detil_jual.no_struk
+                                                                                   *
+ERROR at line 1:
+ORA-00918: column ambiguously defined 
+
+
+13:47:09 SQL> SELECT penjualan.no_struk,detil_jual.harga FROM penjualan INNER JOIN detil_jual ON penjualan.no_struk = detil_jual.no_struk;
+
+NO_STRUK         HARGA                                                                                                                                                                                  
+----------- ----------                                                                                                                                                                                  
+20101310001        500                                                                                                                                                                                  
+20101310001       5000                                                                                                                                                                                  
+20101310001       2000                                                                                                                                                                                  
+20101310002       3500                                                                                                                                                                                  
+20101310002       5000                                                                                                                                                                                  
+20101310002       2000                                                                                                                                                                                  
+20101310003       3500                                                                                                                                                                                  
+20101310003        500                                                                                                                                                                                  
+20101310003       2000                                                                                                                                                                                  
+20101310004       3500                                                                                                                                                                                  
+20101310004        500                                                                                                                                                                                  
+
+NO_STRUK         HARGA                                                                                                                                                                                  
+----------- ----------                                                                                                                                                                                  
+20101310004       5000                                                                                                                                                                                  
+20101310005       5000                                                                                                                                                                                  
+20101310005        500                                                                                                                                                                                  
+20101310005       2000                                                                                                                                                                                  
+20101310005       3500                                                                                                                                                                                  
+
+16 rows selected.
+
+13:47:31 SQL> SELECT penjualan.no_struk,detil_jual.harga,detil_jual.jumlah FROM penjualan INNER JOIN detil_jual ON penjualan.no_struk = detil_jual.no_struk;
+
+NO_STRUK         HARGA     JUMLAH                                                                                                                                                                       
+----------- ---------- ----------                                                                                                                                                                       
+20101310001        500          3                                                                                                                                                                       
+20101310001       5000          5                                                                                                                                                                       
+20101310001       2000          2                                                                                                                                                                       
+20101310002       3500         10                                                                                                                                                                       
+20101310002       5000          4                                                                                                                                                                       
+20101310002       2000          2                                                                                                                                                                       
+20101310003       3500          1                                                                                                                                                                       
+20101310003        500          7                                                                                                                                                                       
+20101310003       2000          2                                                                                                                                                                       
+20101310004       3500          2                                                                                                                                                                       
+20101310004        500          6                                                                                                                                                                       
+
+NO_STRUK         HARGA     JUMLAH                                                                                                                                                                       
+----------- ---------- ----------                                                                                                                                                                       
+20101310004       5000          3                                                                                                                                                                       
+20101310005       5000          4                                                                                                                                                                       
+20101310005        500          5                                                                                                                                                                       
+20101310005       2000          3                                                                                                                                                                       
+20101310005       3500          1                                                                                                                                                                       
+
+16 rows selected.
+
+13:47:55 SQL> SELECT penjualan.no_struk,kasir.nama,member.nama,detil_jual.harga,detil_jual.jumlah FROM penjualan INNER JOIN detil_jual ON penjualan.no_struk = detil_jual.no_struk INNER JOIN kasir on penjualan.id_kasir = kasir.id_kasir;
+SELECT penjualan.no_struk,kasir.nama,member.nama,detil_jual.harga,detil_jual.jumlah FROM penjualan INNER JOIN detil_jual ON penjualan.no_struk = detil_jual.no_struk INNER JOIN kasir on penjualan.id_kasir = kasir.id_kasir
+                                     *
+ERROR at line 1:
+ORA-00904: "MEMBER"."NAMA": invalid identifier 
+
+
+13:50:55 SQL> DESC member;
+ Name                                                                                                              Null?    Type
+ ----------------------------------------------------------------------------------------------------------------- -------- ----------------------------------------------------------------------------
+ ID_MEMBER                                                                                                         NOT NULL CHAR(7)
+ NAMA                                                                                                                       VARCHAR2(30)
+ GENDER                                                                                                                     CHAR(1)
+ NO_HP                                                                                                                      VARCHAR2(14)
+ EMAIL                                                                                                                      VARCHAR2(30)
+ TANGGAL_LAHIR                                                                                                              DATE
+
+13:51:15 SQL> DESC kasir
+ Name                                                                                                              Null?    Type
+ ----------------------------------------------------------------------------------------------------------------- -------- ----------------------------------------------------------------------------
+ ID_KASIR                                                                                                          NOT NULL CHAR(7)
+ NAMA                                                                                                                       VARCHAR2(30)
+ GENDER                                                                                                                     CHAR(1)
+ NO_HP                                                                                                                      VARCHAR2(14)
+ EMAIL                                                                                                                      VARCHAR2(30)
+ TANGGAL_LAHIR                                                                                                              DATE
+
+13:51:22 SQL> SELECT penjualan.no_struk,kasir.nama,detil_jual.harga,detil_jual.jumlah FROM penjualan INNER JOIN detil_jual ON penjualan.no_struk = detil_jual.no_struk INNER JOIN kasir on penjualan.id_kasir = kasir.id_kasir;
+
+NO_STRUK    NAMA                                HARGA     JUMLAH                                                                                                                                        
+----------- ------------------------------ ---------- ----------                                                                                                                                        
+20101310001 Zena                                  500          3                                                                                                                                        
+20101310001 Zena                                 5000          5                                                                                                                                        
+20101310001 Zena                                 2000          2                                                                                                                                        
+20101310002 Zena                                 3500         10                                                                                                                                        
+20101310002 Zena                                 5000          4                                                                                                                                        
+20101310002 Zena                                 2000          2                                                                                                                                        
+20101310003 Yena                                 3500          1                                                                                                                                        
+20101310003 Yena                                  500          7                                                                                                                                        
+20101310003 Yena                                 2000          2                                                                                                                                        
+20101310004 Xena                                 3500          2                                                                                                                                        
+20101310004 Xena                                  500          6                                                                                                                                        
+
+NO_STRUK    NAMA                                HARGA     JUMLAH                                                                                                                                        
+----------- ------------------------------ ---------- ----------                                                                                                                                        
+20101310004 Xena                                 5000          3                                                                                                                                        
+20101310005 Xena                                 5000          4                                                                                                                                        
+20101310005 Xena                                  500          5                                                                                                                                        
+20101310005 Xena                                 2000          3                                                                                                                                        
+20101310005 Xena                                 3500          1                                                                                                                                        
+
+16 rows selected.
+
+13:51:41 SQL> SELECT penjualan.no_struk,kasir.nama,member.nama,detil_jual.harga,detil_jual.jumlah FROM penjualan INNER JOIN detil_jual ON penjualan.no_struk = detil_jual.no_struk INNER JOIN kasir on penjualan.id_kasir = kasir.id_kasir INNER JOIN member ON penjualan.id_member = member.id_member;
+
+NO_STRUK    NAMA                           NAMA                                HARGA     JUMLAH                                                                                                         
+----------- ------------------------------ ------------------------------ ---------- ----------                                                                                                         
+20101310001 Zena                           Bandi                                 500          3                                                                                                         
+20101310001 Zena                           Bandi                                5000          5                                                                                                         
+20101310001 Zena                           Bandi                                2000          2                                                                                                         
+20101310002 Zena                           Andi                                 3500         10                                                                                                         
+20101310002 Zena                           Andi                                 5000          4                                                                                                         
+20101310002 Zena                           Andi                                 2000          2                                                                                                         
+20101310003 Yena                           Cindi                                3500          1                                                                                                         
+20101310003 Yena                           Cindi                                 500          7                                                                                                         
+20101310003 Yena                           Cindi                                2000          2                                                                                                         
+20101310004 Xena                           Dandi                                3500          2                                                                                                         
+20101310004 Xena                           Dandi                                 500          6                                                                                                         
+
+NO_STRUK    NAMA                           NAMA                                HARGA     JUMLAH                                                                                                         
+----------- ------------------------------ ------------------------------ ---------- ----------                                                                                                         
+20101310004 Xena                           Dandi                                5000          3                                                                                                         
+
+12 rows selected.
+
+13:52:29 SQL> SELECT penjualan.no_struk,kasir.nama,member.nama,detil_jual.harga,detil_jual.jumlah FROM penjualan INNER JOIN detil_jual ON penjualan.no_struk = detil_jual.no_struk INNER JOIN kasir on penjualan.id_kasir = kasir.id_kasir INNER JOIN member ON penjualan.id_member = member.id_member;
+
+NO_STRUK    NAMA                           NAMA                                HARGA     JUMLAH                                                                                                         
+----------- ------------------------------ ------------------------------ ---------- ----------                                                                                                         
+20101310001 Zena                           Bandi                                 500          3                                                                                                         
+20101310001 Zena                           Bandi                                5000          5                                                                                                         
+20101310001 Zena                           Bandi                                2000          2                                                                                                         
+20101310002 Zena                           Andi                                 3500         10                                                                                                         
+20101310002 Zena                           Andi                                 5000          4                                                                                                         
+20101310002 Zena                           Andi                                 2000          2                                                                                                         
+20101310003 Yena                           Cindi                                3500          1                                                                                                         
+20101310003 Yena                           Cindi                                 500          7                                                                                                         
+20101310003 Yena                           Cindi                                2000          2                                                                                                         
+20101310004 Xena                           Dandi                                3500          2                                                                                                         
+20101310004 Xena                           Dandi                                 500          6                                                                                                         
+
+NO_STRUK    NAMA                           NAMA                                HARGA     JUMLAH                                                                                                         
+----------- ------------------------------ ------------------------------ ---------- ----------                                                                                                         
+20101310004 Xena                           Dandi                                5000          3                                                                                                         
+
+12 rows selected.
+
+13:54:49 SQL> SELECT penjualan.no_struk,kasir.nama,member.nama,detil_jual.harga,detil_jual.jumlah FROM penjualan INNER JOIN detil_jual ON penjualan.no_struk = detil_jual.no_struk INNER JOIN kasir on penjualan.id_kasir = kasir.id_kasir INNER JOIN member ON penjualan.id_member = member.id_member
+13:55:15   2  
+13:55:20 SQL> 
+13:55:20 SQL> 
+13:55:20 SQL> SELECT penjualan.no_struk,kasir.nama,member.nama,detil_jual.harga,detil_jual.jumlah FROM penjualan INNER JOIN detil_jual ON penjualan.no_struk = detil_jual.no_struk
+13:56:32   2  INNER JOIN kasir ON penjualan.id_kasir = kasir.id_kasir
+13:57:35   3  INNER JOIN member ON penjualan.id_member = member.id_member;
+
+NO_STRUK    NAMA                           NAMA                                HARGA     JUMLAH                                                                                                         
+----------- ------------------------------ ------------------------------ ---------- ----------                                                                                                         
+20101310001 Zena                           Bandi                                 500          3                                                                                                         
+20101310001 Zena                           Bandi                                5000          5                                                                                                         
+20101310001 Zena                           Bandi                                2000          2                                                                                                         
+20101310002 Zena                           Andi                                 3500         10                                                                                                         
+20101310002 Zena                           Andi                                 5000          4                                                                                                         
+20101310002 Zena                           Andi                                 2000          2                                                                                                         
+20101310003 Yena                           Cindi                                3500          1                                                                                                         
+20101310003 Yena                           Cindi                                 500          7                                                                                                         
+20101310003 Yena                           Cindi                                2000          2                                                                                                         
+20101310004 Xena                           Dandi                                3500          2                                                                                                         
+20101310004 Xena                           Dandi                                 500          6                                                                                                         
+
+NO_STRUK    NAMA                           NAMA                                HARGA     JUMLAH                                                                                                         
+----------- ------------------------------ ------------------------------ ---------- ----------                                                                                                         
+20101310004 Xena                           Dandi                                5000          3                                                                                                         
+
+12 rows selected.
+
+13:58:07 SQL> SELECT penjualan.no_struk,kasir.nama,member.nama,data_barang.nama_barang,data_barang.kategori,detil_jual.harga,detil_jual.jumlah FROM penjualan INNER JOIN detil_jual ON penjualan.no_struk = detil_jual.no_struk
+13:59:37   2  INNER JOIN kasir ON penjualan.id_kasir = kasir.id_kasir
+13:59:41   3  INNER JOIN member ON penjualan.id_member = member.id_member;
+SELECT penjualan.no_struk,kasir.nama,member.nama,data_barang.nama_barang,data_barang.kategori,detil_jual.harga,detil_jual.jumlah FROM penjualan INNER JOIN detil_jual ON penjualan.no_struk = detil_jual.no_struk
+                                                                         *
+ERROR at line 1:
+ORA-00904: "DATA_BARANG"."KATEGORI": invalid identifier 
+
+
+13:59:47 SQL> SELECT penjualan.no_struk,kasir.nama,member.nama,data_barang.nama_barang,data_barang.kategori,detil_jual.harga,detil_jual.jumlah FROM penjualan INNER JOIN detil_jual ON penjualan.no_struk = detil_jual.no_struk
+13:59:54   2  INNER JOIN kasir ON penjualan.id_kasir = kasir.id_kasir
+13:59:59   3  INNER JOIN member ON penjualan.id_member = member.id_member
+14:00:04   4  INNER JOIN data_barang ON detil_jual.kode_barang = data_barang.kode_barang;
+
+NO_STRUK    NAMA                           NAMA                           NAMA_BARANG     KA      HARGA     JUMLAH                                                                                      
+----------- ------------------------------ ------------------------------ --------------- -- ---------- ----------                                                                                      
+20101310001 Zena                           Bandi                          Aqua Gelas      M2        500          3                                                                                      
+20101310001 Zena                           Bandi                          Buku Tulis      A1       5000          5                                                                                      
+20101310001 Zena                           Bandi                          Pulpen Hitam    A1       2000          2                                                                                      
+20101310002 Zena                           Andi                           Indomie         M1       3500         10                                                                                      
+20101310002 Zena                           Andi                           Buku Tulis      A1       5000          4                                                                                      
+20101310002 Zena                           Andi                           Pulpen Hitam    A1       2000          2                                                                                      
+20101310003 Yena                           Cindi                          Indomie         M1       3500          1                                                                                      
+20101310003 Yena                           Cindi                          Aqua Gelas      M2        500          7                                                                                      
+20101310003 Yena                           Cindi                          Pulpen Hitam    A1       2000          2                                                                                      
+20101310004 Xena                           Dandi                          Indomie         M1       3500          2                                                                                      
+20101310004 Xena                           Dandi                          Aqua Gelas      M2        500          6                                                                                      
+
+NO_STRUK    NAMA                           NAMA                           NAMA_BARANG     KA      HARGA     JUMLAH                                                                                      
+----------- ------------------------------ ------------------------------ --------------- -- ---------- ----------                                                                                      
+20101310004 Xena                           Dandi                          Buku Tulis      A1       5000          3                                                                                      
+
+12 rows selected.
+
+14:01:53 SQL> SELECT * FROM data_barang;
+
+KODE NAMA_BARANG     KA      HARGA      STOCK                                                                                                                                                           
+---- --------------- -- ---------- ----------                                                                                                                                                           
+M001 Indomie         M1       3500         50                                                                                                                                                           
+M002 Aqua Gelas      M2        500        100                                                                                                                                                           
+A001 Buku Tulis      A1       2000         50                                                                                                                                                           
+A002 Pulpen Hitam    A1       2000         50                                                                                                                                                           
+
+14:02:45 SQL> SELECT*FROM kategori;
+
+KO KATEGORI                                                                                                                                                                                             
+-- ----------                                                                                                                                                                                           
+M1 Makanan                                                                                                                                                                                              
+M2 Minuman                                                                                                                                                                                              
+A1 Alat Tulis                                                                                                                                                                                           
+
+14:03:21 SQL> SELECT penjualan.no_struk,kasir.nama,member.nama,data_barang.nama_barang,kategori.kategori,detil_jual.harga,detil_jual.jumlah FROM penjualan INNER JOIN detil_jual ON penjualan.no_struk = detil_jual.no_struk
+14:05:03   2  INNER JOIN kasir ON penjualan.id_kasir = kasir.id_kasir
+14:05:07   3  INNER JOIN member ON penjualan.id_member = member.id_member
+14:05:13   4  INNER JOIN data_barang ON detil_jual.kode_barang = data_barang.kode_barang
+14:05:20   5  INNER JOIN kategori ON data_barang.kode = kategori.kode;
+INNER JOIN kategori ON data_barang.kode = kategori.kode
+                       *
+ERROR at line 5:
+ORA-00904: "DATA_BARANG"."KODE": invalid identifier 
+
+
+14:06:20 SQL> SELECT penjualan.no_struk,kasir.nama,member.nama,data_barang.nama_barang,kategori.kategori,detil_jual.harga,detil_jual.jumlah FROM penjualan INNER JOIN detil_jual ON penjualan.no_struk = detil_jual.no_struk
+14:06:28   2  INNER JOIN kasir ON penjualan.id_kasir = kasir.id_kasir
+14:06:31   3  INNER JOIN member ON penjualan.id_member = member.id_member
+14:06:34   4  INNER JOIN data_barang ON detil_jual.kode_barang = data_barang.kode_barang
+14:06:37   5  INNER JOIN kategori ON data_barang.kode_barang = kategori.kode;
+
+no rows selected
+
+14:07:20 SQL> SELECT constaint_name,constraint_type, table_name FROM all_constraints WHERE table_name = 'KATEGORI';
+SELECT constaint_name,constraint_type, table_name FROM all_constraints WHERE table_name = 'KATEGORI'
+       *
+ERROR at line 1:
+ORA-00904: "CONSTAINT_NAME": invalid identifier 
+
+
+14:12:39 SQL> SELECT constraint_name,constraint_type, table_name FROM all_constraints WHERE table_name = 'KATEGORI';
+
+CONSTRAINT_NAME                C TABLE_NAME                                                                                                                                                             
+------------------------------ - ------------------------------                                                                                                                                         
+KODE_PK                        P KATEGORI                                                                                                                                                               
+KATEGORI_UQ                    U KATEGORI                                                                                                                                                               
+
+14:12:53 SQL> SELECT constraint_name,constraint_type, table_name FROM all_constraints WHERE table_name = 'DATA_BARANG';
+
+CONSTRAINT_NAME                C TABLE_NAME                                                                                                                                                             
+------------------------------ - ------------------------------                                                                                                                                         
+KATEGORI_FK                    R DATA_BARANG                                                                                                                                                            
+KODE_BARANG_PK                 P DATA_BARANG                                                                                                                                                            
+NAMA_BARANG_UQ                 U DATA_BARANG                                                                                                                                                            
+
+14:14:23 SQL> SELECT penjualan.no_struk,kasir.nama,member.nama,data_barang.nama_barang,kategori.kategori,detil_jual.harga,detil_jual.jumlah FROM penjualan INNER JOIN detil_jual ON penjualan.no_struk = detil_jual.no_struk
+14:19:07   2  INNER JOIN kasir ON penjualan.id_kasir = kasir.id_kasir
+14:19:13   3  INNER JOIN member ON penjualan.id_member = member.id_member
+14:19:16   4  INNER JOIN data_barang ON detil_jual.kode_barang = data_barang.kode_barang
+14:19:20   5  INNER JOIN kategori ON data_barang.kode_barang = kategori.kode;
+
+no rows selected
+
+14:19:34 SQL> SELECT penjualan.no_struk,kasir.nama,member.nama,data_barang.nama_barang,kategori.kategori,detil_jual.harga,detil_jual.jumlah FROM penjualan INNER JOIN detil_jual ON penjualan.no_struk = detil_jual.no_struk
+14:21:30   2  INNER JOIN kasir ON penjualan.id_kasir = kasir.id_kasir
+14:21:33   3  INNER JOIN member ON penjualan.id_member = member.id_member
+14:21:36   4  INNER JOIN data_barang ON detil_jual.kode_barang = data_barang.kode_barang
+14:21:39   5  INNER JOIN kategori ON kategori.kode = data_barang.kategori;
+
+NO_STRUK    NAMA                           NAMA                           NAMA_BARANG     KATEGORI        HARGA     JUMLAH                                                                              
+----------- ------------------------------ ------------------------------ --------------- ---------- ---------- ----------                                                                              
+20101310001 Zena                           Bandi                          Aqua Gelas      Minuman           500          3                                                                              
+20101310001 Zena                           Bandi                          Buku Tulis      Alat Tulis       5000          5                                                                              
+20101310001 Zena                           Bandi                          Pulpen Hitam    Alat Tulis       2000          2                                                                              
+20101310002 Zena                           Andi                           Indomie         Makanan          3500         10                                                                              
+20101310002 Zena                           Andi                           Buku Tulis      Alat Tulis       5000          4                                                                              
+20101310002 Zena                           Andi                           Pulpen Hitam    Alat Tulis       2000          2                                                                              
+20101310003 Yena                           Cindi                          Indomie         Makanan          3500          1                                                                              
+20101310003 Yena                           Cindi                          Aqua Gelas      Minuman           500          7                                                                              
+20101310003 Yena                           Cindi                          Pulpen Hitam    Alat Tulis       2000          2                                                                              
+20101310004 Xena                           Dandi                          Indomie         Makanan          3500          2                                                                              
+20101310004 Xena                           Dandi                          Aqua Gelas      Minuman           500          6                                                                              
+
+NO_STRUK    NAMA                           NAMA                           NAMA_BARANG     KATEGORI        HARGA     JUMLAH                                                                              
+----------- ------------------------------ ------------------------------ --------------- ---------- ---------- ----------                                                                              
+20101310004 Xena                           Dandi                          Buku Tulis      Alat Tulis       5000          3                                                                              
+
+12 rows selected.
+
+14:22:26 SQL> SELECT penjualan.no_struk,kasir.nama,member.nama,data_barang.nama_barang,kategori.kategori,detil_jual.harga,detil_jual.jumlah,detil_jual.harga*detil_jual.jumlah FROM penjualan INNER JOIN detil_jual ON penjualan.no_struk = detil_jual.no_struk
+14:25:48   2  INNER JOIN kasir ON penjualan.id_kasir = kasir.id_kasir
+14:25:51   3  INNER JOIN member ON penjualan.id_member = member.id_member
+14:25:55   4  INNER JOIN data_barang ON detil_jual.kode_barang = data_barang.kode_barang
+14:25:59   5  INNER JOIN kategori ON kategori.kode = data_barang.kategori;
+
+NO_STRUK    NAMA                           NAMA                           NAMA_BARANG     KATEGORI        HARGA     JUMLAH DETIL_JUAL.HARGA*DETIL_JUAL.JUMLAH                                           
+----------- ------------------------------ ------------------------------ --------------- ---------- ---------- ---------- ----------------------------------                                           
+20101310001 Zena                           Bandi                          Aqua Gelas      Minuman           500          3                               1500                                           
+20101310001 Zena                           Bandi                          Buku Tulis      Alat Tulis       5000          5                              25000                                           
+20101310001 Zena                           Bandi                          Pulpen Hitam    Alat Tulis       2000          2                               4000                                           
+20101310002 Zena                           Andi                           Indomie         Makanan          3500         10                              35000                                           
+20101310002 Zena                           Andi                           Buku Tulis      Alat Tulis       5000          4                              20000                                           
+20101310002 Zena                           Andi                           Pulpen Hitam    Alat Tulis       2000          2                               4000                                           
+20101310003 Yena                           Cindi                          Indomie         Makanan          3500          1                               3500                                           
+20101310003 Yena                           Cindi                          Aqua Gelas      Minuman           500          7                               3500                                           
+20101310003 Yena                           Cindi                          Pulpen Hitam    Alat Tulis       2000          2                               4000                                           
+20101310004 Xena                           Dandi                          Indomie         Makanan          3500          2                               7000                                           
+20101310004 Xena                           Dandi                          Aqua Gelas      Minuman           500          6                               3000                                           
+
+NO_STRUK    NAMA                           NAMA                           NAMA_BARANG     KATEGORI        HARGA     JUMLAH DETIL_JUAL.HARGA*DETIL_JUAL.JUMLAH                                           
+----------- ------------------------------ ------------------------------ --------------- ---------- ---------- ---------- ----------------------------------                                           
+20101310004 Xena                           Dandi                          Buku Tulis      Alat Tulis       5000          3                              15000                                           
+
+12 rows selected.
+
+14:26:02 SQL> SELECT penjualan.no_struk,kasir.nama,member.nama,data_barang.nama_barang,kategori.kategori,detil_jual.harga,detil_jual.jumlah,detil_jual.harga*detil_jual.jumlah AS TOTAL FROM penjualan INNER JOIN detil_jual ON penjualan.no_struk = detil_jual.no_struk
+14:26:41   2  INNER JOIN kasir ON penjualan.id_kasir = kasir.id_kasir
+14:26:43   3  INNER JOIN member ON penjualan.id_member = member.id_member
+14:26:45   4  INNER JOIN data_barang ON detil_jual.kode_barang = data_barang.kode_barang
+14:26:48   5  INNER JOIN kategori ON kategori.kode = data_barang.kategori;
+
+NO_STRUK    NAMA                           NAMA                           NAMA_BARANG     KATEGORI        HARGA     JUMLAH      TOTAL                                                                   
+----------- ------------------------------ ------------------------------ --------------- ---------- ---------- ---------- ----------                                                                   
+20101310001 Zena                           Bandi                          Aqua Gelas      Minuman           500          3       1500                                                                   
+20101310001 Zena                           Bandi                          Buku Tulis      Alat Tulis       5000          5      25000                                                                   
+20101310001 Zena                           Bandi                          Pulpen Hitam    Alat Tulis       2000          2       4000                                                                   
+20101310002 Zena                           Andi                           Indomie         Makanan          3500         10      35000                                                                   
+20101310002 Zena                           Andi                           Buku Tulis      Alat Tulis       5000          4      20000                                                                   
+20101310002 Zena                           Andi                           Pulpen Hitam    Alat Tulis       2000          2       4000                                                                   
+20101310003 Yena                           Cindi                          Indomie         Makanan          3500          1       3500                                                                   
+20101310003 Yena                           Cindi                          Aqua Gelas      Minuman           500          7       3500                                                                   
+20101310003 Yena                           Cindi                          Pulpen Hitam    Alat Tulis       2000          2       4000                                                                   
+20101310004 Xena                           Dandi                          Indomie         Makanan          3500          2       7000                                                                   
+20101310004 Xena                           Dandi                          Aqua Gelas      Minuman           500          6       3000                                                                   
+
+NO_STRUK    NAMA                           NAMA                           NAMA_BARANG     KATEGORI        HARGA     JUMLAH      TOTAL                                                                   
+----------- ------------------------------ ------------------------------ --------------- ---------- ---------- ---------- ----------                                                                   
+20101310004 Xena                           Dandi                          Buku Tulis      Alat Tulis       5000          3      15000                                                                   
+
+12 rows selected.
+
+14:26:51 SQL> SELECT penjualan.no_struk AS "NOMER STRUK",kasir.nama AS "NAMA KASIR",member.nama AS "NAMA MEMBER",data_barang.nama_barang AS "NAMA BARANG",kategori.kategori,detil_jual.harga,detil_jual.jumlah,detil_jual.harga*detil_jual.jumlah AS TOTAL FROM penjualan INNER JOIN detil_jual ON penjualan.no_struk = detil_jual.no_struk
+14:30:26   2  INNER JOIN kasir ON penjualan.id_kasir = kasir.id_kasir
+14:30:29   3  INNER JOIN member ON penjualan.id_member = member.id_member
+14:30:31   4  INNER JOIN data_barang ON detil_jual.kode_barang = data_barang.kode_barang
+14:30:35   5  INNER JOIN kategori ON kategori.kode = data_barang.kategori;
+
+NOMER STRUK NAMA KASIR                     NAMA MEMBER                    NAMA BARANG     KATEGORI        HARGA     JUMLAH      TOTAL                                                                   
+----------- ------------------------------ ------------------------------ --------------- ---------- ---------- ---------- ----------                                                                   
+20101310001 Zena                           Bandi                          Aqua Gelas      Minuman           500          3       1500                                                                   
+20101310001 Zena                           Bandi                          Buku Tulis      Alat Tulis       5000          5      25000                                                                   
+20101310001 Zena                           Bandi                          Pulpen Hitam    Alat Tulis       2000          2       4000                                                                   
+20101310002 Zena                           Andi                           Indomie         Makanan          3500         10      35000                                                                   
+20101310002 Zena                           Andi                           Buku Tulis      Alat Tulis       5000          4      20000                                                                   
+20101310002 Zena                           Andi                           Pulpen Hitam    Alat Tulis       2000          2       4000                                                                   
+20101310003 Yena                           Cindi                          Indomie         Makanan          3500          1       3500                                                                   
+20101310003 Yena                           Cindi                          Aqua Gelas      Minuman           500          7       3500                                                                   
+20101310003 Yena                           Cindi                          Pulpen Hitam    Alat Tulis       2000          2       4000                                                                   
+20101310004 Xena                           Dandi                          Indomie         Makanan          3500          2       7000                                                                   
+20101310004 Xena                           Dandi                          Aqua Gelas      Minuman           500          6       3000                                                                   
+
+NOMER STRUK NAMA KASIR                     NAMA MEMBER                    NAMA BARANG     KATEGORI        HARGA     JUMLAH      TOTAL                                                                   
+----------- ------------------------------ ------------------------------ --------------- ---------- ---------- ---------- ----------                                                                   
+20101310004 Xena                           Dandi                          Buku Tulis      Alat Tulis       5000          3      15000                                                                   
+
+12 rows selected.
+
+14:30:38 SQL> SELECT penjualan.no_struk,kasir.nama,member.nama,data_barang.nama_barang,kategori.kategori,detil_jual.harga,detil_jual.jumlah,detil_jual.harga*detil_jual.jumlah AS TOTAL FROM penjualan INNER JOIN detil_jual ON penjualan.no_struk = detil_jual.no_struk
+14:31:35   2  
+14:31:37 SQL> 
+14:31:37 SQL> SELECT penjualan.no_struk AS "NOMER STRUK",kasir.nama AS "NAMA KASIR",member.nama AS "NAMA MEMBER",data_barang.nama_barang AS "NAMA BARANG",kategori.kategori,detil_jual.harga,detil_jual.jumlah,detil_jual.harga*detil_jual.jumlah AS TOTAL FROM penjualan INNER JOIN detil_jual ON penjualan.no_struk = detil_jual.no_struk
+14:31:48   2  INNER JOIN kasir ON penjualan.id_kasir = kasir.id_kasir
+14:31:51   3  INNER JOIN member ON penjualan.id_member = member.id_member
+14:31:55   4  INNER JOIN data_barang ON detil_jual.kode_barang = data_barang.kode_barang
+14:31:58   5  INNER JOIN kategori ON kategori.kode = data_barang.kategori
+14:32:03   6  limit 6;
+limit 6
+*
+ERROR at line 6:
+ORA-00933: SQL command not properly ended 
+
+
+14:32:08 SQL> SELECT penjualan.no_struk AS "NOMER STRUK",kasir.nama AS "NAMA KASIR",member.nama AS "NAMA MEMBER",data_barang.nama_barang AS "NAMA BARANG",kategori.kategori,detil_jual.harga,detil_jual.jumlah,detil_jual.harga*detil_jual.jumlah AS TOTAL FROM penjualan INNER JOIN detil_jual ON penjualan.no_struk = detil_jual.no_struk
+14:32:16   2  INNER JOIN kasir ON penjualan.id_kasir = kasir.id_kasir
+14:32:26   3  INNER JOIN member ON penjualan.id_member = member.id_member
+14:32:29   4  INNER JOIN data_barang ON detil_jual.kode_barang = data_barang.kode_barang
+14:32:33   5  INNER JOIN kategori ON kategori.kode = data_barang.kategori
+14:32:38   6  LIMIT 6;
+LIMIT 6
+*
+ERROR at line 6:
+ORA-00933: SQL command not properly ended 
+
+
+14:34:36 SQL> SELECT penjualan.no_struk AS "NOMER STRUK",kasir.nama AS "NAMA KASIR",member.nama AS "NAMA MEMBER",data_barang.nama_barang AS "NAMA BARANG",kategori.kategori,detil_jual.harga,detil_jual.jumlah,detil_jual.harga*detil_jual.jumlah AS TOTAL FROM penjualan INNER JOIN detil_jual ON penjualan.no_struk = detil_jual.no_struk
+14:34:41   2  INNER JOIN kasir ON penjualan.id_kasir = kasir.id_kasir
+14:34:45   3  INNER JOIN member ON penjualan.id_member = member.id_member
+14:34:48   4  INNER JOIN data_barang ON detil_jual.kode_barang = data_barang.kode_barang
+14:34:51   5  INNER JOIN kategori ON kategori.kode = data_barang.kategori
+14:34:54   6  WHERE kasir.id_kasir = 'A201003';
+
+NOMER STRUK NAMA KASIR                     NAMA MEMBER                    NAMA BARANG     KATEGORI        HARGA     JUMLAH      TOTAL                                                                   
+----------- ------------------------------ ------------------------------ --------------- ---------- ---------- ---------- ----------                                                                   
+20101310001 Zena                           Bandi                          Aqua Gelas      Minuman           500          3       1500                                                                   
+20101310001 Zena                           Bandi                          Buku Tulis      Alat Tulis       5000          5      25000                                                                   
+20101310001 Zena                           Bandi                          Pulpen Hitam    Alat Tulis       2000          2       4000                                                                   
+20101310002 Zena                           Andi                           Indomie         Makanan          3500         10      35000                                                                   
+20101310002 Zena                           Andi                           Buku Tulis      Alat Tulis       5000          4      20000                                                                   
+20101310002 Zena                           Andi                           Pulpen Hitam    Alat Tulis       2000          2       4000                                                                   
+
+6 rows selected.
+
+16:02:32 SQL> SELECT penjualan.no_struk AS "NOMER STRUK",kasir.nama AS "NAMA KASIR",member.nama AS "NAMA MEMBER",data_barang.nama_barang AS "NAMA BARANG",kategori.kategori,detil_jual.harga,detil_jual.jumlah,detil_jual.harga*detil_jual.jumlah AS TOTAL FROM penjualan LEFT JOIN detil_jual ON penjualan.no_struk = detil_jual.no_struk
+16:04:12   2  INNER JOIN kasir ON penjualan.id_kasir = kasir.id_kasir
+16:04:17   3  INNER JOIN member ON penjualan.id_member = member.id_member
+16:04:22   4  INNER JOIN kategori ON kategori.kode = data_barang.kategori
+16:04:26   5  INNER JOIN data_barang ON detil_jual.kode_barang = data_barang.kode_barang
+16:04:35   6  ;
+INNER JOIN kategori ON kategori.kode = data_barang.kategori
+                                       *
+ERROR at line 4:
+ORA-00904: "DATA_BARANG"."KATEGORI": invalid identifier 
+
+
+16:04:40 SQL> SELECT penjualan.no_struk AS "NOMER STRUK",kasir.nama AS "NAMA KASIR",member.nama AS "NAMA MEMBER",data_barang.nama_barang AS "NAMA BARANG",kategori.kategori,detil_jual.harga,detil_jual.jumlah,detil_jual.harga*detil_jual.jumlah AS TOTAL FROM penjualan LEFT JOIN detil_jual ON penjualan.no_struk = detil_jual.no_struk
+16:04:59   2  INNER JOIN kasir ON penjualan.id_kasir = kasir.id_kasir
+16:05:05   3  INNER JOIN member ON penjualan.id_member = member.id_member
+16:05:09   4  INNER JOIN data_barang ON detil_jual.kode_barang = data_barang.kode_barang
+16:05:16   5  INNER JOIN kategori ON kategori.kode = data_barang.kategori;
+
+NOMER STRUK NAMA KASIR                     NAMA MEMBER                    NAMA BARANG     KATEGORI        HARGA     JUMLAH      TOTAL                                                                   
+----------- ------------------------------ ------------------------------ --------------- ---------- ---------- ---------- ----------                                                                   
+20101310002 Zena                           Andi                           Indomie         Makanan          3500         10      35000                                                                   
+20101310003 Yena                           Cindi                          Indomie         Makanan          3500          1       3500                                                                   
+20101310004 Xena                           Dandi                          Indomie         Makanan          3500          2       7000                                                                   
+20101310001 Zena                           Bandi                          Aqua Gelas      Minuman           500          3       1500                                                                   
+20101310003 Yena                           Cindi                          Aqua Gelas      Minuman           500          7       3500                                                                   
+20101310004 Xena                           Dandi                          Aqua Gelas      Minuman           500          6       3000                                                                   
+20101310001 Zena                           Bandi                          Pulpen Hitam    Alat Tulis       2000          2       4000                                                                   
+20101310002 Zena                           Andi                           Pulpen Hitam    Alat Tulis       2000          2       4000                                                                   
+20101310003 Yena                           Cindi                          Pulpen Hitam    Alat Tulis       2000          2       4000                                                                   
+20101310001 Zena                           Bandi                          Buku Tulis      Alat Tulis       5000          5      25000                                                                   
+20101310002 Zena                           Andi                           Buku Tulis      Alat Tulis       5000          4      20000                                                                   
+
+NOMER STRUK NAMA KASIR                     NAMA MEMBER                    NAMA BARANG     KATEGORI        HARGA     JUMLAH      TOTAL                                                                   
+----------- ------------------------------ ------------------------------ --------------- ---------- ---------- ---------- ----------                                                                   
+20101310004 Xena                           Dandi                          Buku Tulis      Alat Tulis       5000          3      15000                                                                   
+
+12 rows selected.
+
+16:05:23 SQL> SELECT penjualan.no_struk AS "NOMER STRUK",kasir.nama AS "NAMA KASIR",member.nama AS "NAMA MEMBER",data_barang.nama_barang AS "NAMA BARANG",kategori.kategori,detil_jual.harga,detil_jual.jumlah,detil_jual.harga*detil_jual.jumlah AS TOTAL FROM penjualan LEFT JOIN detil_jual ON penjualan.no_struk = detil_jual.no_struk
+16:06:41   2  LEFT JOIN kasir ON penjualan.id_kasir = kasir.id_kasir
+16:06:51   3  RIGHT JOIN member ON penjualan.id_member = member.id_member
+16:07:38   4  INNER JOIN data_barang ON detil_jual.kode_barang = data_barang.kode_barang
+16:07:44   5  INNER JOIN kategori ON kategori.kode = data_barang.kategori;
+
+NOMER STRUK NAMA KASIR                     NAMA MEMBER                    NAMA BARANG     KATEGORI        HARGA     JUMLAH      TOTAL                                                                   
+----------- ------------------------------ ------------------------------ --------------- ---------- ---------- ---------- ----------                                                                   
+20101310002 Zena                           Andi                           Indomie         Makanan          3500         10      35000                                                                   
+20101310003 Yena                           Cindi                          Indomie         Makanan          3500          1       3500                                                                   
+20101310004 Xena                           Dandi                          Indomie         Makanan          3500          2       7000                                                                   
+20101310001 Zena                           Bandi                          Aqua Gelas      Minuman           500          3       1500                                                                   
+20101310003 Yena                           Cindi                          Aqua Gelas      Minuman           500          7       3500                                                                   
+20101310004 Xena                           Dandi                          Aqua Gelas      Minuman           500          6       3000                                                                   
+20101310001 Zena                           Bandi                          Pulpen Hitam    Alat Tulis       2000          2       4000                                                                   
+20101310002 Zena                           Andi                           Pulpen Hitam    Alat Tulis       2000          2       4000                                                                   
+20101310003 Yena                           Cindi                          Pulpen Hitam    Alat Tulis       2000          2       4000                                                                   
+20101310001 Zena                           Bandi                          Buku Tulis      Alat Tulis       5000          5      25000                                                                   
+20101310002 Zena                           Andi                           Buku Tulis      Alat Tulis       5000          4      20000                                                                   
+
+NOMER STRUK NAMA KASIR                     NAMA MEMBER                    NAMA BARANG     KATEGORI        HARGA     JUMLAH      TOTAL                                                                   
+----------- ------------------------------ ------------------------------ --------------- ---------- ---------- ---------- ----------                                                                   
+20101310004 Xena                           Dandi                          Buku Tulis      Alat Tulis       5000          3      15000                                                                   
+
+12 rows selected.
+
+16:07:55 SQL> SELECT penjualan.no_struk AS "NOMER STRUK",kasir.nama AS "NAMA KASIR",member.nama AS "NAMA MEMBER",data_barang.nama_barang AS "NAMA BARANG",kategori.kategori,detil_jual.harga,detil_jual.jumlah,detil_jual.harga*detil_jual.jumlah AS TOTAL FROM penjualan FULL JOIN detil_jual ON penjualan.no_struk = detil_jual.no_struk
+16:08:29   2  LEFT JOIN kasir ON penjualan.id_kasir = kasir.id_kasir
+16:08:36   3  RIGHT JOIN member ON penjualan.id_member = member.id_member
+16:08:40   4  INNER JOIN data_barang ON detil_jual.kode_barang = data_barang.kode_barang
+16:08:48   5  INNER JOIN kategori ON kategori.kode = data_barang.kategori;
+
+NOMER STRUK NAMA KASIR                     NAMA MEMBER                    NAMA BARANG     KATEGORI        HARGA     JUMLAH      TOTAL                                                                   
+----------- ------------------------------ ------------------------------ --------------- ---------- ---------- ---------- ----------                                                                   
+20101310004 Xena                           Dandi                          Buku Tulis      Alat Tulis       5000          3      15000                                                                   
+20101310004 Xena                           Dandi                          Aqua Gelas      Minuman           500          6       3000                                                                   
+20101310004 Xena                           Dandi                          Indomie         Makanan          3500          2       7000                                                                   
+20101310003 Yena                           Cindi                          Pulpen Hitam    Alat Tulis       2000          2       4000                                                                   
+20101310003 Yena                           Cindi                          Aqua Gelas      Minuman           500          7       3500                                                                   
+20101310003 Yena                           Cindi                          Indomie         Makanan          3500          1       3500                                                                   
+20101310001 Zena                           Bandi                          Pulpen Hitam    Alat Tulis       2000          2       4000                                                                   
+20101310001 Zena                           Bandi                          Buku Tulis      Alat Tulis       5000          5      25000                                                                   
+20101310001 Zena                           Bandi                          Aqua Gelas      Minuman           500          3       1500                                                                   
+20101310002 Zena                           Andi                           Pulpen Hitam    Alat Tulis       2000          2       4000                                                                   
+20101310002 Zena                           Andi                           Buku Tulis      Alat Tulis       5000          4      20000                                                                   
+
+NOMER STRUK NAMA KASIR                     NAMA MEMBER                    NAMA BARANG     KATEGORI        HARGA     JUMLAH      TOTAL                                                                   
+----------- ------------------------------ ------------------------------ --------------- ---------- ---------- ---------- ----------                                                                   
+20101310002 Zena                           Andi                           Indomie         Makanan          3500         10      35000                                                                   
+
+12 rows selected.
+
+16:08:51 SQL> SELECT * FROM detil_jual;
+
+NO_STRUK    KODE      HARGA     JUMLAH                                                                                                                                                                  
+----------- ---- ---------- ----------                                                                                                                                                                  
+20101310001 M002        500          3                                                                                                                                                                  
+20101310001 A001       5000          5                                                                                                                                                                  
+20101310001 A002       2000          2                                                                                                                                                                  
+20101310002 M001       3500         10                                                                                                                                                                  
+20101310002 A001       5000          4                                                                                                                                                                  
+20101310002 A002       2000          2                                                                                                                                                                  
+20101310003 M001       3500          1                                                                                                                                                                  
+20101310003 M002        500          7                                                                                                                                                                  
+20101310003 A002       2000          2                                                                                                                                                                  
+20101310004 M001       3500          2                                                                                                                                                                  
+20101310004 M002        500          6                                                                                                                                                                  
+
+NO_STRUK    KODE      HARGA     JUMLAH                                                                                                                                                                  
+----------- ---- ---------- ----------                                                                                                                                                                  
+20101310004 A001       5000          3                                                                                                                                                                  
+20101310005 A001       5000          4                                                                                                                                                                  
+20101310005 M002        500          5                                                                                                                                                                  
+20101310005 A002       2000          3                                                                                                                                                                  
+20101310005 M001       3500          1                                                                                                                                                                  
+
+16 rows selected.
+
+16:10:30 SQL> SELECT * FROM kasir;
+
+ID_KASI NAMA                           G NO_HP          EMAIL                          TANGGAL_L                                                                                                        
+------- ------------------------------ - -------------- ------------------------------ ---------                                                                                                        
+A201001 Xena                           L 08123246369    xena1@mail.com                 17-AUG-91                                                                                                        
+A201002 Yena                           P 08245369123    yena1@mail.com                 17-AUG-92                                                                                                        
+A201003 Zena                           P 08369123246    zena1@mail.com                 17-AUG-93                                                                                                        
+
+16:10:42 SQL> SELECT * FROM member;
+
+ID_MEMB NAMA                           G NO_HP          EMAIL                          TANGGAL_L                                                                                                        
+------- ------------------------------ - -------------- ------------------------------ ---------                                                                                                        
+2010001 Andi                           L 085125250375   andi1@mail.com                 17-AUG-90                                                                                                        
+2010002 Bandi                          L 085250250375   bandi1@mail.com                17-AUG-91                                                                                                        
+2010003 Cindi                          P 085375250375   candi1@mail.com                17-AUG-93                                                                                                        
+2010004 Dandi                          L 085255250375   dandi1@mail.com                17-AUG-93                                                                                                        
+
+16:10:56 SQL> SELECT * FROM data_barang;
+
+KODE NAMA_BARANG     KA      HARGA      STOCK                                                                                                                                                           
+---- --------------- -- ---------- ----------                                                                                                                                                           
+M001 Indomie         M1       3500         50                                                                                                                                                           
+M002 Aqua Gelas      M2        500        100                                                                                                                                                           
+A001 Buku Tulis      A1       2000         50                                                                                                                                                           
+A002 Pulpen Hitam    A1       2000         50                                                                                                                                                           
+
+16:11:08 SQL> SELECT penjualan.no_struk,kasir.nama,member.nama
+16:13:13   2  FROM penjualan
+16:14:06   3  LEFT JOIN detil_jual.no_struk = penjualan.no_struk
+16:14:47   4  
+16:15:11 SQL> 
+16:15:11 SQL> SELECT penjualan.no_struk,kasir.nama,member.nama
+16:15:15   2  FROM penjualan
+16:15:17   3  LEFT JOIN detil_beli ON detil_jual.no_struk = penjualan.no_struk
+16:15:44   4  RIGHT JOIN kasir ON kasir.id_kasir = penjualan.idkasir
+16:16:17   5  RIGHT JOIN member ON member.id_member = penjualan.id_member;
+LEFT JOIN detil_beli ON detil_jual.no_struk = penjualan.no_struk
+          *
+ERROR at line 3:
+ORA-00942: table or view does not exist 
+
+
+16:16:47 SQL> SELECT penjualan.no_struk,kasir.nama,member.nama
+16:16:51   2  FROM penjualan
+16:16:54   3  LEFT JOIN detil_jual ON detil_jual.no_struk = penjualan.no_struk
+16:17:20   4  RIGHT JOIN kasir ON kasir.id_kasir = penjualan.id_kasir
+16:17:29   5  RIGHT JOIN member ON member.id_member = penjualan.id_member;
+
+NO_STRUK    NAMA                           NAMA                                                                                                                                                         
+----------- ------------------------------ ------------------------------                                                                                                                               
+20101310001 Zena                           Bandi                                                                                                                                                        
+20101310001 Zena                           Bandi                                                                                                                                                        
+20101310001 Zena                           Bandi                                                                                                                                                        
+20101310002 Zena                           Andi                                                                                                                                                         
+20101310002 Zena                           Andi                                                                                                                                                         
+20101310002 Zena                           Andi                                                                                                                                                         
+20101310003 Yena                           Cindi                                                                                                                                                        
+20101310003 Yena                           Cindi                                                                                                                                                        
+20101310003 Yena                           Cindi                                                                                                                                                        
+20101310004 Xena                           Dandi                                                                                                                                                        
+20101310004 Xena                           Dandi                                                                                                                                                        
+
+NO_STRUK    NAMA                           NAMA                                                                                                                                                         
+----------- ------------------------------ ------------------------------                                                                                                                               
+20101310004 Xena                           Dandi                                                                                                                                                        
+
+12 rows selected.
+
+16:17:33 SQL> SELECT penjualan.no_struk,kasir.nama,member.nama
+16:25:48   2  FROM penjualan
+16:25:51   3  RIGHT JOIN detil_jual ON detil_jual.no_struk = penjualan.no_struk
+16:26:11   4  LEFT JOIN member ON member.id_member = penjualan.id_member;
+SELECT penjualan.no_struk,kasir.nama,member.nama
+                          *
+ERROR at line 1:
+ORA-00904: "KASIR"."NAMA": invalid identifier 
+
+
+16:26:25 SQL> SELECT penjualan.no_struk,kasir.nama,member.nama
+16:26:32   2  FROM penjualan
+16:26:34   3  RIGHT JOIN detil_jual ON detil_jual.no_struk = penjualan.no_struk
+16:26:39   4  LEFT JOIN kasir ON kasir.id_kasir = penjualan.id_kasir
+16:26:54   5  LEFT JOIN member ON member.id_member = penjualan.id_member;
+
+NO_STRUK    NAMA                           NAMA                                                                                                                                                         
+----------- ------------------------------ ------------------------------                                                                                                                               
+20101310002 Zena                           Andi                                                                                                                                                         
+20101310002 Zena                           Andi                                                                                                                                                         
+20101310002 Zena                           Andi                                                                                                                                                         
+20101310001 Zena                           Bandi                                                                                                                                                        
+20101310001 Zena                           Bandi                                                                                                                                                        
+20101310001 Zena                           Bandi                                                                                                                                                        
+20101310003 Yena                           Cindi                                                                                                                                                        
+20101310003 Yena                           Cindi                                                                                                                                                        
+20101310003 Yena                           Cindi                                                                                                                                                        
+20101310004 Xena                           Dandi                                                                                                                                                        
+20101310004 Xena                           Dandi                                                                                                                                                        
+
+NO_STRUK    NAMA                           NAMA                                                                                                                                                         
+----------- ------------------------------ ------------------------------                                                                                                                               
+20101310004 Xena                           Dandi                                                                                                                                                        
+20101310005 Xena                                                                                                                                                                                        
+20101310005 Xena                                                                                                                                                                                        
+20101310005 Xena                                                                                                                                                                                        
+20101310005 Xena                                                                                                                                                                                        
+
+16 rows selected.
+
+16:27:05 SQL> SELECT penjualan.no_struk,kasir.nama
+16:27:28   2  FROM penjualan
+16:27:32   3  LEFT JOIN kasir ON kasir.id_kasir = penjualan.id_kasir
+16:27:42   4  RIGHT JOIN detil_jual ON detil_jual.no_struk = penjualan.no_struk;
+
+NO_STRUK    NAMA                                                                                                                                                                                        
+----------- ------------------------------                                                                                                                                                              
+20101310005 Xena                                                                                                                                                                                        
+20101310005 Xena                                                                                                                                                                                        
+20101310005 Xena                                                                                                                                                                                        
+20101310005 Xena                                                                                                                                                                                        
+20101310004 Xena                                                                                                                                                                                        
+20101310004 Xena                                                                                                                                                                                        
+20101310004 Xena                                                                                                                                                                                        
+20101310003 Yena                                                                                                                                                                                        
+20101310003 Yena                                                                                                                                                                                        
+20101310003 Yena                                                                                                                                                                                        
+20101310002 Zena                                                                                                                                                                                        
+
+NO_STRUK    NAMA                                                                                                                                                                                        
+----------- ------------------------------                                                                                                                                                              
+20101310002 Zena                                                                                                                                                                                        
+20101310002 Zena                                                                                                                                                                                        
+20101310001 Zena                                                                                                                                                                                        
+20101310001 Zena                                                                                                                                                                                        
+20101310001 Zena                                                                                                                                                                                        
+
+16 rows selected.
+
+16:27:49 SQL> SELECT penjualan.no_struk,kasir.nama
+16:28:09   2  LEFT JOIN kasir ON kasir.id_kasir = penjualan.id_kasir
+16:28:11   3  ;
+LEFT JOIN kasir ON kasir.id_kasir = penjualan.id_kasir
+     *
+ERROR at line 2:
+ORA-00923: FROM keyword not found where expected 
+
+
+16:28:13 SQL> SELECT penjualan.no_struk,kasir.nama
+16:28:18   2  LEFT JOIN kasir ON kasir.id_kasir = penjualan.id_kasir
+16:28:21   3  FROM penjualan
+16:28:26   4  
+16:28:27 SQL> 
+16:28:27 SQL> 
+16:28:27 SQL> SELECT penjualan.no_struk,kasir.nama
+16:28:30   2  FROM penjualan
+16:28:34   3  LEFT JOIN kasir ON kasir.id_kasir = penjualan.id_kasir
+16:28:42   4  ;
+
+NO_STRUK    NAMA                                                                                                                                                                                        
+----------- ------------------------------                                                                                                                                                              
+20101310005 Xena                                                                                                                                                                                        
+20101310004 Xena                                                                                                                                                                                        
+20101310003 Yena                                                                                                                                                                                        
+20101310002 Zena                                                                                                                                                                                        
+20101310001 Zena                                                                                                                                                                                        
+
+16:28:44 SQL> SELECT penjualan.no_struk,kasir.nama
+16:29:09   2  FROM penjualan
+16:29:11   3  RIGHT JOIN detil_jual ON detil_jual.no_struk = penjualan.no_struk;
+SELECT penjualan.no_struk,kasir.nama
+                          *
+ERROR at line 1:
+ORA-00904: "KASIR"."NAMA": invalid identifier 
+
+
+16:29:29 SQL> SELECT penjualan.no_struk,kasir.nama
+16:29:32   2  FROM penjualan
+16:29:35   3  RIGHT JOIN detil_jual ON detil_jual.no_struk = penjualan.no_struk
+16:29:40   4  LEFT JOIN kasir ON kasir.id_kasir = penjualan.id_kasir;
+
+NO_STRUK    NAMA                                                                                                                                                                                        
+----------- ------------------------------                                                                                                                                                              
+20101310005 Xena                                                                                                                                                                                        
+20101310005 Xena                                                                                                                                                                                        
+20101310005 Xena                                                                                                                                                                                        
+20101310005 Xena                                                                                                                                                                                        
+20101310004 Xena                                                                                                                                                                                        
+20101310004 Xena                                                                                                                                                                                        
+20101310004 Xena                                                                                                                                                                                        
+20101310003 Yena                                                                                                                                                                                        
+20101310003 Yena                                                                                                                                                                                        
+20101310003 Yena                                                                                                                                                                                        
+20101310002 Zena                                                                                                                                                                                        
+
+NO_STRUK    NAMA                                                                                                                                                                                        
+----------- ------------------------------                                                                                                                                                              
+20101310002 Zena                                                                                                                                                                                        
+20101310002 Zena                                                                                                                                                                                        
+20101310001 Zena                                                                                                                                                                                        
+20101310001 Zena                                                                                                                                                                                        
+20101310001 Zena                                                                                                                                                                                        
+
+16 rows selected.
+
+16:29:45 SQL> SELECT penjualan.no_struk,kasir.nama
+16:33:46   2  FROM penjualan
+16:33:47   3  LEFT JOIN detil_jual ON detil_jual.no_struk = penjualan.no_struk
+16:34:03   4  LEFT JOIN kasir ON kasir.id_kasir = penjualan.id_kasir;
+
+NO_STRUK    NAMA                                                                                                                                                                                        
+----------- ------------------------------                                                                                                                                                              
+20101310001 Zena                                                                                                                                                                                        
+20101310001 Zena                                                                                                                                                                                        
+20101310001 Zena                                                                                                                                                                                        
+20101310002 Zena                                                                                                                                                                                        
+20101310002 Zena                                                                                                                                                                                        
+20101310002 Zena                                                                                                                                                                                        
+20101310003 Yena                                                                                                                                                                                        
+20101310003 Yena                                                                                                                                                                                        
+20101310003 Yena                                                                                                                                                                                        
+20101310004 Xena                                                                                                                                                                                        
+20101310004 Xena                                                                                                                                                                                        
+
+NO_STRUK    NAMA                                                                                                                                                                                        
+----------- ------------------------------                                                                                                                                                              
+20101310004 Xena                                                                                                                                                                                        
+20101310005 Xena                                                                                                                                                                                        
+20101310005 Xena                                                                                                                                                                                        
+20101310005 Xena                                                                                                                                                                                        
+20101310005 Xena                                                                                                                                                                                        
+
+16 rows selected.
+
+16:34:08 SQL> SELECT penjualan.no_struk,kasir.nama
+16:34:11   2  FROM penjualan
+16:34:13   3  LEFT JOIN detil_jual ON detil_jual.no_struk = penjualan.no_struk
+16:34:17   4  RIGHT JOIN kasir ON kasir.id_kasir = penjualan.id_kasir;
+
+NO_STRUK    NAMA                                                                                                                                                                                        
+----------- ------------------------------                                                                                                                                                              
+20101310001 Zena                                                                                                                                                                                        
+20101310001 Zena                                                                                                                                                                                        
+20101310001 Zena                                                                                                                                                                                        
+20101310002 Zena                                                                                                                                                                                        
+20101310002 Zena                                                                                                                                                                                        
+20101310002 Zena                                                                                                                                                                                        
+20101310003 Yena                                                                                                                                                                                        
+20101310003 Yena                                                                                                                                                                                        
+20101310003 Yena                                                                                                                                                                                        
+20101310004 Xena                                                                                                                                                                                        
+20101310004 Xena                                                                                                                                                                                        
+
+NO_STRUK    NAMA                                                                                                                                                                                        
+----------- ------------------------------                                                                                                                                                              
+20101310004 Xena                                                                                                                                                                                        
+20101310005 Xena                                                                                                                                                                                        
+20101310005 Xena                                                                                                                                                                                        
+20101310005 Xena                                                                                                                                                                                        
+20101310005 Xena                                                                                                                                                                                        
+
+16 rows selected.
+
+16:34:26 SQL> SELECT penjualan.no_struk,kasir.nama,member.nama
+16:35:09   2  FROM penjualan
+16:35:12   3  LEFT JOIN detil_jual ON detil_jual.no_struk = penjualan.no_struk
+16:35:16   4  RIGHT JOIN kasir ON kasir.id_kasir = penjualan.id_kasir
+16:35:20   5  RIGHT JOIN member ON member.id_member = penjualan.id_member;
+
+NO_STRUK    NAMA                           NAMA                                                                                                                                                         
+----------- ------------------------------ ------------------------------                                                                                                                               
+20101310001 Zena                           Bandi                                                                                                                                                        
+20101310001 Zena                           Bandi                                                                                                                                                        
+20101310001 Zena                           Bandi                                                                                                                                                        
+20101310002 Zena                           Andi                                                                                                                                                         
+20101310002 Zena                           Andi                                                                                                                                                         
+20101310002 Zena                           Andi                                                                                                                                                         
+20101310003 Yena                           Cindi                                                                                                                                                        
+20101310003 Yena                           Cindi                                                                                                                                                        
+20101310003 Yena                           Cindi                                                                                                                                                        
+20101310004 Xena                           Dandi                                                                                                                                                        
+20101310004 Xena                           Dandi                                                                                                                                                        
+
+NO_STRUK    NAMA                           NAMA                                                                                                                                                         
+----------- ------------------------------ ------------------------------                                                                                                                               
+20101310004 Xena                           Dandi                                                                                                                                                        
+
+12 rows selected.
+
+16:35:44 SQL> SELECT penjualan.no_struk,kasir.nama,member.nama
+16:35:53   2  FROM penjualan
+16:35:56   3  LEFT JOIN detil_jual ON detil_jual.no_struk = penjualan.no_struk
+16:36:06   4  RIGHT JOIN kasir ON kasir.id_kasir = penjualan.id_kasir
+16:36:10   5  LEFT JOIN member ON member.id_member = penjualan.id_member;
+
+NO_STRUK    NAMA                           NAMA                                                                                                                                                         
+----------- ------------------------------ ------------------------------                                                                                                                               
+20101310002 Zena                           Andi                                                                                                                                                         
+20101310002 Zena                           Andi                                                                                                                                                         
+20101310002 Zena                           Andi                                                                                                                                                         
+20101310001 Zena                           Bandi                                                                                                                                                        
+20101310001 Zena                           Bandi                                                                                                                                                        
+20101310001 Zena                           Bandi                                                                                                                                                        
+20101310003 Yena                           Cindi                                                                                                                                                        
+20101310003 Yena                           Cindi                                                                                                                                                        
+20101310003 Yena                           Cindi                                                                                                                                                        
+20101310004 Xena                           Dandi                                                                                                                                                        
+20101310004 Xena                           Dandi                                                                                                                                                        
+
+NO_STRUK    NAMA                           NAMA                                                                                                                                                         
+----------- ------------------------------ ------------------------------                                                                                                                               
+20101310004 Xena                           Dandi                                                                                                                                                        
+20101310005 Xena                                                                                                                                                                                        
+20101310005 Xena                                                                                                                                                                                        
+20101310005 Xena                                                                                                                                                                                        
+20101310005 Xena                                                                                                                                                                                        
+
+16 rows selected.
+
+16:36:20 SQL> SELECT penjualan.no_struk AS "NOMER STRUK",kasir.nama AS "NAMA KASIR",member.nama AS "NAMA MEMBER",data_barang.nama_barang AS "NAMA BARANG",kategori.kategori,detil_jual.harga,detil_jual.jumlah,detil_jual.harga*detil_jual.jumlah AS TOTAL
+16:36:58   2  FROM penjualan
+16:37:05   3  LEFT JOIN member ON member.id_member = penjualan.id_member;
+SELECT penjualan.no_struk AS "NOMER STRUK",kasir.nama AS "NAMA KASIR",member.nama AS "NAMA MEMBER",data_barang.nama_barang AS "NAMA BARANG",kategori.kategori,detil_jual.harga,detil_jual.jumlah,detil_jual.harga*detil_jual.jumlah AS TOTAL
+                                                                                                                                                                                                                  *
+ERROR at line 1:
+ORA-00904: "DETIL_JUAL"."JUMLAH": invalid identifier 
+
+
+16:37:20 SQL> SELECT penjualan.no_struk AS "NOMER STRUK",kasir.nama AS "NAMA KASIR",member.nama AS "NAMA MEMBER",data_barang.nama_barang AS "NAMA BARANG",kategori.kategori,detil_jual.harga,detil_jual.jumlah,detil_jual.harga*detil_jual.jumlah AS TOTAL
+16:37:25   2  FROM penjualan
+16:37:28   3  LEFT JOIN detil_jual ON detil_jual.no_struk = penjualan.no_struk
+16:37:36   4  RIGHT JOIN kasir ON kasir.id_kasir = penjualan.id_kasir
+16:37:44   5  LEFT JOIN member ON member.id_member = penjualan.id_member
+16:37:50   6  RIGHT JOIN data_barang ON data_barang.kode_barang = detil_jual.kode_barang
+16:38:52   7  RIGHT JOIN kategori ON kategori.kode = data_barang.kategori;
+
+NOMER STRUK NAMA KASIR                     NAMA MEMBER                    NAMA BARANG     KATEGORI        HARGA     JUMLAH      TOTAL                                                                   
+----------- ------------------------------ ------------------------------ --------------- ---------- ---------- ---------- ----------                                                                   
+20101310002 Zena                           Andi                           Pulpen Hitam    Alat Tulis       2000          2       4000                                                                   
+20101310002 Zena                           Andi                           Buku Tulis      Alat Tulis       5000          4      20000                                                                   
+20101310002 Zena                           Andi                           Indomie         Makanan          3500         10      35000                                                                   
+20101310001 Zena                           Bandi                          Pulpen Hitam    Alat Tulis       2000          2       4000                                                                   
+20101310001 Zena                           Bandi                          Buku Tulis      Alat Tulis       5000          5      25000                                                                   
+20101310001 Zena                           Bandi                          Aqua Gelas      Minuman           500          3       1500                                                                   
+20101310003 Yena                           Cindi                          Pulpen Hitam    Alat Tulis       2000          2       4000                                                                   
+20101310003 Yena                           Cindi                          Aqua Gelas      Minuman           500          7       3500                                                                   
+20101310003 Yena                           Cindi                          Indomie         Makanan          3500          1       3500                                                                   
+20101310004 Xena                           Dandi                          Buku Tulis      Alat Tulis       5000          3      15000                                                                   
+20101310004 Xena                           Dandi                          Aqua Gelas      Minuman           500          6       3000                                                                   
+
+NOMER STRUK NAMA KASIR                     NAMA MEMBER                    NAMA BARANG     KATEGORI        HARGA     JUMLAH      TOTAL                                                                   
+----------- ------------------------------ ------------------------------ --------------- ---------- ---------- ---------- ----------                                                                   
+20101310004 Xena                           Dandi                          Indomie         Makanan          3500          2       7000                                                                   
+20101310005 Xena                                                          Indomie         Makanan          3500          1       3500                                                                   
+20101310005 Xena                                                          Pulpen Hitam    Alat Tulis       2000          3       6000                                                                   
+20101310005 Xena                                                          Aqua Gelas      Minuman           500          5       2500                                                                   
+20101310005 Xena                                                          Buku Tulis      Alat Tulis       5000          4      20000                                                                   
+
+16 rows selected.
+
+16:39:21 SQL> SELECT penjualan.no_struk AS "NOMER STRUK",kasir.nama AS "NAMA KASIR",member.nama AS "NAMA MEMBER",data_barang.nama_barang AS "NAMA BARANG",kategori.kategori,detil_jual.harga,detil_jual.jumlah,detil_jual.harga*detil_jual.jumlah AS TOTAL
+16:40:57   2  FROM penjualan
+16:41:00   3  LEFT JOIN detil_jual ON detil_jual.no_struk = penjualan.no_struk
+16:41:07   4  RIGHT JOIN kasir ON kasir.id_kasir = penjualan.id_kasir
+16:41:11   5  LEFT JOIN member ON member.id_member = penjualan.id_member
+16:41:27   6  LEFT JOIN data_barang ON data_barang.kode_barang = detil_jual.kode_barang
+16:41:40   7  RIGHT JOIN kategori ON kategori.kode = data_barang.kategori;
+
+NOMER STRUK NAMA KASIR                     NAMA MEMBER                    NAMA BARANG     KATEGORI        HARGA     JUMLAH      TOTAL                                                                   
+----------- ------------------------------ ------------------------------ --------------- ---------- ---------- ---------- ----------                                                                   
+20101310005 Xena                                                          Indomie         Makanan          3500          1       3500                                                                   
+20101310004 Xena                           Dandi                          Indomie         Makanan          3500          2       7000                                                                   
+20101310003 Yena                           Cindi                          Indomie         Makanan          3500          1       3500                                                                   
+20101310002 Zena                           Andi                           Indomie         Makanan          3500         10      35000                                                                   
+20101310005 Xena                                                          Aqua Gelas      Minuman           500          5       2500                                                                   
+20101310004 Xena                           Dandi                          Aqua Gelas      Minuman           500          6       3000                                                                   
+20101310003 Yena                           Cindi                          Aqua Gelas      Minuman           500          7       3500                                                                   
+20101310001 Zena                           Bandi                          Aqua Gelas      Minuman           500          3       1500                                                                   
+20101310005 Xena                                                          Buku Tulis      Alat Tulis       5000          4      20000                                                                   
+20101310004 Xena                           Dandi                          Buku Tulis      Alat Tulis       5000          3      15000                                                                   
+20101310001 Zena                           Bandi                          Buku Tulis      Alat Tulis       5000          5      25000                                                                   
+
+NOMER STRUK NAMA KASIR                     NAMA MEMBER                    NAMA BARANG     KATEGORI        HARGA     JUMLAH      TOTAL                                                                   
+----------- ------------------------------ ------------------------------ --------------- ---------- ---------- ---------- ----------                                                                   
+20101310002 Zena                           Andi                           Buku Tulis      Alat Tulis       5000          4      20000                                                                   
+20101310005 Xena                                                          Pulpen Hitam    Alat Tulis       2000          3       6000                                                                   
+20101310003 Yena                           Cindi                          Pulpen Hitam    Alat Tulis       2000          2       4000                                                                   
+20101310001 Zena                           Bandi                          Pulpen Hitam    Alat Tulis       2000          2       4000                                                                   
+20101310002 Zena                           Andi                           Pulpen Hitam    Alat Tulis       2000          2       4000                                                                   
+
+16 rows selected.
+
+16:41:45 SQL> SELECT penjualan.no_struk AS "NOMER STRUK",kasir.nama AS "NAMA KASIR",member.nama AS "NAMA MEMBER",data_barang.nama_barang AS "NAMA BARANG",kategori.kategori,detil_jual.harga,detil_jual.jumlah,detil_jual.harga*detil_jual.jumlah AS TOTAL
+16:42:32   2  FROM penjualan
+16:42:35   3  LEFT JOIN detil_jual ON detil_jual.no_struk = penjualan.no_struk
+16:42:39   4  RIGHT JOIN kasir ON kasir.id_kasir = penjualan.id_kasir
+16:42:46   5  LEFT JOIN member ON member.id_member = penjualan.id_member
+16:42:53   6  LEFT JOIN data_barang ON data_barang.kode_barang = detil_jual.kode_barang
+16:43:00   7  LEFT JOIN kategori ON kategori.kode = data_barang.kategori;
+
+NOMER STRUK NAMA KASIR                     NAMA MEMBER                    NAMA BARANG     KATEGORI        HARGA     JUMLAH      TOTAL                                                                   
+----------- ------------------------------ ------------------------------ --------------- ---------- ---------- ---------- ----------                                                                   
+20101310002 Zena                           Andi                           Indomie         Makanan          3500         10      35000                                                                   
+20101310003 Yena                           Cindi                          Indomie         Makanan          3500          1       3500                                                                   
+20101310004 Xena                           Dandi                          Indomie         Makanan          3500          2       7000                                                                   
+20101310005 Xena                                                          Indomie         Makanan          3500          1       3500                                                                   
+20101310001 Zena                           Bandi                          Aqua Gelas      Minuman           500          3       1500                                                                   
+20101310003 Yena                           Cindi                          Aqua Gelas      Minuman           500          7       3500                                                                   
+20101310004 Xena                           Dandi                          Aqua Gelas      Minuman           500          6       3000                                                                   
+20101310005 Xena                                                          Aqua Gelas      Minuman           500          5       2500                                                                   
+20101310002 Zena                           Andi                           Pulpen Hitam    Alat Tulis       2000          2       4000                                                                   
+20101310001 Zena                           Bandi                          Pulpen Hitam    Alat Tulis       2000          2       4000                                                                   
+20101310003 Yena                           Cindi                          Pulpen Hitam    Alat Tulis       2000          2       4000                                                                   
+
+NOMER STRUK NAMA KASIR                     NAMA MEMBER                    NAMA BARANG     KATEGORI        HARGA     JUMLAH      TOTAL                                                                   
+----------- ------------------------------ ------------------------------ --------------- ---------- ---------- ---------- ----------                                                                   
+20101310005 Xena                                                          Pulpen Hitam    Alat Tulis       2000          3       6000                                                                   
+20101310002 Zena                           Andi                           Buku Tulis      Alat Tulis       5000          4      20000                                                                   
+20101310001 Zena                           Bandi                          Buku Tulis      Alat Tulis       5000          5      25000                                                                   
+20101310004 Xena                           Dandi                          Buku Tulis      Alat Tulis       5000          3      15000                                                                   
+20101310005 Xena                                                          Buku Tulis      Alat Tulis       5000          4      20000                                                                   
+
+16 rows selected.
+
+16:43:11 SQL> SELECT penjualan.no_struk AS "NOMER STRUK",kasir.nama AS "NAMA KASIR",member.nama AS "NAMA MEMBER",data_barang.nama_barang AS "NAMA BARANG",kategori.kategori,detil_jual.harga,detil_jual.jumlah,detil_jual.harga*detil_jual.jumlah AS TOTAL
+16:43:29   2  FROM penjualan
+16:43:33   3  LEFT JOIN detil_jual ON detil_jual.no_struk = penjualan.no_struk
+16:43:37   4  RIGHT JOIN kasir ON kasir.id_kasir = penjualan.id_kasir
+16:43:43   5  LEFT JOIN member ON member.id_member = penjualan.id_member
+16:43:47   6  RIGHT JOIN data_barang ON data_barang.kode_barang = detil_jual.kode_barang
+16:44:14   7  LEFT JOIN kategori ON kategori.kode = data_barang.kategori;
+
+NOMER STRUK NAMA KASIR                     NAMA MEMBER                    NAMA BARANG     KATEGORI        HARGA     JUMLAH      TOTAL                                                                   
+----------- ------------------------------ ------------------------------ --------------- ---------- ---------- ---------- ----------                                                                   
+20101310002 Zena                           Andi                           Pulpen Hitam    Alat Tulis       2000          2       4000                                                                   
+20101310002 Zena                           Andi                           Buku Tulis      Alat Tulis       5000          4      20000                                                                   
+20101310002 Zena                           Andi                           Indomie         Makanan          3500         10      35000                                                                   
+20101310001 Zena                           Bandi                          Pulpen Hitam    Alat Tulis       2000          2       4000                                                                   
+20101310001 Zena                           Bandi                          Buku Tulis      Alat Tulis       5000          5      25000                                                                   
+20101310001 Zena                           Bandi                          Aqua Gelas      Minuman           500          3       1500                                                                   
+20101310003 Yena                           Cindi                          Pulpen Hitam    Alat Tulis       2000          2       4000                                                                   
+20101310003 Yena                           Cindi                          Aqua Gelas      Minuman           500          7       3500                                                                   
+20101310003 Yena                           Cindi                          Indomie         Makanan          3500          1       3500                                                                   
+20101310004 Xena                           Dandi                          Buku Tulis      Alat Tulis       5000          3      15000                                                                   
+20101310004 Xena                           Dandi                          Aqua Gelas      Minuman           500          6       3000                                                                   
+
+NOMER STRUK NAMA KASIR                     NAMA MEMBER                    NAMA BARANG     KATEGORI        HARGA     JUMLAH      TOTAL                                                                   
+----------- ------------------------------ ------------------------------ --------------- ---------- ---------- ---------- ----------                                                                   
+20101310004 Xena                           Dandi                          Indomie         Makanan          3500          2       7000                                                                   
+20101310005 Xena                                                          Indomie         Makanan          3500          1       3500                                                                   
+20101310005 Xena                                                          Pulpen Hitam    Alat Tulis       2000          3       6000                                                                   
+20101310005 Xena                                                          Aqua Gelas      Minuman           500          5       2500                                                                   
+20101310005 Xena                                                          Buku Tulis      Alat Tulis       5000          4      20000                                                                   
+
+16 rows selected.
+
+16:44:18 SQL> SELECT penjualan.no_struk AS "NOMER STRUK",kasir.nama AS "NAMA KASIR",member.nama AS "NAMA MEMBER",data_barang.nama_barang AS "NAMA BARANG",kategori.kategori,detil_jual.harga,detil_jual.jumlah,detil_jual.harga*detil_jual.jumlah AS TOTAL
+16:44:48   2  FROM penjualan
+16:44:52   3  RIGHT JOIN detil_jual ON detil_jual.no_struk = penjualan.no_struk
+16:45:05   4  RIGHT JOIN kasir ON kasir.id_kasir = penjualan.id_kasir
+16:45:23   5  LEFT JOIN member ON member.id_member = penjualan.id_member
+16:45:28   6  RIGHT JOIN data_barang ON data_barang.kode_barang = detil_jual.kode_barang
+16:45:32   7  LEFT JOIN kategori ON kategori.kode = data_barang.kategori;
+
+NOMER STRUK NAMA KASIR                     NAMA MEMBER                    NAMA BARANG     KATEGORI        HARGA     JUMLAH      TOTAL                                                                   
+----------- ------------------------------ ------------------------------ --------------- ---------- ---------- ---------- ----------                                                                   
+20101310002 Zena                           Andi                           Indomie         Makanan          3500         10      35000                                                                   
+20101310002 Zena                           Andi                           Buku Tulis      Alat Tulis       5000          4      20000                                                                   
+20101310002 Zena                           Andi                           Pulpen Hitam    Alat Tulis       2000          2       4000                                                                   
+20101310001 Zena                           Bandi                          Aqua Gelas      Minuman           500          3       1500                                                                   
+20101310001 Zena                           Bandi                          Buku Tulis      Alat Tulis       5000          5      25000                                                                   
+20101310001 Zena                           Bandi                          Pulpen Hitam    Alat Tulis       2000          2       4000                                                                   
+20101310003 Yena                           Cindi                          Indomie         Makanan          3500          1       3500                                                                   
+20101310003 Yena                           Cindi                          Aqua Gelas      Minuman           500          7       3500                                                                   
+20101310003 Yena                           Cindi                          Pulpen Hitam    Alat Tulis       2000          2       4000                                                                   
+20101310004 Xena                           Dandi                          Indomie         Makanan          3500          2       7000                                                                   
+20101310004 Xena                           Dandi                          Aqua Gelas      Minuman           500          6       3000                                                                   
+
+NOMER STRUK NAMA KASIR                     NAMA MEMBER                    NAMA BARANG     KATEGORI        HARGA     JUMLAH      TOTAL                                                                   
+----------- ------------------------------ ------------------------------ --------------- ---------- ---------- ---------- ----------                                                                   
+20101310004 Xena                           Dandi                          Buku Tulis      Alat Tulis       5000          3      15000                                                                   
+20101310005 Xena                                                          Buku Tulis      Alat Tulis       5000          4      20000                                                                   
+20101310005 Xena                                                          Aqua Gelas      Minuman           500          5       2500                                                                   
+20101310005 Xena                                                          Pulpen Hitam    Alat Tulis       2000          3       6000                                                                   
+20101310005 Xena                                                          Indomie         Makanan          3500          1       3500                                                                   
+
+16 rows selected.
+
+16:45:36 SQL> SELECT penjualan.no_struk AS "NOMER STRUK",kasir.nama AS "NAMA KASIR",member.nama AS "NAMA MEMBER",data_barang.nama_barang AS "NAMA BARANG",kategori.kategori,detil_jual.harga,detil_jual.jumlah,detil_jual.harga*detil_jual.jumlah AS TOTAL
+16:46:25   2  FROM penjualan
+16:46:34   3  RIGHT JOIN detil_jual ON detil_jual.no_struk = penjualan.no_struk
+16:46:39   4  LEFT JOIN kasir ON kasir.id_kasir = penjualan.id_kasir
+16:46:52   5  RIGHT JOIN member ON member.id_member = penjualan.id_member
+16:47:11   6  LEFT JOIN data_barang ON data_barang.kode_barang = detil_jual.kode_barang
+16:47:25   7  LEFT JOIN kategori ON kategori.kode = data_barang.kategori;
+
+NOMER STRUK NAMA KASIR                     NAMA MEMBER                    NAMA BARANG     KATEGORI        HARGA     JUMLAH      TOTAL                                                                   
+----------- ------------------------------ ------------------------------ --------------- ---------- ---------- ---------- ----------                                                                   
+20101310004 Xena                           Dandi                          Indomie         Makanan          3500          2       7000                                                                   
+20101310003 Yena                           Cindi                          Indomie         Makanan          3500          1       3500                                                                   
+20101310002 Zena                           Andi                           Indomie         Makanan          3500         10      35000                                                                   
+20101310004 Xena                           Dandi                          Aqua Gelas      Minuman           500          6       3000                                                                   
+20101310003 Yena                           Cindi                          Aqua Gelas      Minuman           500          7       3500                                                                   
+20101310001 Zena                           Bandi                          Aqua Gelas      Minuman           500          3       1500                                                                   
+20101310003 Yena                           Cindi                          Pulpen Hitam    Alat Tulis       2000          2       4000                                                                   
+20101310002 Zena                           Andi                           Pulpen Hitam    Alat Tulis       2000          2       4000                                                                   
+20101310001 Zena                           Bandi                          Pulpen Hitam    Alat Tulis       2000          2       4000                                                                   
+20101310004 Xena                           Dandi                          Buku Tulis      Alat Tulis       5000          3      15000                                                                   
+20101310002 Zena                           Andi                           Buku Tulis      Alat Tulis       5000          4      20000                                                                   
+
+NOMER STRUK NAMA KASIR                     NAMA MEMBER                    NAMA BARANG     KATEGORI        HARGA     JUMLAH      TOTAL                                                                   
+----------- ------------------------------ ------------------------------ --------------- ---------- ---------- ---------- ----------                                                                   
+20101310001 Zena                           Bandi                          Buku Tulis      Alat Tulis       5000          5      25000                                                                   
+
+12 rows selected.
+
+16:47:29 SQL> SELECT penjualan.no_struk AS "NOMER STRUK",kasir.nama AS "NAMA KASIR",member.nama AS "NAMA MEMBER",data_barang.nama_barang AS "NAMA BARANG",kategori.kategori,detil_jual.harga,detil_jual.jumlah,detil_jual.harga*detil_jual.jumlah AS TOTAL
+16:47:38   2  FROM penjualan
+16:47:41   3  LEFT JOIN detil_jual ON detil_jual.no_struk = penjualan.no_struk
+16:47:54   4  RIGHT JOIN kasir ON kasir.id_kasir = penjualan.id_kasir
+16:48:08   5  LEFT JOIN member ON member.id_member = penjualan.id_member
+16:48:18   6  RIGHT JOIN data_barang ON data_barang.kode_barang = detil_jual.kode_barang
+16:48:41   7  LEFT JOIN kategori ON kategori.kode = data_barang.kategori;
+
+NOMER STRUK NAMA KASIR                     NAMA MEMBER                    NAMA BARANG     KATEGORI        HARGA     JUMLAH      TOTAL                                                                   
+----------- ------------------------------ ------------------------------ --------------- ---------- ---------- ---------- ----------                                                                   
+20101310002 Zena                           Andi                           Pulpen Hitam    Alat Tulis       2000          2       4000                                                                   
+20101310002 Zena                           Andi                           Buku Tulis      Alat Tulis       5000          4      20000                                                                   
+20101310002 Zena                           Andi                           Indomie         Makanan          3500         10      35000                                                                   
+20101310001 Zena                           Bandi                          Pulpen Hitam    Alat Tulis       2000          2       4000                                                                   
+20101310001 Zena                           Bandi                          Buku Tulis      Alat Tulis       5000          5      25000                                                                   
+20101310001 Zena                           Bandi                          Aqua Gelas      Minuman           500          3       1500                                                                   
+20101310003 Yena                           Cindi                          Pulpen Hitam    Alat Tulis       2000          2       4000                                                                   
+20101310003 Yena                           Cindi                          Aqua Gelas      Minuman           500          7       3500                                                                   
+20101310003 Yena                           Cindi                          Indomie         Makanan          3500          1       3500                                                                   
+20101310004 Xena                           Dandi                          Buku Tulis      Alat Tulis       5000          3      15000                                                                   
+20101310004 Xena                           Dandi                          Aqua Gelas      Minuman           500          6       3000                                                                   
+
+NOMER STRUK NAMA KASIR                     NAMA MEMBER                    NAMA BARANG     KATEGORI        HARGA     JUMLAH      TOTAL                                                                   
+----------- ------------------------------ ------------------------------ --------------- ---------- ---------- ---------- ----------                                                                   
+20101310004 Xena                           Dandi                          Indomie         Makanan          3500          2       7000                                                                   
+20101310005 Xena                                                          Indomie         Makanan          3500          1       3500                                                                   
+20101310005 Xena                                                          Pulpen Hitam    Alat Tulis       2000          3       6000                                                                   
+20101310005 Xena                                                          Aqua Gelas      Minuman           500          5       2500                                                                   
+20101310005 Xena                                                          Buku Tulis      Alat Tulis       5000          4      20000                                                                   
+
+16 rows selected.
+
+16:48:46 SQL> SELECT penjualan.no_struk AS "NOMER STRUK",kasir.nama AS "NAMA KASIR",member.nama AS "NAMA MEMBER",data_barang.nama_barang AS "NAMA BARANG",kategori.kategori,detil_jual.harga,detil_jual.jumlah,detil_jual.harga*detil_jual.jumlah AS TOTAL
+16:50:34   2  FROM penjualan
+16:50:36   3  LEFT JOIN detil_jual ON detil_jual.no_struk = penjualan.no_struk
+16:50:39   4  RIGHT JOIN data_barang ON data_barang.kode_barang = detil_jual.kode_barang
+16:50:42   5  LEFT JOIN member ON member.id_member = penjualan.id_member
+16:50:50   6  
+16:50:50 SQL> 
+16:50:50 SQL> 
+16:50:51 SQL> SELECT penjualan.no_struk AS "NOMER STRUK",kasir.nama AS "NAMA KASIR",member.nama AS "NAMA MEMBER",data_barang.nama_barang AS "NAMA BARANG",kategori.kategori,detil_jual.harga,detil_jual.jumlah,detil_jual.harga*detil_jual.jumlah AS TOTAL
+16:50:52   2  FROM penjualan
+16:50:55   3  LEFT JOIN detil_jual ON detil_jual.no_struk = penjualan.no_struk
+16:50:59   4  RIGHT JOIN kasir ON kasir.id_kasir = penjualan.id_kasir
+16:51:03   5  LEFT JOIN member ON member.id_member = penjualan.id_member
+16:51:08   6  LEFT JOIN data_barang ON data_barang.kode_barang = detil_jual.kode_barang
+16:51:18   7  LEFT JOIN kategori ON kategori.kode = data_barang.kategori;
+
+NOMER STRUK NAMA KASIR                     NAMA MEMBER                    NAMA BARANG     KATEGORI        HARGA     JUMLAH      TOTAL                                                                   
+----------- ------------------------------ ------------------------------ --------------- ---------- ---------- ---------- ----------                                                                   
+20101310002 Zena                           Andi                           Indomie         Makanan          3500         10      35000                                                                   
+20101310003 Yena                           Cindi                          Indomie         Makanan          3500          1       3500                                                                   
+20101310004 Xena                           Dandi                          Indomie         Makanan          3500          2       7000                                                                   
+20101310005 Xena                                                          Indomie         Makanan          3500          1       3500                                                                   
+20101310001 Zena                           Bandi                          Aqua Gelas      Minuman           500          3       1500                                                                   
+20101310003 Yena                           Cindi                          Aqua Gelas      Minuman           500          7       3500                                                                   
+20101310004 Xena                           Dandi                          Aqua Gelas      Minuman           500          6       3000                                                                   
+20101310005 Xena                                                          Aqua Gelas      Minuman           500          5       2500                                                                   
+20101310002 Zena                           Andi                           Pulpen Hitam    Alat Tulis       2000          2       4000                                                                   
+20101310001 Zena                           Bandi                          Pulpen Hitam    Alat Tulis       2000          2       4000                                                                   
+20101310003 Yena                           Cindi                          Pulpen Hitam    Alat Tulis       2000          2       4000                                                                   
+
+NOMER STRUK NAMA KASIR                     NAMA MEMBER                    NAMA BARANG     KATEGORI        HARGA     JUMLAH      TOTAL                                                                   
+----------- ------------------------------ ------------------------------ --------------- ---------- ---------- ---------- ----------                                                                   
+20101310005 Xena                                                          Pulpen Hitam    Alat Tulis       2000          3       6000                                                                   
+20101310002 Zena                           Andi                           Buku Tulis      Alat Tulis       5000          4      20000                                                                   
+20101310001 Zena                           Bandi                          Buku Tulis      Alat Tulis       5000          5      25000                                                                   
+20101310004 Xena                           Dandi                          Buku Tulis      Alat Tulis       5000          3      15000                                                                   
+20101310005 Xena                                                          Buku Tulis      Alat Tulis       5000          4      20000                                                                   
+
+16 rows selected.
+
+16:51:28 SQL> SELECT penjualan.no_struk AS "NOMER STRUK",kasir.nama AS "NAMA KASIR",member.nama AS "NAMA MEMBER",data_barang.nama_barang AS "NAMA BARANG",kategori.kategori,detil_jual.harga,detil_jual.jumlah,detil_jual.harga*detil_jual.jumlah AS TOTAL
+16:51:44   2  FROM penjualan
+16:51:48   3  LEFT JOIN detil_jual ON detil_jual.no_struk = penjualan.no_struk
+16:51:53   4  RIGHT JOIN kasir ON kasir.id_kasir = penjualan.id_kasir
+16:52:06   5  LEFT JOIN member ON member.id_member = penjualan.id_member
+16:52:09   6  RIGHT JOIN data_barang ON data_barang.kode_barang = detil_jual.kode_barang
+16:52:25   7  RIGHT JOIN kategori ON kategori.kode = data_barang.kategori;
+
+NOMER STRUK NAMA KASIR                     NAMA MEMBER                    NAMA BARANG     KATEGORI        HARGA     JUMLAH      TOTAL                                                                   
+----------- ------------------------------ ------------------------------ --------------- ---------- ---------- ---------- ----------                                                                   
+20101310002 Zena                           Andi                           Pulpen Hitam    Alat Tulis       2000          2       4000                                                                   
+20101310002 Zena                           Andi                           Buku Tulis      Alat Tulis       5000          4      20000                                                                   
+20101310002 Zena                           Andi                           Indomie         Makanan          3500         10      35000                                                                   
+20101310001 Zena                           Bandi                          Pulpen Hitam    Alat Tulis       2000          2       4000                                                                   
+20101310001 Zena                           Bandi                          Buku Tulis      Alat Tulis       5000          5      25000                                                                   
+20101310001 Zena                           Bandi                          Aqua Gelas      Minuman           500          3       1500                                                                   
+20101310003 Yena                           Cindi                          Pulpen Hitam    Alat Tulis       2000          2       4000                                                                   
+20101310003 Yena                           Cindi                          Aqua Gelas      Minuman           500          7       3500                                                                   
+20101310003 Yena                           Cindi                          Indomie         Makanan          3500          1       3500                                                                   
+20101310004 Xena                           Dandi                          Buku Tulis      Alat Tulis       5000          3      15000                                                                   
+20101310004 Xena                           Dandi                          Aqua Gelas      Minuman           500          6       3000                                                                   
+
+NOMER STRUK NAMA KASIR                     NAMA MEMBER                    NAMA BARANG     KATEGORI        HARGA     JUMLAH      TOTAL                                                                   
+----------- ------------------------------ ------------------------------ --------------- ---------- ---------- ---------- ----------                                                                   
+20101310004 Xena                           Dandi                          Indomie         Makanan          3500          2       7000                                                                   
+20101310005 Xena                                                          Indomie         Makanan          3500          1       3500                                                                   
+20101310005 Xena                                                          Pulpen Hitam    Alat Tulis       2000          3       6000                                                                   
+20101310005 Xena                                                          Aqua Gelas      Minuman           500          5       2500                                                                   
+20101310005 Xena                                                          Buku Tulis      Alat Tulis       5000          4      20000                                                                   
+
+16 rows selected.
+
+16:52:40 SQL> SPOOL OFF

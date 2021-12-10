@@ -1,0 +1,499 @@
+C:\Users\Nurul PC>SQLPLUS
+
+SQL*Plus: Release 11.2.0.2.0 Production on Sat Nov 21 12:19:46 2020
+
+Copyright (c) 1982, 2014, Oracle.  All rights reserved.
+
+Enter user-name: nurulag
+Enter password:
+
+Connected to:
+Oracle Database 11g Express Edition Release 11.2.0.2.0 - 64bit Production
+
+SQL> SELECT * FROM TAB;
+
+TNAME                          TABTYPE  CLUSTERID
+------------------------------ ------- ----------
+DATA_BARANG                    TABLE
+KASIR                          TABLE
+KATEGORI                       TABLE
+MEMBER                         TABLE
+
+SQL> SET TIME ON
+12:29:57 SQL> CREATE TABLE detil_jual(
+12:35:57   2  NO_STRUK CHAR(11),
+12:35:57   3  KODE_BARANG CHAR(4),
+12:35:57   4  HARGA NUMBER,
+12:35:57   5  JUMLAH NUMBER
+12:35:57   6  );
+
+Table created.
+
+12:35:59 SQL> SELECT * FROM TAB;
+
+TNAME                          TABTYPE  CLUSTERID
+------------------------------ ------- ----------
+DATA_BARANG                    TABLE
+DETIL_JUAL                     TABLE
+KASIR                          TABLE
+KATEGORI                       TABLE
+MEMBER                         TABLE
+
+12:36:14 SQL> SELECT detil_jual.no_struk AS "NOMER STRUK", kasir.nama AS "NAMA KASIR", member.nama AS "NAMA MEMBER", data_barang.nama_barang AS "NAMA BARANG", kategori.kategori, detil_jual.harga, detil_jual.jumlah, detil_jual.harga*detil_jual.jumlah AS TOTAL
+12:37:20   2  FROM detil_jual RIGHT JOIN penjualan
+12:37:37   3  ON detil_jual.no_struk = penjualan.no_struk
+12:37:56   4  LEFT JOIN kasir
+12:38:05   5  ON kasir.id_kasir = penjualan.id_kasir
+12:38:13   6  LEFT JOIN member
+12:38:22   7  ON member.id_member = penjualan.id_member
+12:38:31   8  LEFT JOIN data_barang
+12:38:42   9  ON data_barang.kode_barang = detil_jual.kode_barang
+12:38:52  10  RIGHT JOIN kategori
+12:39:01  11  ON kategori.kode = data_barang.kategori;
+FROM detil_jual RIGHT JOIN penjualan
+                           *
+ERROR at line 2:
+ORA-00942: table or view does not exist
+
+
+12:39:17 SQL> CREATE TABLE penjualan(
+12:41:14   2  NO_STRUK CHAR(11),
+12:41:14   3  TANGGAL DATE,
+12:41:14   4  ID_MEMBER CHAR(7),
+12:41:14   5  ID_KASIR CHAR(7));
+
+Table created.
+
+12:41:14 SQL> SELECT detil_jual.no_struk AS "NOMER STRUK", kasir.nama AS "NAMA KASIR", member.nama AS "NAMA MEMBER", data_barang.nama_barang AS "NAMA BARANG", kategori.kategori, detil_jual.harga, detil_jual.jumlah, detil_jual.harga*detil_jual.jumlah AS TOTAL
+12:41:53   2  FROM detil_jual RIGHT JOIN penjualan
+12:42:08   3  ON detil_jual.no_struk = penjualan.no_struk
+12:42:17   4  LEFT JOIN kasir
+12:42:26   5  ON kasir.id_kasir = penjualan.id_kasir
+12:42:35   6  LEFT JOIN member
+12:42:44   7  ON member.id_member = penjualan.id_member
+12:42:53   8  LEFT JOIN data_barang
+12:43:03   9  ON data_barang.kode_barang = detil_jual.kode_barang
+12:43:11  10  RIGHT JOIN kategori
+12:43:20  11  ON kategori.kode = data_barang.kategori;
+
+no rows selected
+
+12:43:28 SQL> INSERT INTO detil_jual VALUES('20101310001','M002',500,3);
+
+1 row created.
+
+17:21:32 SQL> INSERT INTO detil_jual VALUES('20101310001','A001',5000,5);
+
+1 row created.
+
+17:23:24 SQL> INSERT INTO detil_jual VALUES('20101310001','A002',2000,2);
+
+1 row created.
+
+17:23:45 SQL> INSERT INTO detil_jual VALUES('20101310002','M001',3500,10);
+
+1 row created.
+
+17:24:00 SQL> INSERT INTO detil_jual VALUES('20101310002','A001',5000,4);
+
+1 row created.
+
+17:24:00 SQL> INSERT INTO detil_jual VALUES('20101310002','A002',2000,2);
+
+1 row created.
+
+17:24:03 SQL> INSERT INTO detil_jual VALUES('20101310003','M001',3500,1);
+
+1 row created.
+
+17:24:15 SQL> INSERT INTO detil_jual VALUES('20101310003','M002',500,7);
+
+1 row created.
+
+17:24:15 SQL> INSERT INTO detil_jual VALUES('20101310003','A002',2000,2);
+
+1 row created.
+
+17:24:15 SQL> INSERT INTO detil_jual VALUES('20101310004','M001',3500,2);
+
+1 row created.
+
+17:24:15 SQL> INSERT INTO detil_jual VALUES('20101310004','M002',500,6);
+
+1 row created.
+
+17:24:15 SQL> INSERT INTO detil_jual VALUES('20101310004','A001',5000,3);
+
+1 row created.
+
+17:24:15 SQL> INSERT INTO detil_jual VALUES('20101310005','A001',5000,4);
+
+1 row created.
+
+17:24:17 SQL> INSERT INTO detil_jual VALUES('20101310005','M002',500,5);
+
+1 row created.
+
+17:24:36 SQL> INSERT INTO detil_jual VALUES('20101310005','A002',2000,3);
+
+1 row created.
+
+17:24:36 SQL> INSERT INTO detil_jual VALUES('20101310005','M001',3500,1);
+
+1 row created.
+
+17:24:37 SQL> INSERT INTO kasir VALUES('A201001','Xena','L','08123246369','xena1@mail.com','17-Aug-1991');
+
+1 row created.
+
+17:25:01 SQL> INSERT INTO kasir VALUES('A201002','Yena','P','08246369123','yena1@mail.com','17-Aug-1992');
+
+1 row created.
+
+17:25:01 SQL> INSERT INTO kasir VALUES('A201003','Zena','P','08369123246','zena1@mail.com','17-Aug-1993');
+
+1 row created.
+
+17:25:01 SQL> INSERT INTO member VALUES('2010001','Andi','L','085125250375','andi1@mail.com','17-Aug-1990');
+
+1 row created.
+
+17:25:17 SQL> INSERT INTO member VALUES('2010002','Bandi','L','085250375125','bandi1@mail.com','17-Aug-1991');
+
+1 row created.
+
+17:25:17 SQL> INSERT INTO member VALUES('2010003','Cindi','P','085375125250','cindi1@mail.com','17-Aug-1993');
+
+1 row created.
+
+17:25:17 SQL> INSERT INTO member VALUES('2010004','Dandi','L','085250125375','dandi1@mail.com','17-Aug-1993');
+
+1 row created.
+
+17:25:17 SQL> INSERT INTO penjualan VALUES('20101310001','13-Oct-2020','2010002','A201003');
+
+1 row created.
+
+17:25:33 SQL> INSERT INTO penjualan VALUES('20101310002','13-Oct-2020','2010001','A201003');
+
+1 row created.
+
+17:25:33 SQL> INSERT INTO penjualan VALUES('20101310003','13-Oct-2020','2010003','A201002');
+
+1 row created.
+
+17:25:33 SQL> INSERT INTO penjualan VALUES('20101310004','13-Oct-2020','2010004','A201001');
+
+1 row created.
+
+17:25:33 SQL> INSERT INTO penjualan VALUES('20101310005','13-Oct-2020', NULL, 'A201001');
+
+1 row created.
+
+17:25:33 SQL> INSERT INTO data_barang VALUES('M001', 'Indomie', 'M1', 3500, 50);
+
+1 row created.
+
+17:25:54 SQL> INSERT INTO data_barang VALUES('M002', 'Aqua Gelas', 'M2', 500, 100);
+
+1 row created.
+
+17:25:54 SQL> INSERT INTO data_barang VALUES('A001', 'Buku Tulis', 'A1', 5000, 30);
+
+1 row created.
+
+17:25:54 SQL> INSERT INTO data_barang VALUES('A002', 'Pulpen Hitam', 'A1', 2000, 50);
+
+1 row created.
+
+17:25:54 SQL> INSERT INTO admin VALUES('2010A01', 'Karin', 'P', '08123246360', 'karin@mail.com', '17-08-1991');
+INSERT INTO admin VALUES('2010A01', 'Karin', 'P', '08123246360', 'karin@mail.com', '17-08-1991')
+            *
+ERROR at line 1:
+ORA-00942: table or view does not exist
+
+
+17:26:04 SQL> INSERT INTO admin VALUES('2010A02', 'Lana', 'L', '08246369124', 'lana1@mail.com', '17-08-1992');
+INSERT INTO admin VALUES('2010A02', 'Lana', 'L', '08246369124', 'lana1@mail.com', '17-08-1992')
+            *
+ERROR at line 1:
+ORA-00942: table or view does not exist
+
+
+17:26:04 SQL> INSERT INTO admin VALUES('2010A03', 'Mona', 'P', '08369123247', 'mona@mail.com', '17-08-1993');
+INSERT INTO admin VALUES('2010A03', 'Mona', 'P', '08369123247', 'mona@mail.com', '17-08-1993')
+            *
+ERROR at line 1:
+ORA-00942: table or view does not exist
+
+
+17:26:04 SQL> INSERT INTO kategori VALUES ('M1', 'Makanan');
+
+1 row created.
+
+17:27:10 SQL> INSERT INTO kategori VALUES ('M2', 'Minuman');
+
+1 row created.
+
+17:27:10 SQL> INSERT INTO kategori VALUES ('A1', 'Alat Tulis');
+
+1 row created.
+
+17:27:10 SQL> SELECT detil_jual.no_struk AS "NOMER STRUK", kasir.nama AS "NAMA KASIR", member.nama AS "NAMA MEMBER", data_barang.nama_barang AS "NAMA BARANG", kategori.kategori, detil_jual.harga, detil_jual.jumlah, detil_jual.harga*detil_jual.jumlah AS TOTAL
+17:27:31   2  FROM detil_jual RIGHT JOIN penjualan
+17:27:31   3  ON detil_jual.no_struk = penjualan.no_struk
+17:27:31   4  LEFT JOIN kasir
+17:27:31   5  ON kasir.id_kasir = penjualan.id_kasir
+17:27:31   6  LEFT JOIN member
+17:27:31   7  ON member.id_member = penjualan.id_member
+17:27:31   8  LEFT JOIN data_barang
+17:27:31   9  ON data_barang.kode_barang = detil_jual.kode_barang
+17:27:31  10  RIGHT JOIN kategori
+17:27:31  11  ON kategori.kode = data_barang.kategori;
+
+NOMER STRUK NAMA KASIR                     NAMA MEMBER
+----------- ------------------------------ ------------------------------
+NAMA BARANG     KATEGORI        HARGA     JUMLAH      TOTAL
+--------------- ---------- ---------- ---------- ----------
+20101310001 Zena                           Bandi
+Aqua Gelas      Minuman           500          3       1500
+
+20101310001 Zena                           Bandi
+Buku Tulis      Alat Tulis       5000          5      25000
+
+20101310001 Zena                           Bandi
+Pulpen Hitam    Alat Tulis       2000          2       4000
+
+
+NOMER STRUK NAMA KASIR                     NAMA MEMBER
+----------- ------------------------------ ------------------------------
+NAMA BARANG     KATEGORI        HARGA     JUMLAH      TOTAL
+--------------- ---------- ---------- ---------- ----------
+20101310002 Zena                           Andi
+Indomie         Makanan          3500         10      35000
+
+20101310002 Zena                           Andi
+Buku Tulis      Alat Tulis       5000          4      20000
+
+20101310002 Zena                           Andi
+Pulpen Hitam    Alat Tulis       2000          2       4000
+
+
+NOMER STRUK NAMA KASIR                     NAMA MEMBER
+----------- ------------------------------ ------------------------------
+NAMA BARANG     KATEGORI        HARGA     JUMLAH      TOTAL
+--------------- ---------- ---------- ---------- ----------
+20101310003 Yena                           Cindi
+Indomie         Makanan          3500          1       3500
+
+20101310003 Yena                           Cindi
+Aqua Gelas      Minuman           500          7       3500
+
+20101310003 Yena                           Cindi
+Pulpen Hitam    Alat Tulis       2000          2       4000
+
+
+NOMER STRUK NAMA KASIR                     NAMA MEMBER
+----------- ------------------------------ ------------------------------
+NAMA BARANG     KATEGORI        HARGA     JUMLAH      TOTAL
+--------------- ---------- ---------- ---------- ----------
+20101310004 Xena                           Dandi
+Indomie         Makanan          3500          2       7000
+
+20101310004 Xena                           Dandi
+Aqua Gelas      Minuman           500          6       3000
+
+20101310004 Xena                           Dandi
+Buku Tulis      Alat Tulis       5000          3      15000
+
+
+NOMER STRUK NAMA KASIR                     NAMA MEMBER
+----------- ------------------------------ ------------------------------
+NAMA BARANG     KATEGORI        HARGA     JUMLAH      TOTAL
+--------------- ---------- ---------- ---------- ----------
+20101310005 Xena
+Buku Tulis      Alat Tulis       5000          4      20000
+
+20101310005 Xena
+Aqua Gelas      Minuman           500          5       2500
+
+20101310005 Xena
+Pulpen Hitam    Alat Tulis       2000          3       6000
+
+
+NOMER STRUK NAMA KASIR                     NAMA MEMBER
+----------- ------------------------------ ------------------------------
+NAMA BARANG     KATEGORI        HARGA     JUMLAH      TOTAL
+--------------- ---------- ---------- ---------- ----------
+20101310005 Xena
+Indomie         Makanan          3500          1       3500
+
+
+16 rows selected.
+
+17:27:36 SQL> SET LINESIZE 200
+17:30:37 SQL> LEFT JOIN member
+SP2-0734: unknown command beginning "LEFT JOIN ..." - rest of line ignored.
+17:30:48 SQL> SELECT detil_jual.no_struk AS "NOMER STRUK", kasir.nama AS "NAMA KASIR", member.nama AS "NAMA MEMBER", data_barang.nama_barang AS "NAMA BARANG", kategori.kategori, detil_jual.harga, detil_jual.jumlah, detil_jual.harga*detil_jual.jumlah AS TOTAL
+17:31:22   2
+17:31:23 SQL>
+17:31:23 SQL>
+17:31:23 SQL> SELECT detil_jual.no_struk AS "NOMER STRUK", kasir.nama AS "NAMA KASIR", member.nama AS "NAMA MEMBER", data_barang.nama_barang AS "NAMA BARANG", kategori.kategori, detil_jual.harga, detil_jual.jumlah, detil_jual.harga*detil_jual.jumlah AS TOTAL
+17:31:26   2  FROM detil_jual RIGHT JOIN penjualan
+17:31:26   3  ON detil_jual.no_struk = penjualan.no_struk
+17:31:26   4  LEFT JOIN kasir
+17:31:26   5  ON kasir.id_kasir = penjualan.id_kasir
+17:31:26   6  LEFT JOIN member
+17:31:26   7  ON member.id_member = penjualan.id_member
+17:31:26   8  LEFT JOIN data_barang
+17:31:26   9  ON data_barang.kode_barang = detil_jual.kode_barang
+17:31:26  10  RIGHT JOIN kategori
+17:31:26  11  ON kategori.kode = data_barang.kategori;
+
+NOMER STRUK NAMA KASIR                     NAMA MEMBER                    NAMA BARANG     KATEGORI        HARGA     JUMLAH      TOTAL
+----------- ------------------------------ ------------------------------ --------------- ---------- ---------- ---------- ----------
+20101310001 Zena                           Bandi                          Aqua Gelas      Minuman           500
+         3       1500
+20101310001 Zena                           Bandi                          Buku Tulis      Alat Tulis       5000
+         5      25000
+20101310001 Zena                           Bandi                          Pulpen Hitam    Alat Tulis       2000
+         2       4000
+20101310002 Zena                           Andi                           Indomie         Makanan          3500
+        10      35000
+20101310002 Zena                           Andi                           Buku Tulis      Alat Tulis       5000
+         4      20000
+20101310002 Zena                           Andi                           Pulpen Hitam    Alat Tulis       2000
+         2       4000
+20101310003 Yena                           Cindi                          Indomie         Makanan          3500
+         1       3500
+20101310003 Yena                           Cindi                          Aqua Gelas      Minuman           500
+         7       3500
+20101310003 Yena                           Cindi                          Pulpen Hitam    Alat Tulis       2000
+         2       4000
+20101310004 Xena                           Dandi                          Indomie         Makanan          3500
+         2       7000
+20101310004 Xena                           Dandi                          Aqua Gelas      Minuman           500
+         6       3000
+
+NOMER STRUK NAMA KASIR                     NAMA MEMBER                    NAMA BARANG     KATEGORI        HARGA     JUMLAH      TOTAL
+----------- ------------------------------ ------------------------------ --------------- ---------- ---------- ---------- ----------
+20101310004 Xena                           Dandi                          Buku Tulis      Alat Tulis       5000
+         3      15000
+20101310005 Xena                                                          Buku Tulis      Alat Tulis       5000
+         4      20000
+20101310005 Xena                                                          Aqua Gelas      Minuman           500
+         5       2500
+20101310005 Xena                                                          Pulpen Hitam    Alat Tulis       2000
+         3       6000
+20101310005 Xena                                                          Indomie         Makanan          3500
+         1       3500
+
+16 rows selected.
+
+17:31:28 SQL>
+17:35:16 SQL>
+17:35:17 SQL>
+17:35:17 SQL>
+17:35:17 SQL>
+17:35:17 SQL> SELECT penjualan.no_struk AS "NOMER STRUK",
+17:35:32   2  kasir.nama AS "NAMA KASIR",
+17:35:32   3  member.nama AS "NAMA MEMBER",
+17:35:32   4  data_barang.nama_barang AS "NAMA BARANG",
+17:35:32   5  kategori.kategori,
+17:35:32   6  detil_jual.harga,
+17:35:32   7  detil_jual.jumlah,
+17:35:32   8  detil_jual.harga*detil_jual.jumlah AS TOTAL
+17:35:32   9  FROM penjualan INNER JOIN detil_jual
+17:35:32  10  ON  penjualan.no_struk = detil_jual.no_struk
+17:35:32  11  INNER JOIN kasir
+17:35:32  12  ON kasir.id_kasir = penjualan.id_kasir
+17:35:32  13  INNER JOIN member
+17:35:32  14  ON member.id_member = penjualan.id_member
+17:35:32  15  INNER JOIN data_barang
+17:35:32  16  ON data_barang.kode_barang = detil_jual.kode_barang
+17:35:32  17  INNER JOIN kategori
+17:35:32  18  ON kategori.kode = data_barang.kategori
+17:35:32  19  WHERE kasir.id_kasir = 'A201003';
+
+NOMER STRUK NAMA KASIR                     NAMA MEMBER                    NAMA BARANG     KATEGORI        HARGA     JUMLAH      TOTAL
+----------- ------------------------------ ------------------------------ --------------- ---------- ---------- ---------- ----------
+20101310001 Zena                           Bandi                          Aqua Gelas      Minuman           500          3       1500
+20101310001 Zena                           Bandi                          Buku Tulis      Alat Tulis       5000          5      25000
+20101310001 Zena                           Bandi                          Pulpen Hitam    Alat Tulis       2000          2       4000
+20101310002 Zena                           Andi                           Indomie         Makanan          3500         10      35000
+20101310002 Zena                           Andi                           Buku Tulis      Alat Tulis       5000          4      20000
+20101310002 Zena                           Andi                           Pulpen Hitam    Alat Tulis       2000          2       4000
+
+6 rows selected.
+
+17:35:38 SQL> SELECT detil_jual.no_struk AS "NOMER STRUK", kasir.nama AS "NAMA KASIR", member.nama AS "NAMA MEMBER", data_barang.nama_barang AS "NAMA BARANG", kategori.kategori, detil_jual.harga, detil_jual.jumlah, detil_jual.harga*detil_jual.jumlah AS TOTAL
+17:36:02   2  FROM detil_jual RIGHT JOIN penjualan
+17:36:02   3  ON detil_jual.no_struk = penjualan.no_struk
+17:36:02   4  LEFT JOIN kasir
+17:36:02   5  ON kasir.id_kasir = penjualan.id_kasir
+17:36:02   6  LEFT JOIN member
+17:36:02   7  ON member.id_member = penjualan.id_member
+17:36:02   8  LEFT JOIN data_barang
+17:36:02   9  ON data_barang.kode_barang = detil_jual.kode_barang
+17:36:02  10  RIGHT JOIN kategori
+17:36:02  11  ON kategori.kode = data_barang.kategori;
+
+NOMER STRUK NAMA KASIR                     NAMA MEMBER                    NAMA BARANG     KATEGORI        HARGA     JUMLAH      TOTAL
+----------- ------------------------------ ------------------------------ --------------- ---------- ---------- ---------- ----------
+20101310001 Zena                           Bandi                          Aqua Gelas      Minuman           500          3       1500
+20101310001 Zena                           Bandi                          Buku Tulis      Alat Tulis       5000          5      25000
+20101310001 Zena                           Bandi                          Pulpen Hitam    Alat Tulis       2000          2       4000
+20101310002 Zena                           Andi                           Indomie         Makanan          3500         10      35000
+20101310002 Zena                           Andi                           Buku Tulis      Alat Tulis       5000          4      20000
+20101310002 Zena                           Andi                           Pulpen Hitam    Alat Tulis       2000          2       4000
+20101310003 Yena                           Cindi                          Indomie         Makanan          3500          1       3500
+20101310003 Yena                           Cindi                          Aqua Gelas      Minuman           500          7       3500
+20101310003 Yena                           Cindi                          Pulpen Hitam    Alat Tulis       2000          2       4000
+20101310004 Xena                           Dandi                          Indomie         Makanan          3500          2       7000
+20101310004 Xena                           Dandi                          Aqua Gelas      Minuman           500          6       3000
+
+NOMER STRUK NAMA KASIR                     NAMA MEMBER                    NAMA BARANG     KATEGORI        HARGA     JUMLAH      TOTAL
+----------- ------------------------------ ------------------------------ --------------- ---------- ---------- ---------- ----------
+20101310004 Xena                           Dandi                          Buku Tulis      Alat Tulis       5000          3      15000
+20101310005 Xena                                                          Buku Tulis      Alat Tulis       5000          4      20000
+20101310005 Xena                                                          Aqua Gelas      Minuman           500          5       2500
+20101310005 Xena                                                          Pulpen Hitam    Alat Tulis       2000          3       6000
+20101310005 Xena                                                          Indomie         Makanan          3500          1       3500
+
+16 rows selected.
+
+17:36:03 SQL> SELECT detil_jual.no_struk AS "NOMER STRUK", kasir.nama AS "NAMA KASIR", member.nama AS "NAMA MEMBER", data_barang.nama_barang AS "NAMA BARANG", kategori.kategori, detil_jual.harga, detil_jual.jumlah, detil_jual.harga*detil_jual.jumlah AS TOTAL
+17:37:15   2  FROM detil_jual RIGHT JOIN penjualan
+17:37:15   3  ON detil_jual.no_struk = penjualan.no_struk
+17:37:15   4  LEFT JOIN kasir
+17:37:15   5  ON kasir.id_kasir = penjualan.id_kasir
+17:37:15   6  LEFT JOIN member
+17:37:15   7  ON member.id_member = penjualan.id_member
+17:37:15   8  LEFT JOIN data_barang
+17:37:15   9  ON data_barang.kode_barang = detil_jual.kode_barang
+17:37:15  10  RIGHT JOIN kategori
+17:37:15  11  ON kategori.kode = data_barang.kategori;
+
+NOMER STRUK NAMA KASIR                     NAMA MEMBER                    NAMA BARANG     KATEGORI        HARGA     JUMLAH      TOTAL
+----------- ------------------------------ ------------------------------ --------------- ---------- ---------- ---------- ----------
+20101310001 Zena                           Bandi                          Aqua Gelas      Minuman           500          3       1500
+20101310001 Zena                           Bandi                          Buku Tulis      Alat Tulis       5000          5      25000
+20101310001 Zena                           Bandi                          Pulpen Hitam    Alat Tulis       2000          2       4000
+20101310002 Zena                           Andi                           Indomie         Makanan          3500         10      35000
+20101310002 Zena                           Andi                           Buku Tulis      Alat Tulis       5000          4      20000
+20101310002 Zena                           Andi                           Pulpen Hitam    Alat Tulis       2000          2       4000
+20101310003 Yena                           Cindi                          Indomie         Makanan          3500          1       3500
+20101310003 Yena                           Cindi                          Aqua Gelas      Minuman           500          7       3500
+20101310003 Yena                           Cindi                          Pulpen Hitam    Alat Tulis       2000          2       4000
+20101310004 Xena                           Dandi                          Indomie         Makanan          3500          2       7000
+20101310004 Xena                           Dandi                          Aqua Gelas      Minuman           500          6       3000
+
+NOMER STRUK NAMA KASIR                     NAMA MEMBER                    NAMA BARANG     KATEGORI        HARGA     JUMLAH      TOTAL
+----------- ------------------------------ ------------------------------ --------------- ---------- ---------- ---------- ----------
+20101310004 Xena                           Dandi                          Buku Tulis      Alat Tulis       5000          3      15000
+20101310005 Xena                                                          Buku Tulis      Alat Tulis       5000          4      20000
+20101310005 Xena                                                          Aqua Gelas      Minuman           500          5       2500
+20101310005 Xena                                                          Pulpen Hitam    Alat Tulis       2000          3       6000
+20101310005 Xena                                                          Indomie         Makanan          3500          1       3500
+
+16 rows selected.

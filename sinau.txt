@@ -1,0 +1,126 @@
+CARA MEMBUAT USERNAME
+> SQLPLUS
+> sys as sysdba
+> password : oracle
+> CREATE USER musnadil IDENTIFIED BY password = oracle;
+> GRANT CONNECT,RESOURCE to musnadil;
+> CONNECT
+> masukkan musnadil
+> masukkan password(oracle)
+
+############################################################################################
+
+CEK USERNAME
+>show user
+
+############################################################################################
+
+CARA MEMBUAT TABLE
+>CREATE TABLE namatabel(
+	2 variable tipedata(banyaknya value),
+	3 variable tipedata(banyaknya value),
+	4 variable tipedata(banyaknya value));
+
+############################################################################################
+
+CEK TABLE
+> DESC namatabel
+
+############################################################################################
+
+INSERT TABLE
+> INSERT INTO namatabel(variable,variable,variable,variable)
+	2 VALUES ('value','value','value','value');
+
+*note: selain tipe data number dikasih ('') / tanda petik 1
+
+############################################################################################
+
+CEK ISI TABLE
+SELECT*FROM namatabel;
+
+############################################################################################
+
+> SET PAGESIZE 100
+
+############################################################################################
+
+> SET LINESIZE 250
+
+############################################################################################
+
+UPDATE TABLE
+> UPDATE namatabel SET variable = 'value baru' WHERE idvariabel yg paling berbeda = valuenya;
+contoh :
+> UPDATE keluarga SET pekerjaan = 'Ibu rumah tangga' WHERE no = 2;
+
+############################################################################################
+
+MENGHAPUS TABEL
+DELETE namatabel;
+
+############################################################################################
+
+COMMIT; -> untuk menyimpan data yang telah dimasukkan
+ROLLBACK; -> untuk meng-undo data yang telah dimasukkan
+
+############################################################################################
+
+MENGUBAH BANYAKNYA VALUE 
+>ALTER TABLE keluarga MODIFY tempat_lahir VARCHAR2(10);
+
+############################################################################################
+
+RENAME TABLE 
+>ALTER TABLE keluarga RENAME COLUMN ig TO instagram;
+
+############################################################################################
+
+MERUBAH NAMA TABLE 
+>ALTER TABLE keluarga RENAME  TO keluargakku;
+
+############################################################################################
+
+MENAMBAHKAN KOLOM TABEL
+> ALTER TABLE keluarga ADD email VARCHAR2(20);
+
+############################################################################################
+
+MEMBERIKAN UNIQUE pada id
+>ALTER TABLE namatabel ADD CONSTRAINT id_uq UNIQUE (variable yg akan dikasih unique id);
+contoh :
+>ALTER TABLE keluarga ADD CONSTRAINT no_klg_uq UNIQUE (no);
+
+############################################################################################
+
+MEMBERIKAN PRIMARY KEY pada id
+>ALTER TABLE namatabel ADD CONSTRAINT id_uq UNIQUE (variable yg akan dikasih unique id);
+Contoh:
+>ALTER TABLE keluarga ADD CONSTRAINT nik_pk PRIMARY (NIK);
+
+############################################################################################
+
+CEK variabel mana saja yang sudah diberikan Unique id
+> SELECT constraint_name, constraint_type FROM all_constraints
+	2 WHERE table_name = 'KELUARGA";
+
+############################################################################################
+
+MEMBERIKAN FOREIGN KEY
+> ALTER TABLE data_barang ADD CONSTRAINT ktgr_fk
+	2FOREIGN KEY (kategori) REFERENCES kategori(kode);
+
+############################################################################################
+
+MENAMBAHKAN CHECK
+
+> ALTER TABLE data_barang ADD CONSTRAINT stok_ck CHECK(stok>=5 and stok<=100);
+> ALTER TABLE keluargaku ADD CONSTRAINT ck_jk CHECK (JENIS_KELAMIN IN('L','P'));
+> ALTER TABLE keluargaku ADD CONSTRAINT no_hp_ck CHECK(HP LIKE '08%');
+
+############################################################################################
+
+MENGHAPUS CHECK
+ALTER TABLE kelurga DROP CONSTRAINT no_hp_ck;
+
+############################################################################################
